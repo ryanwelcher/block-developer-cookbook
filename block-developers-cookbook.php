@@ -8,9 +8,7 @@
  * Author:            The WordPress Contributors
  * License:           GPL-2.0-or-later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       block-developers-cookbook
- *
- * @package           block-developers-cookbook
+ * Text Domain:       bdc
  */
 
 /**
@@ -20,13 +18,53 @@
  *
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
-function block_developers_cookbook_block_init() {
-	register_block_type( __DIR__ . '/build/connecting-to-meta-data' );
-}
-add_action( 'init', 'block_developers_cookbook_block_init' );
+add_action(
+	'init',
+	function() {
+		$dirs = array_filter( glob( __DIR__ . '/build/*' ), 'is_dir' );
+
+		foreach ( $dirs as $block_dir ) {
+			register_block_type( trailingslashit( $block_dir ) );
+		}
+	}
+);
+
+// Enqueue filename from a plugin
+add_action(
+	'enqueue_block_editor_assets',
+	function() {
+		$assets_file = plugin_dir_path( __FILE__ ) . '/build/hooks.asset.php';
+
+		if ( file_exists( $assets_file ) ) {
+			$assets = include $assets_file;
+			wp_enqueue_script(
+				'script-handle',
+				plugin_dir_url( __FILE__ ) . '/build/hooks.js',
+				$assets['dependencies'],
+				$assets['version'],
+				true
+			);
+		}
+	}
+);
 
 
-// Add some post meta
+add_filter(
+	'block_categories_all',
+	function( $categories ) {
+		array_unshift(
+			$categories,
+			array(
+				'slug'  => 'block-developers-cookbook',
+				'title' => __( 'Block Developers Cookbook', 'block-developers-cookbook' ),
+			)
+		);
+		return $categories;
+	},
+	10
+);
+
+// Add some post meta.
 add_action(
 	'init',
 	function() {
