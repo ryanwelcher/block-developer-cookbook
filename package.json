@@ -13,7 +13,8 @@
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
 		"start": "wp-scripts start --webpack-copy-php",
-		"wp-now": "wp-now"
+		"wp-now": "wp-now",
+		"block": "cd ./src && npx @wordpress/create-block --template ../templates/bdc --no-plugin"
 	},
 	"devDependencies": {
 		"@wordpress/scripts": "^26.11.0",
