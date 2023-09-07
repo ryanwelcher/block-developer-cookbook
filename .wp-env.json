@@ -5,6 +5,7 @@
 		"./plugins/managing-formats",
 		"./plugins/transforms"
 	],
+	"themes": [ "./themes/chef-kiss" ],
 	"mappings": {
 		"wp-content/mu-plugins": "./mu-plugins"
 	},
