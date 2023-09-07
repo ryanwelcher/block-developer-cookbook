@@ -6,15 +6,16 @@
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"scripts": {
-		"build": "wp-scripts build --webpack-copy-php",
 		"format": "wp-scripts format",
 		"lint:css": "wp-scripts lint-style",
 		"lint:js": "wp-scripts lint-js",
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
-		"start": "wp-scripts start --webpack-copy-php",
 		"wp-now": "wp-now",
-		"block": "cd ./src && npx @wordpress/create-block --template ../templates/bdc --no-plugin"
+		"block": "cd ./plugins && npx @wordpress/create-block --template ../templates/bdc --variant dynamic",
+		"plugin": "cd ./plugins && npx @wordpress/create-block --template ../templates/bdc --variant plugin",
+		"build": "pnpm -r build",
+		"start": "pnpm -r start"
 	},
 	"devDependencies": {
 		"@wordpress/scripts": "^26.11.0",
