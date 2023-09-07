@@ -1,0 +1,16 @@
+{
+	"plugins": [
+		"./plugins/block-level-checks",
+		"./plugins/connecting-to-post-meta",
+		"./plugins/managing-formats",
+		"./plugins/transforms"
+	],
+	"mappings": {
+		"wp-content/mu-plugins": "./mu-plugins"
+	},
+	"config": {
+		"WP_DEBUG": true,
+		"WP_DEBUG_DISPLAY": true,
+		"SCRIPT_DEBUG": true
+	}
+}
