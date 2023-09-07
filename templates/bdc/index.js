@@ -14,6 +14,7 @@ module.exports = {
 			render: 'file:./render.php',
 		},
 		static: {},
+		plugin: {},
 	},
 	pluginTemplatesPath: join( __dirname, 'templates/plugin' ),
 	blockTemplatesPath: join( __dirname, 'templates/block' ),

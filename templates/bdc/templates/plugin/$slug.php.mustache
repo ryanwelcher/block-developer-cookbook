@@ -29,7 +29,7 @@
  *
  * @package           {{namespace}}
  */
-
+{{^isPluginVariant}}
 /**
  * Registers the block using the metadata loaded from the `block.json` file.
  * Behind the scenes, it registers also all assets so they can be enqueued
@@ -41,3 +41,25 @@ function {{namespaceSnakeCase}}_{{slugSnakeCase}}_block_init() {
 	register_block_type( __DIR__ . '/build' );
 }
 add_action( 'init', '{{namespaceSnakeCase}}_{{slugSnakeCase}}_block_init' );
+{{/isPluginVariant}}
+{{#isPluginVariant}}
+add_action(
+	'enqueue_block_editor_assets',
+	function() {
+		$citation_file = plugin_dir_path( __FILE__ ) . '/build/{{slug}}.asset.php';
+
+		if ( file_exists( $citation_file ) ) {
+			$assets = include $citation_file;
+			wp_enqueue_script(
+				'citation-format',
+				plugin_dir_url( __FILE__ ) . '/build/{{slug}}.js',
+				$assets['dependencies'],
+				$assets['version'],
+				true
+			);
+		}
+	}
+);
+
+
+{{/isPluginVariant}}
