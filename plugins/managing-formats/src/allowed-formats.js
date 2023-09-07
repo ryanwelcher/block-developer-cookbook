@@ -43,7 +43,6 @@ const Test = () => {
 				...settings,
 			} );
 		} );
-		console.log( formats );
 		setRunOnce( true );
 	}
 

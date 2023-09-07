@@ -8,16 +8,19 @@ import { __ } from '@wordpress/i18n';
 import { useSelect, useDispatch } from '@wordpress/data';
 
 function addIsValueAttribute( settings, name ) {
-	return {
-		...settings,
-		attributes: {
-			...settings.attributes,
-			blockIsValid: {
-				type: 'boolean',
-				default: true,
+	if ( 'core/buttons' === name ) {
+		return {
+			...settings,
+			attributes: {
+				...settings.attributes,
+				blockIsValid: {
+					type: 'boolean',
+					default: true,
+				},
 			},
-		},
-	};
+		};
+	}
+	return settings;
 }
 
 addFilter(
@@ -26,17 +29,18 @@ addFilter(
 	addIsValueAttribute
 );
 
-const { createHigherOrderComponent } = wp.compose;
-
-const withClientIdClassName = createHigherOrderComponent(
-	( BlockListBlock ) => {
-		return ( props ) => {
+const withClientIdClassName = ( BlockListBlock ) => {
+	return ( props ) => {
+		const {
+			block: { name },
+		} = props;
+		if ( name === 'core/buttons' ) {
 			const classes = props.attributes.blockIsValid ? 'valid' : 'invalid';
 			return <BlockListBlock { ...props } className={ classes } />;
-		};
-	},
-	'withClientIdClassName'
-);
+		}
+		return <BlockListBlock { ...props } />;
+	};
+};
 
 addFilter(
 	'editor.BlockListBlock',
@@ -69,18 +73,21 @@ registerPlugin( 'block-developers-cook', {
 			( block ) =>
 				block.attributes?.text && block.attributes?.text.length !== 0
 		);
+		console.log( isValid );
 
 		updateBlockAttributes( firstButtonsBlock?.clientId, {
 			blockIsValid: isValid,
 		} );
 
-		if ( ! isValid ) {
-			lockPostSaving();
-			disablePublishSidebar();
-		} else {
-			unlockPostSaving();
-			enablePublishSidebar();
-		}
+		// if ( buttonsBlocks ) {
+		// 	if ( ! isValid ) {
+		// 		lockPostSaving();
+		// 		disablePublishSidebar();
+		// 	} else {
+		// 		unlockPostSaving();
+		// 		enablePublishSidebar();
+		// 	}
+		// }
 
 		return (
 			<PluginDocumentSettingPanel

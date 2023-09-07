@@ -1,0 +1,13 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "block-developers-cookbook/block-level-checks",
+	"version": "0.1.0",
+	"title": "Block Level Checks",
+	"category": "block-developers-cookbook",
+	"example": {},
+	"textdomain": "block-level-checks",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}
