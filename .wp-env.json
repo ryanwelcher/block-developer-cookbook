@@ -2,9 +2,7 @@
 	"plugins": [
 		"./plugins/managing-formats",
 		"./plugins/transforms",
-		"./plugins/block-level-checks",
-		"./plugins/connecting-to-post-meta",
-		"./plugins/variations"
+		"./plugins/block-level-checks"
 	],
 	"themes": [ "./themes/chef-kiss" ],
 	"mappings": {
