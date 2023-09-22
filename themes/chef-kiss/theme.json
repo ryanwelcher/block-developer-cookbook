@@ -144,11 +144,6 @@
 			"area": "sidebar",
 			"name": "sidebar",
 			"title": "Sidebar"
-		},
-		{
-			"area": "comments",
-			"name": "comments",
-			"title": "Comments"
 		}
 	],
 	"customTemplates": []
