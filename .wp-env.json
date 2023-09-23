@@ -1,5 +1,9 @@
 {
-	"plugins": [ "./plugins/managing-formats", "./plugins/transforms" ],
+	"plugins": [
+		"./plugins/managing-formats",
+		"./plugins/transforms",
+		"./plugins/interactive-block"
+	],
 	"themes": [ "./themes/chef-kiss" ],
 	"mappings": {
 		"wp-content/mu-plugins": "./mu-plugins"
