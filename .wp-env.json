@@ -2,7 +2,9 @@
 	"plugins": [
 		"./plugins/managing-formats",
 		"./plugins/transforms",
-		"./plugins/interactive-block"
+		"./plugins/interactive-block",
+		"./plugins/block-variations",
+		"./plugins/context"
 	],
 	"themes": [ "./themes/chef-kiss" ],
 	"mappings": {

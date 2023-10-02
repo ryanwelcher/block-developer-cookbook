@@ -51,7 +51,7 @@ add_action(
 		if ( file_exists( $citation_file ) ) {
 			$assets = include $citation_file;
 			wp_enqueue_script(
-				'citation-format',
+				'{{slug}}',
 				plugin_dir_url( __FILE__ ) . '/build/{{slug}}.js',
 				$assets['dependencies'],
 				$assets['version'],

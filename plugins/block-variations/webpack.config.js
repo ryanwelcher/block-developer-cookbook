@@ -1,4 +1,3 @@
-{{#isPluginVariant}}
 // Import the original config from the @wordpress/scripts package.
 const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
 
@@ -10,7 +9,6 @@ module.exports = {
 	...defaultConfig,
 	entry: {
 		...getWebpackEntryPoints(),
-		'{{slug}}': './src/{{slug}}.js'
+		'block-variations': './src/block-variations.js',
 	},
 };
-{{/isPluginVariant}}
