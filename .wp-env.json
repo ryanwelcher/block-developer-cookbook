@@ -5,7 +5,8 @@
 		"./plugins/interactive-block",
 		"./plugins/block-variations",
 		"./plugins/context",
-		"./plugins/using-the-data-layer"
+		"./plugins/using-the-data-layer",
+		"./plugins/block-editing-mode"
 	],
 	"themes": [ "./themes/chef-kiss" ],
 	"mappings": {

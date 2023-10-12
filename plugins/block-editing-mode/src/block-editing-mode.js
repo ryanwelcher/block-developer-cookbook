@@ -1,0 +1,7 @@
+/**
+ * WordPress dependencies
+ */
+
+/**
+ * Internal dependencies
+ */
