@@ -15,6 +15,24 @@ importers:
         specifier: ^0.1.61
         version: 0.1.63
 
+  plugins/block-variations:
+    devDependencies:
+      '@wordpress/scripts':
+        specifier: ^26.12.0
+        version: 26.12.0(react-dom@18.2.0)(react@18.2.0)(typescript@5.2.2)
+
+  plugins/context:
+    devDependencies:
+      '@wordpress/scripts':
+        specifier: ^26.12.0
+        version: 26.12.0(react-dom@18.2.0)(react@18.2.0)(typescript@5.2.2)
+
+  plugins/data-layer:
+    devDependencies:
+      '@wordpress/scripts':
+        specifier: ^26.12.0
+        version: 26.12.0(react-dom@18.2.0)(react@18.2.0)(typescript@5.2.2)
+
   plugins/interactive-block:
     dependencies:
       '@wordpress/interactivity':

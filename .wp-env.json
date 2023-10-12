@@ -4,7 +4,8 @@
 		"./plugins/transforms",
 		"./plugins/interactive-block",
 		"./plugins/block-variations",
-		"./plugins/context"
+		"./plugins/context",
+		"./plugins/using-the-data-layer"
 	],
 	"themes": [ "./themes/chef-kiss" ],
 	"mappings": {
@@ -12,7 +13,7 @@
 	},
 	"config": {
 		"WP_DEBUG": true,
-		"WP_DEBUG_DISPLAY": true,
+		"WP_DEBUG_DISPLAY": false,
 		"SCRIPT_DEBUG": true
 	}
 }
