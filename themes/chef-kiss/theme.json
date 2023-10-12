@@ -82,11 +82,11 @@
 			"fontSize": "var( --wp--preset--font-size--medium )"
 		},
 		"spacing": {
-			"blockGap": "2rem",
-			"padding": {
+			"blockGap": "5rem",
+			"margin": {
 				"bottom": "1rem",
-				"left": "2rem",
-				"right": "2rem",
+				"left": "3rem",
+				"right": "3rem",
 				"top": "1rem"
 			}
 		},
