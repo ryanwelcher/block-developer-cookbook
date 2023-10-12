@@ -11,22 +11,14 @@
  *
  * @package           block-developers-cookbook
  */
-add_action(
-	'enqueue_block_editor_assets',
-	function() {
-		$citation_file = plugin_dir_path( __FILE__ ) . '/build/block-editing-mode.asset.php';
-
-		if ( file_exists( $citation_file ) ) {
-			$assets = include $citation_file;
-			wp_enqueue_script(
-				'block-editing-mode',
-				plugin_dir_url( __FILE__ ) . '/build/block-editing-mode.js',
-				$assets['dependencies'],
-				$assets['version'],
-				true
-			);
-		}
-	}
-);
-
-
+/**
+ * Registers the block using the metadata loaded from the `block.json` file.
+ * Behind the scenes, it registers also all assets so they can be enqueued
+ * through the block editor in the corresponding context.
+ *
+ * @see https://developer.wordpress.org/reference/functions/register_block_type/
+ */
+function block_developers_cookbook_block_editing_mode_block_init() {
+	register_block_type( __DIR__ . '/build' );
+}
+add_action( 'init', 'block_developers_cookbook_block_editing_mode_block_init' );
