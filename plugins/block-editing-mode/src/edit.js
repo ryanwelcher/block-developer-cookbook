@@ -25,7 +25,6 @@ export default function Edit( {
 			return {
 				blocks: select( blockEditorStore ).getBlocks(),
 				getBlockIndex: select( blockEditorStore ).getBlockIndex,
-				getBlockOrder: select( blockEditorStore ).getBlockOrder,
 				getBlockParents: select( blockEditorStore ).getBlockParents,
 			};
 		},
@@ -44,6 +43,7 @@ export default function Edit( {
 	}
 
 	useBlockEditingMode( mode );
+
 	return (
 		<RichText
 			{ ...useBlockProps() }
