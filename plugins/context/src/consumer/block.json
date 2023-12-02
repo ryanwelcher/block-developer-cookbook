@@ -1,0 +1,15 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "block-developers-cookbook/consumer",
+	"version": "0.1.0",
+	"title": "Consumer",
+	"category": "block-developers-cookbook",
+	"example": {},
+	"usesContext": [ "provider/message" ],
+	"textdomain": "consumer",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

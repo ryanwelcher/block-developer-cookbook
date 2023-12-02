@@ -4,18 +4,16 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.DS_Store
-plugins/gutenberg
 
 # Coverage directory used by tools like istanbul
 coverage
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
-build/
-.vscode
+build/Release
+
 # Dependency directories
 node_modules/
-vendor/
+
 # Optional npm cache directory
 .npm
 

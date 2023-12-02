@@ -1,0 +1,20 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "block-developers-cookbook/block-editing-mode",
+	"version": "0.1.0",
+	"title": "Block Editing Mode",
+	"category": "block-developers-cookbook",
+	"example": {},
+	"attributes": {
+		"message": {
+			"type": "string",
+			"default": "Congrats cr0ybot"
+		}
+	},
+	"textdomain": "block-editing-mode",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}
