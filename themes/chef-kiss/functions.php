@@ -11,7 +11,7 @@ add_action(
 
 		$args = array(
 			'labels'             => array(
-				'name' => __( 'Recipes', 'chef-kiss' ),
+				'name'          => __( 'Recipes', 'chef-kiss' ),
 				'singular_name' => __( 'Recipe', 'chef-kiss' ),
 				'add_new_item'  => __( 'Add New Book', 'chef-kiss' ),
 			),
@@ -25,7 +25,7 @@ add_action(
 			'has_archive'        => true,
 			'hierarchical'       => false,
 			'menu_position'      => null,
-			'supports'           => array( 'title','editor', 'thumbnail' ),
+			'supports'           => array( 'title', 'editor', 'thumbnail' ),
 			'show_in_rest'       => true,
 		);
 
