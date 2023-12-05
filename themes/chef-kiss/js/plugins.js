@@ -19,7 +19,6 @@ registerPlugin( 'chef-kiss', {
 
 		switch ( postType ) {
 			case 'recipe':
-				console.log( meta );
 				return (
 					<PluginDocumentSettingPanel
 						title={ __( 'Recipe Details', 'chef-kiss' ) }
@@ -45,15 +44,18 @@ registerPlugin( 'chef-kiss', {
 						/>
 					</PluginDocumentSettingPanel>
 				);
-			case 'conference':
-				console.log( meta );
+			case 'page':
 				return (
 					<PluginDocumentSettingPanel
 						title={ __( 'Conference Details', 'chef-kiss' ) }
 					>
-						<div className="chef-kiss">
-							{ __( 'Chef Kiss', 'chef-kiss' ) }
-						</div>
+						<NumberControl
+							label={ __( 'Available time (mins)', 'chef-kiss' ) }
+							value={ meta?.duration }
+							onChange={ ( value ) =>
+								setMeta( { ...meta, duration: value } )
+							}
+						/>
 					</PluginDocumentSettingPanel>
 				);
 			default:

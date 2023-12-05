@@ -11,7 +11,6 @@ add_action(
 	'init',
 	function () {
 		register_recipes();
-		register_conferences();
 	}
 );
 
@@ -67,45 +66,15 @@ function register_recipes() {
 			'default'      => 1,
 		)
 	);
-}
 
-/**
- * Register the conferences CPT
- */
-function register_conferences() {
-	$args = array(
-		'labels'             => array(
-			'name'          => __( 'Conferences', 'chef-kiss' ),
-			'singular_name' => __( 'Conference', 'chef-kiss' ),
-			'add_new_item'  => __( 'Add New Conference', 'chef-kiss' ),
-		),
-		'public'             => true,
-		'publicly_queryable' => true,
-		'show_ui'            => true,
-		'show_in_menu'       => true,
-		'query_var'          => true,
-		'rewrite'            => array( 'slug' => 'conference' ),
-		'capability_type'    => 'post',
-		'has_archive'        => true,
-		'hierarchical'       => false,
-		'menu_position'      => null,
-		'supports'           => array( 'title', 'editor', 'thumbnail', 'custom-fields' ),
-		'show_in_rest'       => true,
-	);
-
-	register_post_type(
-		'conference',
-		$args
-	);
-
-	// Register the amount of time.
 	register_post_meta(
-		'conference',
+		'page',
 		'duration',
 		array(
 			'show_in_rest' => true,
 			'single'       => true,
 			'type'         => 'number',
+			'default'      => 90,
 		)
 	);
 }
