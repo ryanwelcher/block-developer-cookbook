@@ -59,13 +59,32 @@
 					"text": "var(--wp--preset--color--card)"
 				}
 			},
+			"chef-kiss/level": {
+				"typography": {
+					"fontSize": "var( --wp--preset--font-size--small )"
+				}
+			},
+			"chef-kiss/cooking-time": {
+				"typography": {
+					"fontSize": "var( --wp--preset--font-size--small )"
+				}
+			},
 			"core/group": {
 				"css": "&.recipe-container { background-color: var(--wp--preset--color--card);} &.recipe-container .number-value {color: var(--wp--preset--color--highlight);}"
+			},
+			"core/post-excerpt": {
+				"typography": {
+					"fontSize": "var( --wp--preset--font-size--medium )"
+				}
 			}
 		},
 		"color": {
 			"background": "var( --wp--preset--color--background)",
 			"text": "var( --wp--preset--color--text )"
+		},
+		"typography": {
+			"fontFamily": "var( --wp--preset--font-family--prata )",
+			"fontSize": "var( --wp--preset--font-size--medium )"
 		},
 		"elements": {
 			"button": {
@@ -79,7 +98,8 @@
 					"text": "var( --wp--preset--color--highlight)"
 				},
 				"typography": {
-					"fontFamily": "var( --wp--preset--font-family--prata )"
+					"fontFamily": "var( --wp--preset--font-family--prata )",
+					"fontSize": "var( --wp--preset--font-size--large )"
 				}
 			}
 		},
@@ -91,10 +111,6 @@
 				"right": "3rem",
 				"top": "1rem"
 			}
-		},
-		"typography": {
-			"fontFamily": "var( --wp--preset--font-family--prata )",
-			"fontSize": "var( --wp--preset--font-size--medium )"
 		}
 	},
 	"templateParts": [
