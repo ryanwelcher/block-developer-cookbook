@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "block-developers-cookbook/time-remaining",
+	"version": "0.1.0",
+	"title": "Time Remaining",
+	"category": "block-developers-cookbook",
+	"icon": "media-interactive",
+	"description": "Displays the amount of time the user has to fill with recipes selection",
+	"example": {},
+	"supports": {
+		"interactivity": true
+	},
+	"textdomain": "block-developers-cookbook",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}
