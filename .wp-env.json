@@ -1,6 +1,5 @@
 {
 	"plugins": [
-		"./plugins/gutenberg",
 		"./plugins/managing-formats",
 		"./plugins/transforms",
 		"./plugins/interactive-block",
