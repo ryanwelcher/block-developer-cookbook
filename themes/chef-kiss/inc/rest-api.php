@@ -20,6 +20,9 @@ class BDC_REST_API extends WP_REST_Controller {
 
 	const NAMESPACE = 'bdc/v1';
 
+	/**
+	 * Register the routes/
+	 */
 	public function register_routes() {
 		register_rest_route(
 			self::NAMESPACE,
@@ -47,15 +50,15 @@ class BDC_REST_API extends WP_REST_Controller {
 
 		$rtn = false;
 
-		// Return an error if ids are missing
+		// Return an error if ids are missing.
 		if ( ! $user_id || ! $conference_id || ! $recipe_id ) {
 			return new \WP_Error( 'Missing Params', 'Requires: $user_id, $conference_id, and $recipe_id' );
 		}
 
 		// Generate the term name - we want to be able query for a count of terms for each recipe.
-		$term_name = "{$recipe_id}_{$user_id}";
+		$term_name = "{$user_id}_{$recipe_id}";
 
-		// Check the action and act accordingly
+		// Check the action and act accordingly.
 		switch ( $action ) {
 			case 'add':
 				$rtn = $this->add_vote( $term_name, $conference_id );
@@ -68,6 +71,12 @@ class BDC_REST_API extends WP_REST_Controller {
 		}
 
 		if ( ! is_wp_error( $rtn ) ) {
+			return new \WP_REST_Response(
+				array(
+					'status' => 'success',
+					'data'   => $rtn,
+				)
+			);
 		} else {
 			// Pass WP_Errors through.
 			return $rtn;
@@ -81,7 +90,7 @@ class BDC_REST_API extends WP_REST_Controller {
 	 * @param {integer} $conference_id The post ID of the conference.
 	 */
 	private function add_vote( $term_name, $conference_id ) {
-		wp_insert_term( $term_name, 'recipe_votes' );
+		return wp_set_object_terms( $conference_id, $term_name, 'votes', true );
 	}
 
 	/**
@@ -91,10 +100,11 @@ class BDC_REST_API extends WP_REST_Controller {
 	 * @param {integer} $conference_id The post ID of the conference.
 	 */
 	private function remove_vote( $term_name, $conference_id ) {
-		$term = get_term_by( 'name', $term_name, 'recipe_votes', );
+		$term = get_term_by( 'name', $term_name, 'votes', );
 		if ( $term ) {
-			wp_delete_term( $term->term_id, 'recipe_votes' );
+			return wp_delete_term( $term->term_id, 'votes' );
 		}
+		return new \WP_Error( 'Term not found' );
 	}
 }
 

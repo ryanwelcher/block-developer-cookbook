@@ -1,14 +1,7 @@
 {
-	"$schema": "http://schemas.wp.org/trunk/theme.json",
-	"version": 2,
+	"customTemplates": [],
 	"settings": {
-		"border": {},
-		"shadow": {},
 		"appearanceTools": true,
-		"layout": {
-			"contentSize": "60rem",
-			"wideSize": "64rem"
-		},
 		"color": {
 			"palette": [
 				{
@@ -33,12 +26,15 @@
 				}
 			]
 		},
+		"custom": [],
+		"layout": {
+			"contentSize": "60rem",
+			"wideSize": "64rem"
+		},
 		"typography": {
+			"dropCap": true,
 			"fontFamilies": [
 				{
-					"fontFamily": "Transformers",
-					"name": "Transformers",
-					"slug": "transformers",
 					"fontFace": [
 						{
 							"fontFamily": "Transformers",
@@ -48,12 +44,12 @@
 								"file:./assets/fonts/transformers/transformers.woff2"
 							]
 						}
-					]
+					],
+					"fontFamily": "Transformers",
+					"name": "Transformers",
+					"slug": "transformers"
 				},
 				{
-					"fontFamily": "Prata",
-					"name": "Prata",
-					"slug": "prata",
 					"fontFace": [
 						{
 							"fontFamily": "Prata",
@@ -63,34 +59,34 @@
 								"file:./assets/fonts/Prata/Prata-Regular.ttf"
 							]
 						}
-					]
+					],
+					"fontFamily": "Prata",
+					"name": "Prata",
+					"slug": "prata"
 				}
-			],
-			"dropCap": true,
-			"lineHeight": true
+			]
 		},
-		"custom": {},
 		"useRootPaddingAwareAlignments": true
 	},
 	"styles": {
+		"blocks": {
+			"block-developers-cookbook/transforms": {
+				"typography": {
+					"fontFamily": "var( --wp--preset--font-family--transformers )"
+				}
+			}
+		},
 		"color": {
 			"background": "var( --wp--preset--color--background )",
 			"text": "var( --wp--preset--color--text )"
 		},
-		"typography": {
-			"fontFamily": "var( --wp--preset--font-family--prata )",
-			"fontSize": "var( --wp--preset--font-size--medium )"
-		},
-		"spacing": {
-			"blockGap": "5rem",
-			"margin": {
-				"bottom": "1rem",
-				"left": "3rem",
-				"right": "3rem",
-				"top": "1rem"
-			}
-		},
 		"elements": {
+			"button": {
+				"color": {
+					"background": "var( --wp--preset--color--highlight )",
+					"text": "var( --wp--preset--color--editor-dark )"
+				}
+			},
 			"heading": {
 				"color": {
 					"text": "var( --wp--preset--color--highlight )"
@@ -113,20 +109,20 @@
 				"color": {
 					"text": "var( --wp--preset--color--highlight )"
 				}
-			},
-			"button": {
-				"color": {
-					"background": "var( --wp--preset--color--highlight )",
-					"text": "var( --wp--preset--color--editor-dark )"
-				}
 			}
 		},
-		"blocks": {
-			"block-developers-cookbook/transforms": {
-				"typography": {
-					"fontFamily": "var( --wp--preset--font-family--transformers )"
-				}
+		"spacing": {
+			"blockGap": "5rem",
+			"margin": {
+				"bottom": "1rem",
+				"left": "3rem",
+				"right": "3rem",
+				"top": "1rem"
 			}
+		},
+		"typography": {
+			"fontFamily": "var( --wp--preset--font-family--prata )",
+			"fontSize": "var( --wp--preset--font-size--medium )"
 		}
 	},
 	"templateParts": [
@@ -146,5 +142,6 @@
 			"title": "Sidebar"
 		}
 	],
-	"customTemplates": []
+	"version": 2,
+	"$schema": "https://schemas.wp.org/wp/6.4/theme.json"
 }

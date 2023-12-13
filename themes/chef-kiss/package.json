@@ -3,13 +3,13 @@
 	"version": "1.0.0",
 	"description": "",
 	"scripts": {
-		"build": "wp-scripts build",
+		"build": "wp-scripts build --webpack-src-dir=blocks",
 		"format": "wp-scripts format",
 		"lint:css": "wp-scripts lint-style",
 		"lint:js": "wp-scripts lint-js",
 		"packages-update": "wp-scripts packages-update",
 		"plugin-zip": "wp-scripts plugin-zip",
-		"start": "wp-scripts start"
+		"start": "wp-scripts start --webpack-src-dir=blocks"
 	},
 	"devDependencies": {
 		"@wordpress/scripts": "^26.12.0"
