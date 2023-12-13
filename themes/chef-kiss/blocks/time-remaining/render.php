@@ -28,12 +28,20 @@ wp_store(
 	)
 );
 
+$context = array(
+	'duration'   => get_post_meta( $post->ID, 'duration', true ),
+	'assigned'   => '0',
+	'votingOpen' => true,
+)
+
 
 ?>
 
 <div
 	<?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>
 	data-wp-interactive='{ "namespace": "chef_kiss_store" }'
+	data-wp-context='<?php echo wp_json_encode( $context ); ?>'
 >
-Time: <span data-wp-text="state.timeAssigned"></span>/<span data-wp-text="state.totalDuration"></span>
+Time: <span data-wp-text="context.assigned"></span>/<span data-wp-text="context.duration"></span>
+<p data-wp-text="state.totalDuration">ads</p>
 </div>

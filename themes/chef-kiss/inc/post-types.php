@@ -34,7 +34,7 @@ function register_recipes() {
 		'has_archive'        => true,
 		'hierarchical'       => false,
 		'menu_position'      => null,
-		'supports'           => array( 'title', 'editor', 'thumbnail', 'custom-fields' ),
+		'supports'           => array( 'title', 'editor', 'thumbnail', 'custom-fields', 'excerpt' ),
 		'show_in_rest'       => true,
 	);
 

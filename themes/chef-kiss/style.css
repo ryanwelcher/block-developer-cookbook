@@ -13,3 +13,8 @@
  * License:           GNU General Public License v2.0 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  */
+
+.wp-block-group.recipe-container:hover {
+	transition: transform 0.2s ease-in-out;
+	transform: scale(1.05);
+}

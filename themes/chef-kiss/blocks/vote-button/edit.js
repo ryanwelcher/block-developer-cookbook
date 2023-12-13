@@ -27,10 +27,10 @@ import { useBlockProps } from '@wordpress/block-editor';
  */
 export default function Edit( { attributes, setAttributes } ) {
 	const blockProps = useBlockProps();
-	
+
 	return (
-		<p { ...blockProps }>
-			{ __( 'Vote Button – hello from the editor!', 'vote-button' ) }
-		</p>
+		<button { ...blockProps }>
+			{ __( 'Add this recipe', 'vote-button' ) }
+		</button>
 	);
 }

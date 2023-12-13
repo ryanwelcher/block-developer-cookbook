@@ -5,28 +5,27 @@
 		"color": {
 			"palette": [
 				{
-					"color": "#f3f3f5",
-					"name": "Background",
-					"slug": "background"
+					"color": "#1E1E3F",
+					"name": "Card",
+					"slug": "card"
 				},
 				{
-					"color": "#566771",
+					"color": "#F2ECFF",
 					"name": "Text",
 					"slug": "text"
 				},
 				{
-					"color": "#1f3543",
+					"color": "#F9F871",
 					"name": "Highlight",
 					"slug": "highlight"
 				},
 				{
-					"color": "#1E1E3F",
-					"name": "Editor Dark",
-					"slug": "editor-dark"
+					"color": "#DBEFEF",
+					"name": "Background",
+					"slug": "background"
 				}
 			]
 		},
-		"custom": [],
 		"layout": {
 			"contentSize": "60rem",
 			"wideSize": "64rem"
@@ -34,21 +33,6 @@
 		"typography": {
 			"dropCap": true,
 			"fontFamilies": [
-				{
-					"fontFace": [
-						{
-							"fontFamily": "Transformers",
-							"fontStyle": "normal",
-							"fontWeight": "normal",
-							"src": [
-								"file:./assets/fonts/transformers/transformers.woff2"
-							]
-						}
-					],
-					"fontFamily": "Transformers",
-					"name": "Transformers",
-					"slug": "transformers"
-				},
 				{
 					"fontFace": [
 						{
@@ -70,49 +54,37 @@
 	},
 	"styles": {
 		"blocks": {
-			"block-developers-cookbook/transforms": {
-				"typography": {
-					"fontFamily": "var( --wp--preset--font-family--transformers )"
+			"block-developers-cookbook/time-remaining": {
+				"color": {
+					"text": "var(--wp--preset--color--card)"
 				}
+			},
+			"core/group": {
+				"css": "&.recipe-container { background-color: var(--wp--preset--color--card);} &.recipe-container .number-value {color: var(--wp--preset--color--highlight);}"
 			}
 		},
 		"color": {
-			"background": "var( --wp--preset--color--background )",
+			"background": "var( --wp--preset--color--background)",
 			"text": "var( --wp--preset--color--text )"
 		},
 		"elements": {
 			"button": {
 				"color": {
-					"background": "var( --wp--preset--color--highlight )",
-					"text": "var( --wp--preset--color--editor-dark )"
+					"background": "var( --wp--preset--color--background)",
+					"text": "var( --wp--preset--color--background)"
 				}
 			},
 			"heading": {
 				"color": {
-					"text": "var( --wp--preset--color--highlight )"
+					"text": "var( --wp--preset--color--highlight)"
 				},
 				"typography": {
 					"fontFamily": "var( --wp--preset--font-family--prata )"
 				}
-			},
-			"link": {
-				":focus": {
-					"color": {
-						"text": "var( --wp--preset--color--highlight )"
-					}
-				},
-				":hover": {
-					"color": {
-						"text": "var( --wp--preset--color--highlight )"
-					}
-				},
-				"color": {
-					"text": "var( --wp--preset--color--highlight )"
-				}
 			}
 		},
 		"spacing": {
-			"blockGap": "5rem",
+			"blockGap": "2rem",
 			"margin": {
 				"bottom": "1rem",
 				"left": "3rem",

@@ -1,0 +1,32 @@
+{
+	"$schema": "http://schemas.wp.org/trunk/theme.json",
+	"version": 2,
+	"title": "Tester",
+	"description": "Let's test some colors",
+	"settings": {
+		"color": {
+			"palette": [
+				{
+					"color": "#1E1E3F",
+					"name": "Card",
+					"slug": "card"
+				},
+				{
+					"color": "#F2ECFF",
+					"name": "Text",
+					"slug": "text"
+				},
+				{
+					"color": "#F9F871",
+					"name": "Highlight",
+					"slug": "highlight"
+				},
+				{
+					"color": "#DBEFEF",
+					"name": "Background",
+					"slug": "background"
+				}
+			]
+		}
+	}
+}

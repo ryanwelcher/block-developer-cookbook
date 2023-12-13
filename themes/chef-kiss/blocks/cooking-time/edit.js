@@ -30,8 +30,10 @@ export default function Edit( {
 	console.log( meta );
 	return (
 		<p { ...blockProps }>
-			{ __( 'Time to prepare: ', 'bdc' ) }
-			<span>{ `${ meta?.time } minutes` || 'N/A' }</span>
+			{ __( 'Prep Time: ', 'bdc' ) }
+			<span className="number-value">
+				{ `${ meta?.time } minutes` || 'N/A' }
+			</span>
 		</p>
 	);
 }

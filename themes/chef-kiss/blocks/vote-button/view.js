@@ -5,7 +5,7 @@ import { store, getContext } from '@wordpress/interactivity';
 
 store( 'chef-kiss', {
 	actions: {
-		toggle: () => {
+		vote: () => {
 			const context = getContext();
 			context.isOpen = ! context.isOpen;
 		},

@@ -24,4 +24,5 @@ if ( function_exists( 'gutenberg_enqueue_module' ) ) {
 	data-wp-interactive='{ "namespace": "chef-kiss" }'
 	data-wp-context='{ "isOpen": false }'
 >
+<button>Add this recipe</button>
 </div>

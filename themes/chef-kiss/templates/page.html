@@ -1,2 +1,33 @@
-<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
-<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->
+<!-- wp:template-part {"slug":"header","theme":"chef-kiss","tagName":"header"} /-->
+
+<!-- wp:group {"align":"wide","style":{"spacing":{"padding":{"top":"var:preset|spacing|50","right":"0","bottom":"var:preset|spacing|50","left":"0"},"blockGap":"0","margin":{"top":"154px","bottom":"0"}},"dimensions":{"minHeight":"18px"}},"layout":{"type":"default"}} -->
+<div class="wp-block-group alignwide" style="min-height:18px;margin-top:154px;margin-bottom:0;padding-top:var(--wp--preset--spacing--50);padding-right:0;padding-bottom:var(--wp--preset--spacing--50);padding-left:0"><!-- wp:group {"style":{"spacing":{"margin":{"top":"0","bottom":"var:preset|spacing|70"}}},"layout":{"type":"flex","flexWrap":"nowrap","justifyContent":"right"}} -->
+	<div class="wp-block-group" style="margin-top:0;margin-bottom:var(--wp--preset--spacing--70)"><!-- wp:block-developers-cookbook/time-remaining /--></div>
+	<!-- /wp:group -->
+
+	<!-- wp:query {"queryId":3,"query":{"perPage":50,"pages":0,"offset":0,"order":"desc","orderBy":"meta_value_num","author":"","search":"","exclude":[],"sticky":"","inherit":false,"parents":[],"postType":"recipe","meta_query":{"queries":[{"id":"6b5aa7a0-be82-44e0-8135-5119f5ffc5f6","meta_key":"time","meta_value":"","meta_compare":""}]},"exclude_current":"chef-kiss//page"},"tagName":"main","namespace":"advanced-query-loop","align":"wide","layout":{"type":"default"}} -->
+	<main class="wp-block-query alignwide"><!-- wp:post-template {"layout":{"type":"grid","columnCount":4}} -->
+	<!-- wp:group {"style":{"spacing":{"margin":{"top":"0","bottom":"0"},"blockGap":"var:preset|spacing|40"}},"className":"recipe-container","layout":{"type":"constrained"}} -->
+	<div class="wp-block-group recipe-container" style="margin-top:0;margin-bottom:0"><!-- wp:post-title /-->
+
+	<!-- wp:post-excerpt {"style":{"typography":{"fontSize":"16px"}}} /-->
+
+	<!-- wp:group {"style":{"spacing":{"blockGap":"0"}},"layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
+	<div class="wp-block-group"><!-- wp:chef-kiss/level /-->
+
+	<!-- wp:chef-kiss/cooking-time /--></div>
+	<!-- /wp:group -->
+
+	<!-- wp:chef-kiss/vote-button /--></div>
+	<!-- /wp:group -->
+	<!-- /wp:post-template -->
+
+	<!-- wp:query-no-results -->
+	<!-- wp:paragraph {"placeholder":"Add text or blocks that will display when a query returns no results."} -->
+	<p></p>
+	<!-- /wp:paragraph -->
+	<!-- /wp:query-no-results --></main>
+	<!-- /wp:query --></div>
+	<!-- /wp:group -->
+
+	<!-- wp:template-part {"slug":"footer","theme":"chef-kiss","tagName":"footer"} /-->

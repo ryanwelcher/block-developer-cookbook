@@ -10,5 +10,6 @@ module.exports = {
 	entry: {
 		...getWebpackEntryPoints(),
 		plugins: './js/plugins.js',
+		variations: './js/variations.js',
 	},
 };

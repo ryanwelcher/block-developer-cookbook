@@ -10,29 +10,22 @@
  * @see https://github.com/WordPress/gutenberg/blob/trunk/docs/reference-guides/block-api/block-metadata.md#render
  */
 
-$unique_id = uniqid( 'p-' );
+global $post;
+
+$context = array(
+	'cookingTime' => get_post_meta( $post->ID, 'time', true ) . 'mins',
+);
+
+// Enqueue the view file.
+if ( function_exists( 'gutenberg_enqueue_module' ) ) {
+	gutenberg_enqueue_module( 'cooking-time-view' );
+}
 ?>
 
 <div
-	<?php echo get_block_wrapper_attributes(); ?>
-	data-wp-interactive
-	data-wp-context='{ "block-developers-cookbook": { "isOpen": false } }'
-	data-wp-effect="effects.block-developers-cookbook.logIsOpen"
+	<?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>
+	data-wp-interactive='{ "namespace": "chef-kiss" }'
+	data-wp-context='<?php echo wp_json_encode( $context ); ?>'
 >
-	<button
-		data-wp-on--click="actions.block-developers-cookbook.toggle"
-		data-wp-bind--aria-expanded="context.block-developers-cookbook.isOpen"
-		aria-controls="p-<?php echo esc_attr( $unique_id ); ?>"
-	>
-		<?php esc_html_e( 'Toggle', 'interactive-block' ); ?>
-	</button>
-
-	<p
-		id="p-<?php echo esc_attr( $unique_id ); ?>"
-		data-wp-bind--hidden="!context.block-developers-cookbook.isOpen"
-	>
-		<?php
-			esc_html_e( 'Interactive Block - hello from an interactive block!', 'interactive-block' );
-		?>
-	</p>
+	<p>Prep Time: <span class="number-value" data-wp-text="context.cookingTime"></span></p>
 </div>
