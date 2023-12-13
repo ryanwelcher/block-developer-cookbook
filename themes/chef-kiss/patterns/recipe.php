@@ -2,7 +2,7 @@
 /**
  * Title: Recipe Cards
  * Slug: chef-kiss/recipe-cards
- * Description: Displays the receipes
+ * Description: Displays the recipes
  * Keywords: query
  * Block Types: core/query
  */
