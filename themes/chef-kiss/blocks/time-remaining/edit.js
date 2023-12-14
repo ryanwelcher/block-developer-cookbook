@@ -28,12 +28,5 @@ import { useBlockProps } from '@wordpress/block-editor';
 export default function Edit( { attributes, setAttributes } ) {
 	const blockProps = useBlockProps();
 
-	return (
-		<p { ...blockProps }>
-			{ __(
-				'Interactive Block – hello from the editor!',
-				'interactive-block'
-			) }
-		</p>
-	);
+	return <p { ...blockProps }>{ __( 'Time: 0/50', 'interactive-block' ) }</p>;
 }

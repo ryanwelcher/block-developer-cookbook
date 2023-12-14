@@ -19,8 +19,10 @@ global $post;
 $context = array(
 	'time'     => intval( get_post_meta( $post->ID, 'time', true ) ),
 	'disabled' => false,
-	'recipeId' => $post->ID,
-)
+	'recipeId' => $block->context['postId'],
+);
+
+
 ?>
 
 <div
@@ -29,7 +31,5 @@ $context = array(
 	data-wp-context='<?php echo wp_json_encode( $context ); ?>'
 	data-wp-watch='callbacks.canBeAdded'
 >
-<span>✅</span>
-<span>❎</span>
-<button data-wp-on--click="actions.vote" data-wp-bind--disabled="context.disabled">✅</button>
+<button data-wp-on--click="actions.vote" data-wp-bind--disabled="context.disabled">Add to Order</button>
 </div>

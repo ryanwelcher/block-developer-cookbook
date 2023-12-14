@@ -4,9 +4,11 @@
  * Replace them with your own styles or remove the file completely.
  */
 
-.wp-block-block-developers-cookbook-interactive-block input[type="text"] {
-	font-size: 1em;
-	color: inherit;
-	background: inherit;
-	border: 0;
+.wp-block-chef-kiss-hat .chef-hat-icon {
+	position: absolute;
+	top: -2.5rem;
+	width: 6rem;
+	height: 6rem;
+	left: -1rem;
+	transform: rotate(-22deg);
 }

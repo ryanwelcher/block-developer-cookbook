@@ -3,7 +3,7 @@
 	"apiVersion": 3,
 	"name": "chef-kiss/hat",
 	"version": "0.1.0",
-	"title": "Level",
+	"title": "Chef Hat",
 	"category": "block-developers-cookbook",
 	"icon": "media-interactive",
 	"description": "An interactive block with the Interactivity API",
@@ -11,7 +11,7 @@
 	"supports": {
 		"interactivity": true
 	},
-	"usesContext": [ "postId", "postType" ],
+	"usesContext": [ "postId" ],
 	"textdomain": "interactive-block",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",

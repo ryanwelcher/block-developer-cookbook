@@ -1,7 +1,7 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "block-developers-cookbook/time-remaining",
+	"name": "chef-kiss/time-remaining",
 	"version": "0.1.0",
 	"title": "Time Remaining",
 	"category": "block-developers-cookbook",
@@ -9,7 +9,19 @@
 	"description": "Displays the amount of time the user has to fill with recipes selection",
 	"example": {},
 	"supports": {
-		"interactivity": true
+		"interactivity": true,
+		"align": true,
+		"alignWide": true,
+		"color": {
+			"text": true,
+			"background": true
+		},
+		"__experimentalBorder": {
+			"color": true,
+			"radius": true,
+			"style": true,
+			"width": true
+		}
 	},
 	"textdomain": "block-developers-cookbook",
 	"editorScript": "file:./index.js",

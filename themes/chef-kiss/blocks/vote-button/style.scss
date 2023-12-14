@@ -5,8 +5,32 @@
  * Replace them with your own styles or remove the file completely.
  */
 
-.wp-block-create-block-vote-button {
-	font-size: 1em;
-	background: #ffff001a;
-	padding: 1em;
+.wp-block-chef-kiss-vote-button {
+	button {
+		transition: all .2s ease;
+		color: var(--wp--preset--color--card);
+		border: 3px solid var(--wp--preset--color--card);
+		text-transform: uppercase;
+		text-align: center;
+		line-height: 1;
+		font-size: 17px;
+		background-color: transparent;
+		padding: 10px;
+		outline: none;
+		border-radius: 4px;
+	}
+
+	button:hover {
+		color: var(--wp--preset--color--highlight);
+		background-color: var(--wp--preset--color--card);
+	}
+
+	button:disabled {
+		transition: none;
+		background-color: black;
+	}
+
+	button:disabled:hover {
+		color: var(--wp--preset--color--card);
+	}
 }

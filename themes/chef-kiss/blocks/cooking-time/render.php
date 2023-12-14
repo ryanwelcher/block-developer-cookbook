@@ -13,7 +13,7 @@
 global $post;
 
 $context = array(
-	'cookingTime' => get_post_meta( $post->ID, 'time', true ) . 'mins',
+	'cookingTime' => get_post_meta( $post->ID, 'time', true ) . 'min',
 );
 
 // Enqueue the view file.

@@ -2,8 +2,13 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { useEntityRecord } from '@wordpress/core-data';
 import { useBlockProps } from '@wordpress/block-editor';
+
+/**
+ * Internal dependencies
+ */
+import Hat from '../../assets/svg/chef-hat.svg';
+import starUrl, { ReactComponent as Star } from '../../assets/svg/chef-hat.svg';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -17,21 +22,6 @@ import { useBlockProps } from '@wordpress/block-editor';
  *
  * @return {WPElement} Element to render.
  */
-export default function Edit( {
-	attributes,
-	setAttributes,
-	context: { postType, postId },
-} ) {
-	const blockProps = useBlockProps();
-
-	const {
-		record: { meta },
-	} = useEntityRecord( 'postType', postType, postId );
-	console.log( meta );
-	return (
-		<p { ...blockProps }>
-			{ __( 'Skill Level: ', 'bdc' ) }
-			<span>{ `${ meta?.level }` || 'N/A' }</span>
-		</p>
-	);
+export default function Edit() {
+	return null;
 }

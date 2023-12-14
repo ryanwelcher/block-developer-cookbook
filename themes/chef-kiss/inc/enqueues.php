@@ -10,12 +10,12 @@ add_action(
 	'enqueue_block_editor_assets',
 	function () {
 
-		wp_enqueue_style(
-			'editor-style',
-			get_theme_file_uri( '/editor-style.css' ),
-			array(),
-			'all'
-		);
+		// wp_enqueue_style(
+		// 	'editor-style',
+		// 	get_theme_file_uri( '/editor-style.css' ),
+		// 	array(),
+		// 	'all'
+		// );
 
 		$assets_file = get_stylesheet_directory() . '/build/plugins.asset.php';
 

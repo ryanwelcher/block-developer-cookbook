@@ -1,0 +1,32 @@
+{
+	"$schema": "http://schemas.wp.org/trunk/theme.json",
+	"version": 2,
+	"title": "WC Asia 2024",
+	"description": "Branding based on WC Asia",
+	"settings": {
+		"color": {
+			"palette": [
+				{
+					"color": "#2c05c2",
+					"name": "Card",
+					"slug": "card"
+				},
+				{
+					"color": "#fff",
+					"name": "Text",
+					"slug": "text"
+				},
+				{
+					"color": "#fff",
+					"name": "Highlight",
+					"slug": "highlight"
+				},
+				{
+					"color": "#fff",
+					"name": "Background",
+					"slug": "background"
+				}
+			]
+		}
+	}
+}

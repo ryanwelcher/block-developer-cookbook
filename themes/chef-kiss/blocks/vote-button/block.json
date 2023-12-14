@@ -9,8 +9,10 @@
 	"description": "An interactive block with the Interactivity API",
 	"example": {},
 	"supports": {
-		"interactivity": true
+		"interactivity": true,
+		"align": true
 	},
+	"usesContext": [ "postId" ],
 	"textdomain": "vote-button",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",

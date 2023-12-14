@@ -18,6 +18,7 @@ if ( function_exists( 'gutenberg_enqueue_module' ) ) {
 global $post;
 
 $duration = intval( get_post_meta( $post->ID, 'duration', true ) );
+
 wp_store(
 	array(
 		'chef-kiss' => array(
@@ -26,6 +27,8 @@ wp_store(
 			'allowedValue'    => $duration,
 			'votingOpen'      => true,
 			'selectedRecipes' => array(),
+			'totalDuration'   => $duration,
+			'timeAssigned'    => 0,
 		),
 	)
 );
