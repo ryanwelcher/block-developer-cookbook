@@ -1,8 +1,14 @@
 {
+	"$schema": "https://schemas.wp.org/wp/6.4/theme.json",
+	"version": 2,
 	"customTemplates": [],
+	"title": "Chef Kiss Theme",
 	"settings": {
 		"appearanceTools": true,
 		"color": {
+			"customDuotone": false,
+			"customGradient": false,
+			"defaultPalette": false,
 			"palette": [
 				{
 					"color": "#1E1E3F",
@@ -32,6 +38,31 @@
 		},
 		"typography": {
 			"dropCap": true,
+			"fluid": true,
+			"customFontSize": false,
+			"fontSizes": [
+				{
+					"fluid": {
+						"min": "0.8rem",
+						"max": "1rem"
+					},
+					"size": "1rem",
+					"slug": "medium"
+				},
+				{
+					"fluid": {
+						"min": "1.3rem",
+						"max": "1.875rem"
+					},
+					"size": "1.75rem",
+					"slug": "large"
+				},
+				{
+					"fluid": false,
+					"size": "2.25rem",
+					"slug": "x-large"
+				}
+			],
 			"fontFamilies": [
 				{
 					"fontFace": [
@@ -47,16 +78,79 @@
 					"fontFamily": "Prata",
 					"name": "Prata",
 					"slug": "prata"
+				},
+				{
+					"fontFace": [
+						{
+							"fontFamily": "Space Mono",
+							"fontStyle": "regular",
+							"fontWeight": "regular",
+							"src": [
+								"file:./assets/fonts/Space_Mono/SpaceMono-Regular.ttf"
+							]
+						},
+						{
+							"fontFamily": "Space Mono",
+							"fontStyle": "bold",
+							"fontWeight": "bold",
+							"src": [
+								"file:./assets/fonts/Space_Mono/SpaceMono-Bold.ttf"
+							]
+						},
+						{
+							"fontFamily": "Space Mono",
+							"fontStyle": "italic",
+							"fontWeight": "bold",
+							"src": [
+								"file:./assets/fonts/Space_Mono/SpaceMono-BoldItalic.ttf"
+							]
+						},
+						{
+							"fontFamily": "Space Mono",
+							"fontStyle": "italic",
+							"fontWeight": "regular",
+							"src": [
+								"file:./assets/fonts/Space_Mono/SpaceMono-Italic.ttf"
+							]
+						}
+					],
+					"fontFamily": "Space Mono",
+					"name": "Space Mono",
+					"slug": "space-mono"
+				},
+				{
+					"fontFamily": "Montserrat, sans-serif",
+					"name": "Montserrat",
+					"slug": "montserrat"
 				}
 			]
 		},
-		"useRootPaddingAwareAlignments": true
+		"useRootPaddingAwareAlignments": true,
+		"blocks": {
+			"chef-kiss/time-remaining": {
+				"border": {
+					"radius": true
+				}
+			}
+		}
 	},
 	"styles": {
 		"blocks": {
-			"block-developers-cookbook/time-remaining": {
+			"chef-kiss/time-remaining": {
 				"color": {
-					"text": "var(--wp--preset--color--card)"
+					"text": "var( --wp--preset--color--highlight )",
+					"background": "var( --wp--preset--color--card )"
+				},
+				"spacing": {
+					"padding": {
+						"top": "2rem",
+						"right": "2rem",
+						"bottom": "2rem",
+						"left": "2rem"
+					}
+				},
+				"typography": {
+					"fontSize": "var( --wp--preset--font-size--x-large)"
 				}
 			},
 			"chef-kiss/level": {
@@ -69,13 +163,13 @@
 					"fontSize": "var( --wp--preset--font-size--small )"
 				}
 			},
-			"core/group": {
-				"css": "&.recipe-container { background-color: var(--wp--preset--color--card);} &.recipe-container .number-value {color: var(--wp--preset--color--highlight);}"
-			},
 			"core/post-excerpt": {
-				"typography": {
-					"fontSize": "var( --wp--preset--font-size--medium )"
+				"color": {
+					"text": "var( --wp--preset--color--card )"
 				}
+			},
+			"core/group": {
+				"css": "&.recipe-container { background-color: var(--wp--preset--color--card); box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; position: relative;} &.recipe-container .number-value {color: var(--wp--preset--color--highlight);} &.recipe-container:hover { transition: transform 0.2s ease-in-out; transform: scale(1.05);}"
 			}
 		},
 		"color": {
@@ -83,7 +177,7 @@
 			"text": "var( --wp--preset--color--text )"
 		},
 		"typography": {
-			"fontFamily": "var( --wp--preset--font-family--prata )",
+			"fontFamily": "var( --wp--preset--font-family--space-mono )",
 			"fontSize": "var( --wp--preset--font-size--medium )"
 		},
 		"elements": {
@@ -95,10 +189,10 @@
 			},
 			"heading": {
 				"color": {
-					"text": "var( --wp--preset--color--highlight)"
+					"text": "var( --wp--preset--color--highlight )"
 				},
 				"typography": {
-					"fontFamily": "var( --wp--preset--font-family--prata )",
+					"fontFamily": "var( --wp--preset--font-family--space-mono )",
 					"fontSize": "var( --wp--preset--font-size--large )"
 				}
 			}
@@ -107,8 +201,8 @@
 			"blockGap": "2rem",
 			"margin": {
 				"bottom": "1rem",
-				"left": "3rem",
-				"right": "3rem",
+				"left": "5rem",
+				"right": "5rem",
 				"top": "1rem"
 			}
 		}
@@ -129,7 +223,5 @@
 			"name": "sidebar",
 			"title": "Sidebar"
 		}
-	],
-	"version": 2,
-	"$schema": "https://schemas.wp.org/wp/6.4/theme.json"
+	]
 }
