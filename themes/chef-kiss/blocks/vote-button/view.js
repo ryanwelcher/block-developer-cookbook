@@ -3,18 +3,22 @@
  */
 import { store, getContext } from '@wordpress/interactivity';
 
-store( 'chef-kiss', {
+const { state } = store( 'chef-kiss', {
 	actions: {
 		vote: () => {
 			const context = getContext();
-			context.isOpen = ! context.isOpen;
+			console.log( context, state );
+			state.assigned += Number( context.time );
+			state.allowedValue -= Number( context.time );
+			state.selectedRecipes.push( context.recipeId );
+			// context.selected = true;
 		},
 	},
 	callbacks: {
-		logIsOpen: () => {
-			const { isOpen } = getContext();
-			// Log the value of `isOpen` each time it changes.
-			console.log( `Is open: ${ isOpen }` );
+		canBeAdded: () => {
+			const context = getContext();
+			console.log( state.selectedRecipes );
+			context.disabled = context.time > state.allowedValue;
 		},
 	},
 } );

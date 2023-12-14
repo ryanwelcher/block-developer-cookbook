@@ -10,19 +10,26 @@
  * @see https://github.com/WordPress/gutenberg/blob/trunk/docs/reference-guides/block-api/block-metadata.md#render
  */
 
-// Generate unique id for aria-controls.
-$unique_id = wp_unique_id( 'p-' );
-
 // Enqueue the view file.
 if ( function_exists( 'gutenberg_enqueue_module' ) ) {
 	gutenberg_enqueue_module( 'vote-button-view' );
 }
+
+global $post;
+$context = array(
+	'time'     => intval( get_post_meta( $post->ID, 'time', true ) ),
+	'disabled' => false,
+	'recipeId' => $post->ID,
+)
 ?>
 
 <div
 	<?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>
 	data-wp-interactive='{ "namespace": "chef-kiss" }'
-	data-wp-context='{ "isOpen": false }'
+	data-wp-context='<?php echo wp_json_encode( $context ); ?>'
+	data-wp-watch='callbacks.canBeAdded'
 >
-<button>Add this recipe</button>
+<span>✅</span>
+<span>❎</span>
+<button data-wp-on--click="actions.vote" data-wp-bind--disabled="context.disabled">✅</button>
 </div>

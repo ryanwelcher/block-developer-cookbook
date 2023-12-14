@@ -16,32 +16,25 @@ if ( function_exists( 'gutenberg_enqueue_module' ) ) {
 }
 
 global $post;
+
+$duration = intval( get_post_meta( $post->ID, 'duration', true ) );
 wp_store(
 	array(
-		'state' => array(
-			'chef_kiss_store' => array(
-				'duration'   => get_post_meta( $post->ID, 'duration', true ),
-				'assigned'   => '0',
-				'votingOpen' => true,
-			),
+		'chef-kiss' => array(
+			'duration'        => $duration,
+			'assigned'        => 0,
+			'allowedValue'    => $duration,
+			'votingOpen'      => true,
+			'selectedRecipes' => array(),
 		),
 	)
 );
-
-$context = array(
-	'duration'   => get_post_meta( $post->ID, 'duration', true ),
-	'assigned'   => '0',
-	'votingOpen' => true,
-)
-
-
 ?>
 
 <div
 	<?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>
-	data-wp-interactive='{ "namespace": "chef_kiss_store" }'
-	data-wp-context='<?php echo wp_json_encode( $context ); ?>'
+	data-wp-interactive='{ "namespace": "chef-kiss" }'
+	data-wp-watch='callbacks.watchTime'
 >
-Time: <span data-wp-text="context.assigned"></span>/<span data-wp-text="context.duration"></span>
-<p data-wp-text="state.totalDuration">ads</p>
+Time: <span data-wp-text="state.timeAssigned"></span>/<span data-wp-text="state.totalDuration"></span>
 </div>

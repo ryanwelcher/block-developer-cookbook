@@ -7,9 +7,8 @@ store( 'chef-kiss', {
 	state: {
 		get chefs() {
 			const { skillLevel } = getContext();
-			console.log( skillLevel );
 			switch ( skillLevel ) {
-				case '1':
+				default:
 					return '👨‍🍳';
 				case '2':
 					return '👨‍🍳👨‍🍳';
