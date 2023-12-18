@@ -31,7 +31,7 @@ export default function Edit( {
 	return (
 		<p { ...blockProps }>
 			{ __( 'Skill Level: ', 'bdc' ) }
-			<span>{ `${ meta?.level }` || 'N/A' }</span>
+			<span className={ `level-${ meta?.level }` }></span>
 		</p>
 	);
 }

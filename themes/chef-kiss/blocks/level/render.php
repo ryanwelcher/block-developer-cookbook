@@ -12,6 +12,7 @@
 
 global $post;
 
+$level = get_post_meta( $post->ID, 'level', true );
 $context = array(
 	'skillLevel' => get_post_meta( $post->ID, 'level', true ),
 );
@@ -27,5 +28,5 @@ if ( function_exists( 'gutenberg_enqueue_module' ) ) {
 	data-wp-interactive='{ "namespace": "chef-kiss" }'
 	data-wp-context='<?php echo wp_json_encode( $context ); ?>'
 >
-	<p>Skill Level: <span class="number-value level-three"></span></p>
+	<p>Skill Level: <span class="number-value level-<?php echo esc_attr( $level ); ?>"></span></p>
 </div>

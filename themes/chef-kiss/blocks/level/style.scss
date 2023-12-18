@@ -7,15 +7,15 @@
 
 .wp-block-chef-kiss-level {
 
-	.level-one:before {
+	.level-1:before {
 		content: var(--wp--custom--chef-kiss-level--icon);
 	}
 
-	.level-two:before {
+	.level-2:before {
 		content: var(--wp--custom--chef-kiss-level--icon) var(--wp--custom--chef-kiss-level--icon);
 	}
 
-	.level-three::before {
-		content: '🖕'
+	.level-3:before {
+		content: var(--wp--custom--chef-kiss-level--icon) var(--wp--custom--chef-kiss-level--icon);
 	}
 }
