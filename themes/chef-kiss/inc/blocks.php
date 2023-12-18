@@ -63,13 +63,13 @@ add_action(
 					// Register the block style.
 					\wp_enqueue_block_style(
 						"core/{$slug}",
-						[
-							'handle' => "x3p0-ideas-block-{$namespace}-{$slug}",
+						array(
+							'handle' => "chef-kiss-core-{$slug}",
 							'src'    => get_parent_theme_file_uri( "{$relative}.css"  ),
 							'path'   => get_parent_theme_file_path( "{$relative}.css" ),
 							'deps'   => $asset['dependencies'],
 							'ver'    => $asset['version'],
-						]
+						)
 					);
 				}
 			}

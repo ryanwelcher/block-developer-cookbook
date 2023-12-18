@@ -172,9 +172,6 @@
 				"color": {
 					"text": "var( --wp--preset--color--card )"
 				}
-			},
-			"core/group": {
-				"css": "&.recipe-container { background-color: var(--wp--preset--color--card); box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; position: relative;} &.recipe-container .number-value {color: var(--wp--preset--color--highlight);} &.recipe-container:hover { transition: transform 0.2s ease-in-out; transform: scale(1.05);}"
 			}
 		},
 		"color": {
