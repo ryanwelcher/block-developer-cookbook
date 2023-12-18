@@ -15,13 +15,26 @@ if ( function_exists( 'gutenberg_enqueue_module' ) ) {
 	gutenberg_enqueue_module( 'vote-button-view' );
 }
 
-global $post;
-$context = array(
-	'time'     => intval( get_post_meta( $post->ID, 'time', true ) ),
-	'disabled' => false,
-	'recipeId' => $block->context['postId'],
+
+wp_store(
+	array(
+		'chef-kiss' => array(
+			'buttonCTA' => __( 'Add Vote', 'chef-kiss' ),
+		),
+	)
 );
 
+
+global $post;
+$context = array(
+	'time'      => intval( get_post_meta( $post->ID, 'time', true ) ),
+	'disabled'  => false,
+	'recipeId'  => $block->context['postId'],
+	'added'     => false,
+	'addCTA'    => __( 'Add Vote', 'chef-kiss' ),
+	'removeCTA' => __( 'Remove Vote', 'chef-kiss' ),
+
+);
 
 ?>
 
@@ -31,5 +44,5 @@ $context = array(
 	data-wp-context='<?php echo wp_json_encode( $context ); ?>'
 	data-wp-watch='callbacks.canBeAdded'
 >
-<button data-wp-on--click="actions.vote" data-wp-bind--disabled="context.disabled">Add to Order</button>
+<button data-wp-on--click="actions.vote" data-wp-bind--disabled="context.disabled" data-wp-text='state.buttonCTA'></button>
 </div>
