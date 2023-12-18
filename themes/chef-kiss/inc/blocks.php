@@ -31,5 +31,48 @@ add_action(
 				);
 			}
 		}
+
+		// Get the block namespace paths.
+		$paths = array_map(
+			fn( $namespace ) => get_parent_theme_file_path( "build/css/{$namespace}" ),
+			array( 'core-blocks' )
+		);
+
+		// Enqueue block level CSS
+		// Loop through each of the block namespace paths, get their
+		// stylesheets, and enqueue them.
+		foreach ( $paths as $path ) {
+			$files = new \FilesystemIterator( $path );
+
+			foreach ( $files as $file ) {
+				if ( ! $file->isDir() && 'css' === $file->getExtension() ) {
+
+					$slug = $file->getBasename( '.css' );
+
+					// Build a relative path and URL string.
+					$relative = "build/css/core-blocks/{$slug}";
+
+					// Bail if the asset file doesn't exist.
+					if ( ! file_exists( get_parent_theme_file_path( "{$relative}.asset.php" ) ) ) {
+						return;
+					}
+
+					// Get the asset file.
+					$asset = include get_parent_theme_file_path( "{$relative}.asset.php" );
+
+					// Register the block style.
+					\wp_enqueue_block_style(
+						"core/{$slug}",
+						[
+							'handle' => "x3p0-ideas-block-{$namespace}-{$slug}",
+							'src'    => get_parent_theme_file_uri( "{$relative}.css"  ),
+							'path'   => get_parent_theme_file_path( "{$relative}.css" ),
+							'deps'   => $asset['dependencies'],
+							'ver'    => $asset['version'],
+						]
+					);
+				}
+			}
+		}
 	}
 );
