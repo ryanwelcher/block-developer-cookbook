@@ -132,6 +132,11 @@
 					"radius": true
 				}
 			}
+		},
+		"custom": {
+			"chef-kiss-level": {
+				"icon": "👨‍🍳"
+			}
 		}
 	},
 	"styles": {

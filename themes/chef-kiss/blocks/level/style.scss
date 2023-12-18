@@ -5,8 +5,17 @@
  * Replace them with your own styles or remove the file completely.
  */
 
-.wp-block-block-developers-cookbook-interactive-block {
-	font-size: 1em;
-	background: #ffff001a;
-	padding: 1em;
+.wp-block-chef-kiss-level {
+
+	.level-one:before {
+		content: var(--wp--custom--chef-kiss-level--icon);
+	}
+
+	.level-two:before {
+		content: var(--wp--custom--chef-kiss-level--icon) var(--wp--custom--chef-kiss-level--icon);
+	}
+
+	.level-three::before {
+		content: '🖕'
+	}
 }

@@ -27,6 +27,11 @@
 					"slug": "background"
 				}
 			]
+		},
+		"custom": {
+			"chef-kiss-level": {
+				"icon": "🔥"
+			}
 		}
 	}
 }
