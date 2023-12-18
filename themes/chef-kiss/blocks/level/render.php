@@ -11,22 +11,10 @@
  */
 
 global $post;
-
 $level = get_post_meta( $post->ID, 'level', true );
-$context = array(
-	'skillLevel' => get_post_meta( $post->ID, 'level', true ),
-);
-
-// Enqueue the view file.
-if ( function_exists( 'gutenberg_enqueue_module' ) ) {
-	gutenberg_enqueue_module( 'level-view' );
-}
 ?>
-
 <div
 	<?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>
-	data-wp-interactive='{ "namespace": "chef-kiss" }'
-	data-wp-context='<?php echo wp_json_encode( $context ); ?>'
 >
-	<p>Skill Level: <span class="number-value level-<?php echo esc_attr( $level ); ?>"></span></p>
+	<p><?php __( 'Skill Level:', 'chef-kiss' );?> <span class="number-value level-<?php echo esc_attr( $level ); ?>"></span></p>
 </div>

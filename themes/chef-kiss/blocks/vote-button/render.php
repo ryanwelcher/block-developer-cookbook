@@ -19,7 +19,7 @@ if ( function_exists( 'gutenberg_enqueue_module' ) ) {
 wp_store(
 	array(
 		'chef-kiss' => array(
-			'buttonCTA' => __( 'Add Vote', 'chef-kiss' ),
+			'buttonCTA' => __( 'Add Recipe', 'chef-kiss' ),
 		),
 	)
 );
@@ -31,8 +31,8 @@ $context = array(
 	'disabled'  => false,
 	'recipeId'  => $block->context['postId'],
 	'added'     => false,
-	'addCTA'    => __( 'Add Vote', 'chef-kiss' ),
-	'removeCTA' => __( 'Remove Vote', 'chef-kiss' ),
+	'addCTA'    => __( 'Add Recipe', 'chef-kiss' ),
+	'removeCTA' => __( 'Remove Recipe', 'chef-kiss' ),
 
 );
 

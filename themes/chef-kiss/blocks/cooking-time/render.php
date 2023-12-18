@@ -11,21 +11,10 @@
  */
 
 global $post;
-
-$context = array(
-	'cookingTime' => get_post_meta( $post->ID, 'time', true ) . 'min',
-);
-
-// Enqueue the view file.
-if ( function_exists( 'gutenberg_enqueue_module' ) ) {
-	gutenberg_enqueue_module( 'cooking-time-view' );
-}
+$cooking_time = get_post_meta( $post->ID, 'time', true );
 ?>
-
 <div
 	<?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>
-	data-wp-interactive='{ "namespace": "chef-kiss" }'
-	data-wp-context='<?php echo wp_json_encode( $context ); ?>'
 >
-	<p>Prep Time: <span class="number-value" data-wp-text="context.cookingTime"></span></p>
+	<p>Prep Time: <span class="number-value"><?php echo esc_html( $cooking_time ); ?></span></p>
 </div>
