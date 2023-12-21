@@ -10,8 +10,11 @@ plugins/gutenberg
 # Coverage directory used by tools like istanbul
 coverage
 
+
+
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/
+!plugins/transforms/build/
 .vscode
 # Dependency directories
 node_modules/
