@@ -20,5 +20,8 @@
 	},
 	"bugs": {
 		"url": "https://github.com/ryanwelcher/block-developer-cookbook/issues"
+	},
+	"publishConfig": {
+		"access": "public"
 	}
 }
