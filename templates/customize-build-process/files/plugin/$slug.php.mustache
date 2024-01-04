@@ -1,0 +1,97 @@
+<?php
+/**
+ * Plugin Name:       {{title}}
+{{#pluginURI}}
+ * Plugin URI:        {{{pluginURI}}}
+{{/pluginURI}}
+{{#description}}
+ * Description:       {{description}}
+{{/description}}
+ * Requires at least: 6.1
+ * Requires PHP:      7.0
+ * Version:           {{version}}
+{{#author}}
+ * Author:            {{author}}
+{{/author}}
+{{#license}}
+ * License:           {{license}}
+{{/license}}
+{{#licenseURI}}
+ * License URI:       {{{licenseURI}}}
+{{/licenseURI}}
+ * Text Domain:       {{textdomain}}
+{{#domainPath}}
+ * Domain Path:       {{{domainPath}}}
+{{/domainPath}}
+{{#updateURI}}
+ * Update URI:        {{{updateURI}}}
+{{/updateURI}}
+ *
+ * @package           {{namespace}}
+ */
+
+/**
+ * Registers the block using the metadata loaded from the `block.json` file.
+ * Behind the scenes, it registers also all assets so they can be enqueued
+ * through the block editor in the corresponding context.
+ *
+ * @see https://developer.wordpress.org/reference/functions/register_block_type/
+ */
+fadd_action(
+	'init',
+	function () {
+		register_block_type( __DIR__ . '/build/custom-block' );
+	}
+);
+
+add_action(
+	'enqueue_block_editor_assets',
+	function () {
+		enqueue_variation_js();
+		enqueue_variation_css();
+	}
+);
+
+add_action(
+	'wp_enqueue_scripts',
+	function () {
+		enqueue_variation_css();
+	}
+);
+
+
+/**
+ * Function to enqueue the variation JS.
+ */
+function enqueue_variation_js() {
+	$js_file = plugin_dir_path( __FILE__ ) . '/build/variations.asset.php';
+	if ( file_exists( $js_file ) ) {
+		// Enqueue the JS file.
+		$js_assets = include $js_file;
+		wp_enqueue_script(
+			'variation-script',
+			plugin_dir_url( __FILE__ ) . '/build/variations.js',
+			$js_assets['dependencies'],
+			$js_assets['version'],
+			true
+		);
+	}
+}
+
+/**
+ * Function to enqueue the variation CSS.
+ */
+function enqueue_variation_css() {
+	$css_file = plugin_dir_path( __FILE__ ) . '/build/variation-styles.asset.php';
+	if ( file_exists( $css_file ) ) {
+		// Enqueue the CSS file.
+		$css_assets = include $css_file;
+		wp_enqueue_style(
+			'variation-style',
+			plugin_dir_url( __FILE__ ) . '/build/variation-styles.css',
+			$css_assets['dependencies'],
+			$css_assets['version']
+		);
+	}
+}
+
