@@ -37,7 +37,7 @@
  *
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
-fadd_action(
+add_action(
 	'init',
 	function () {
 		register_block_type( __DIR__ . '/build/custom-block' );
