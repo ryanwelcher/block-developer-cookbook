@@ -57,7 +57,7 @@ Now that you have the files registered, you need to enqueue them only when the b
 Add the following to the main PHP file:
 
 ```php
-add_filter( 'render_block', 'enqueue_script_for_core_blocks', 10, 2 );
+add_filter( 'render_block', 'enqueue_files_for_core_blocks', 10, 2 );
 
 /**
  * Enqueue our custom script for the core blocks.
@@ -67,7 +67,7 @@ add_filter( 'render_block', 'enqueue_script_for_core_blocks', 10, 2 );
  * @param string $block_content The block content.
  * @param array  $block         The full block, including name and attributes.
  */
-function enqueue_script_for_core_blocks( $block_content, $block ) {
+function enqueue_files_for_core_blocks( $block_content, $block ) {
 
 	// Enqueue the same script for more than one block type.
 	if ( 'core/cover' === $block['blockName'] || 'core/image' === $block['blockName'] ) {

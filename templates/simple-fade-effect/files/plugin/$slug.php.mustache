@@ -71,7 +71,7 @@ function register_custom_js_script() {
  * @param string $block_content The block content.
  * @param array  $block         The full block, including name and attributes.
  */
-function enqueue_script_for_core_blocks( $block_content, $block ) {
+function enqueue_files_for_core_blocks( $block_content, $block ) {
 	// Enqueue the same script for more than one block type.
 	if ( 'core/cover' === $block['blockName'] || 'core/image' === $block['blockName'] ) {
 		// Append the the fader class to to the block wrapper.
