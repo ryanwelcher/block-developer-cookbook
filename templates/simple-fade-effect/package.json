@@ -10,8 +10,7 @@
 	"license": "GPL-2.0-or-later",
 	"keywords": [
 		"wordpress",
-		"create block",
-		"block template"
+		"create block"
 	],
 	"homepage": "https://blockdevelopercookbook.com/",
 	"repository": {
