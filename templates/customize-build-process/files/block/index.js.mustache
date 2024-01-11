@@ -18,9 +18,6 @@ import './style.scss';
  * Internal dependencies
  */
 import Edit from './edit';
-{{#isStaticVariant}}
-import save from './save';
-{{/isStaticVariant}}
 import metadata from './block.json';
 
 /**
@@ -33,11 +30,4 @@ registerBlockType( metadata.name, {
 	 * @see ./edit.js
 	 */
 	edit: Edit,
-	{{#isStaticVariant}}
-
-	/**
-	 * @see ./save.js
-	 */
-	save,
-	{{/isStaticVariant}}
 } );
