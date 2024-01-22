@@ -1,21 +1,39 @@
 <?php
 /**
- * Plugin Name:       Managing Formats
+ * Plugin Name:       {{title}}
+{{#pluginURI}}
+ * Plugin URI:        {{{pluginURI}}}
+{{/pluginURI}}
+{{#description}}
+ * Description:       {{description}}
+{{/description}}
  * Requires at least: 6.1
  * Requires PHP:      7.0
- * Version:           0.1.0
- * Author:            The WordPress Contributors
- * License:           GPL-2.0-or-later
- * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       managing-formats
+ * Version:           {{version}}
+{{#author}}
+ * Author:            {{author}}
+{{/author}}
+{{#license}}
+ * License:           {{license}}
+{{/license}}
+{{#licenseURI}}
+ * License URI:       {{{licenseURI}}}
+{{/licenseURI}}
+ * Text Domain:       {{textdomain}}
+{{#domainPath}}
+ * Domain Path:       {{{domainPath}}}
+{{/domainPath}}
+{{#updateURI}}
+ * Update URI:        {{{updateURI}}}
+{{/updateURI}}
  *
- * @package           block-developers-cookbook
+ * @package           {{namespace}}
  */
 
-
+{{#isCompletedVariant}}
 // Hooks.
-add_action( 'enqueue_block_editor_assets', 'enqueue_files_for_acronym_format' );
 add_action( 'wp_head', 'horrible_hack_to_add_some_css' );
+add_action( 'enqueue_block_editor_assets', 'enqueue_files_for_acronym_format' );
 
 /**
  * Enqueue the files for the format.
@@ -51,3 +69,4 @@ function horrible_hack_to_add_some_css() {
 		cursor: help;
 	}</style>';
 }
+{{/isCompletedVariant}}
