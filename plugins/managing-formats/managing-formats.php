@@ -15,31 +15,35 @@
 add_action(
 	'enqueue_block_editor_assets',
 	function() {
-		$citation_file = plugin_dir_path( __FILE__ ) . '/build/citation.asset.php';
+		$acronym_file = plugin_dir_path( __FILE__ ) . '/build/acronym.asset.php';
 
-		if ( file_exists( $citation_file ) ) {
-			$assets = include $citation_file;
+		if ( file_exists( $acronym_file ) ) {
+			$assets = include $acronym_file;
 			wp_enqueue_script(
-				'citation-format',
-				plugin_dir_url( __FILE__ ) . '/build/citation.js',
+				'acronym-format',
+				plugin_dir_url( __FILE__ ) . 'build/acronym.js',
 				$assets['dependencies'],
 				$assets['version'],
 				true
 			);
-		}
 
-		$allowed_file = plugin_dir_path( __FILE__ ) . '/build/allowed.asset.php';
-
-		if ( file_exists( $allowed_file ) ) {
-			$assets = include $allowed_file;
-			wp_enqueue_script(
-				'managing-formats',
-				plugin_dir_url( __FILE__ ) . '/build/allowed.js',
-				$assets['dependencies'],
-				$assets['version'],
-				true
+			wp_enqueue_style(
+				'acronym-format-styles',
+				plugin_dir_url( __FILE__ ) . 'build/acronym.css',
+				array(),
+				$assets['version']
 			);
 		}
-	}
+	},
 );
 
+
+// This is a hack! Do it better than me!
+add_action(
+	'wp_head',
+	function() {
+		echo '<style>.bdc-acronym {
+			cursor: help;
+		}</style>';
+	}
+);
