@@ -1,8 +1,10 @@
 /**
  * WordPress dependencies
  */
+{{#isCompletedVariant}}
 import { __ } from '@wordpress/i18n';
 import { registerFormatType } from '@wordpress/rich-text';
+{{/isCompletedVariant}}
 
 /**
  * Internal dependencies
@@ -15,10 +17,14 @@ export const name = 'block-developer-cookbook/acronym';
 
 // The format type definition.
 export const acronymFormat = {
+	{{#isCompletedVariant}}
 	title: __( 'Acronym', 'block-developer-cookbook' ),
 	tagName: 'abbr',
 	className: 'bdc-acronym',
 	edit: AcronymEdit,
+	{{/isCompletedVariant}}
 };
 
+{{#isCompletedVariant}}
 registerFormatType( name, acronymFormat );
+{{/isCompletedVariant}}

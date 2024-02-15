@@ -8,6 +8,7 @@ module.exports = {
 			prettier: '@wordpress/prettier-config',
 		},
 		example: {},
+		editorScript: 'file:./acronym.js',
 	},
 	variants: {
 		start: {},
@@ -19,5 +20,5 @@ module.exports = {
 		},
 	},
 	pluginTemplatesPath: join( __dirname, 'files/plugin' ),
-	blockTemplatesPath: join( __dirname, 'files/block' ),
+	blockTemplatesPath: join( __dirname, 'files/src' ),
 };

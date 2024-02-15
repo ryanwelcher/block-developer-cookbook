@@ -1,124 +1,216 @@
 # Overview
 
-In this recipe, you will load custom JavaScript and CSS files for the cover and image blocks to create a simple fade-in effect when the block is scrolled into view. You don't want to load files unless they are needed so you will only enqueue them when the block(s) are on the page.
+In this recipe, you will create a custom format to mark text as an acronym by wrapping it in an `<abbr>` tag and providing an explanation that is displayed using the `title` attribute using the `<Popover>` component.
 
 ## Setup
 
-Run ` npm run prep:simple-fade-effect` from the root of the repository
+Run ` npm run prep:acronym-format` from the root of the repository. Once the scaffolding is completed, delete the `block.json` from inside the `src` directory. This is a file that was added automatically by the create-block package and you don't need it for this recipe.
 
-## Step 1
+## Step 1 - Preparing the build process
 
-After scaffolding the plugin, run `npm run start` to build the provided JavaScript and CSS that creates the fade-in effect.
+There are no blocks in the recipe so you will need to modify the build process to target the file we need. Open the `package.json` file make the following changes the the `build` a `start` commands:
 
-## Step 2
+```json
+"build": "wp-scripts build ./src/acronym.js",
+"start": "wp-scripts start ./src/acronym.js"
+```
 
-Typically when enqueueing a file, you would use `wp_enqueue_script` to both register and enqueue the file. For this recipe, you will need to break that out into two steps: registering first and then enqueueing later.
+This will tell the `@wordpress/scripts` package to process the file found at `./src/acronym.js`. We could also name this file `index.js` and call the scripts without any parameters, but this way the files output are named `acronym.(js|css)`.
 
-In the main PHP file for the plugin, add the following code:
+Run `npm start` to start the build process.
+
+## Step 2 - Setting up the enqueues
+
+Now that you're successfully building the script, you need to enqueue the build files in the block editor.
+
+Add the following to the main php file of the plugin.
 
 ```php
 // Hooks.
-add_action( 'wp_enqueue_scripts', 'register_custom_js_script' );
+add_action( 'enqueue_block_editor_assets', 'enqueue_files_for_acronym_format' );
 
 /**
- * Register the script we want to load with the core blocks
+ * Enqueue the files for the format.
  */
-function register_custom_js_script() {
+function enqueue_files_for_acronym_format() {
+	$acronym_file = plugin_dir_path( __FILE__ ) . '/build/acronym.asset.php';
 
-	$js_file = plugin_dir_path( __FILE__ ) . '/build/index.asset.php';
-
-	if ( file_exists( $js_file ) ) {
-		// Register the custom script to be used later.
-		$js_assets = include $js_file;
-		wp_register_script(
-			'custom-script-for-core-block',
-			plugin_dir_url( __FILE__ ) . '/build/index.js',
-			$js_assets['dependencies'],
-			$js_assets['version'],
+	if ( file_exists( $acronym_file ) ) {
+		$assets = include $acronym_file;
+		wp_enqueue_script(
+			'acronym-format',
+			plugin_dir_url( __FILE__ ) . 'build/acronym.js',
+			$assets['dependencies'],
+			$assets['version'],
 			true
 		);
 
-		wp_register_style(
-			'test-styles',
-			plugin_dir_url( __FILE__ ) . '/build/index.css',
+		wp_enqueue_style(
+			'acronym-format-styles',
+			plugin_dir_url( __FILE__ ) . 'build/acronym.css',
 			array(),
-			$js_assets['version'],
+			$assets['version']
 		);
 	}
 }
+
 ```
 
-This code does a number of things. First it checks to make sure that the `index.asset.php` generated when you ran the build process is in place. Then if that file exists, it registers the JS and CSS.
+This code checks to make sure that the `acronym.asset.php` generated when you ran the build process is in place. Then if that file exists, it enqueues the JS and CSS for the format.
 
-## Step 3
+## Step 3 - Defining the format settings and registering it.
 
-Now that you have the files registered, you need to enqueue them only when the block(s) are on the page. As of WordPress 6.4, there is no dedicated hook for this so the best place way to do this is to use either the `render_block` or `render_block_{name}` filters.
+At this point, you are enqueueing empty files. So let's start adding some JavaScript!
 
-Add the following to the main PHP file:
+Open the `./src/acronym.js` file and import `registerFormatType` from the `@wordpress/rich-text` along with some other dependencies you'll need.
 
-```php
-add_filter( 'render_block', 'enqueue_files_for_core_blocks', 10, 2 );
-
+```js
 /**
- * Enqueue our custom script for the core blocks.
- *
- * @see https://developer.wordpress.org/reference/hooks/render_block/
- *
- * @param string $block_content The block content.
- * @param array  $block         The full block, including name and attributes.
+ * WordPress dependencies
  */
-function enqueue_files_for_core_blocks( $block_content, $block ) {
+import { registerFormatType } from '@wordpress/rich-text';
+import { __ } from '@wordpress/i18n';
+/**
+ * Internal dependencies
+ */
+import './editor.scss';
+import AcronymEdit from './edit';
+```
 
-	// Enqueue the same script for more than one block type.
-	if ( 'core/cover' === $block['blockName'] || 'core/image' === $block['blockName'] ) {
+Update the `acronymFormat` object to give the format a title, a tag that will be used to wrap the selection, a class that will be added to that tag, and the component that will handle displaying the button in the block toolbar.
 
-		// Append the the fader class to to the block wrapper.
-		$tag = new WP_HTML_Tag_Processor( $block_content );
-		if ( $tag->next_tag() ) {
-			$tag->add_class( 'fader' );
-		}
-		$block_content = $tag->get_updated_html();
+```js
+export const acronymFormat = {
+	title: __( 'Acronym', 'block-developer-cookbook' ),
+	tagName: 'abbr',
+	className: 'bdc-acronym',
+	edit: AcronymEdit,
+};
+```
 
+Now, register the new format. The [registerFormatType](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-rich-text/#registerformattype) function takes two parameters:
 
-		wp_enqueue_script( 'custom-script-for-core-block' );
-		wp_enqueue_style( 'test-styles' );
-	}
-	// Be sure to sure the return the block content.
-	return $block_content;
+1. name `string`: Format name.
+2. settings object `WPFormat`: Format settings. See the [official documentation for all of the supported properties](https://github.com/WordPress/gutenberg/blob/trunk/packages/rich-text/src/register-format-type.js#L10).
+
+```js
+registerFormatType( name, acronymFormat );
+``;
+```
+
+# Step 4 - Creating the component to display the format
+
+Open the `./src/edit.js` file. In this file, you will build the component that will be used to display the format in the block toolbar.
+
+To do this, you can use the `RichTextToolbarButton` from the `@wordpress/block-editor`. Import that now.
+
+```js
+/**
+ * WordPress dependencies
+ */
+import { __ } from '@wordpress/i18n';
+import { RichTextToolbarButton } from '@wordpress/block-editor';
+```
+
+Next, update the `AcronymEdit` component to return the new `RichTextToolbarButton` that uses the custom icon provided and set the the title of the button. Notice that you are also using the `isActive` prop that is passed to the component. This will determine how the button is displayed based on whether the selection has this format active or not.
+
+```js
+<RichTextToolbarButton
+	icon={ Icon }
+	title={ __( 'Acronym', 'block-developer-cookbook' ) }
+	isActive={ isActive }
+	onClick={ () => {} }
+/>
+```
+
+Ensure you're build command is running and then go test this out. You should see the format available in the dropdown list when yuo select some text but clicking on it does nothing.
+
+Don't worry! This is expected at this point as you haven't defined what happens when the button is clicked.
+
+# Step 5 - Handling the click and using a popover to add the acronym definition
+
+When the user clicks on the format button, the intention is to provide the ability to explain the acronym and have it added as the `title` attribute on the front end so when the user hover over it, they see the explanation.
+
+To do this we can use the `Popover` component. In `popover.js`, there is a custom `AcronymPopover` component that will handle all of the logic and while it's beyond the scope of this recipe to get into the details of it, you are encouraged to dive into it at your leisure.
+
+What you need to to create is the logic to show and hide the `AcronymPopover` when the button is clicked and when the the user is done entering text into the popover. To do this, you'll need to introduce some local state.
+
+Import the `useState` hook:
+
+```js
+/**
+ * WordPress dependencies
+ */
+import { __ } from '@wordpress/i18n';
+import { RichTextToolbarButton } from '@wordpress/block-editor';
+import { useState } from '@wordpress/element';
+```
+
+Create a new piece of state to track if the popover is visible and set the default value to be `false`;
+
+```js
+function AcronymEdit( { isActive, onChange, value, contentRef } ) {
+	const [ isPopoverVisible, setIsPopoverVisible ] = useState( false );
+
+	return (
+		<RichTextToolbarButton
+			icon={ Icon }
+			title={ __( 'Acronym', 'block-developer-cookbook' ) }
+			isActive={ isActive }
+			onClick={ () => {} }
+		/>
+	);
 }
 ```
 
-This code adds a filter to `render_block` and then checks to see if the block being rendered is either the `core/cover` or `core/image` block. If it is, it then uses the HTML Tag Processor to add a new class to the main wrapper (this is only to achieve the effect of the fade-in). It then enqueues the JS and CSS we need to complete the effect.
+Next, create a helper function to toggle the value of `isPopoverVisible` between `true` and `false`.
 
-## Step 4 ( Optional)
+```js
+function AcronymEdit( { isActive, onChange, value, contentRef } ) {
+	const [ isPopoverVisible, setIsPopoverVisible ] = useState( false );
 
-This recipe is complete but you could also use dedicated filter for each block instead of doing the check
+	const togglePopover = () => setIsPopoverVisible( ( state ) => ! state );
 
-```php
-add_filter( 'render_block_core/cover', 'enqueue_files_for_one_core_block' );
-add_filter( 'render_block_core/image', 'enqueue_files_for_one_core_block' );
-
-/**
- * Enqueue our custom script for a single core block by using the specific hook
- *
- * @see https://developer.wordpress.org/reference/hooks/render_block_this-name/
- *
- * @param string $block_content The block content.
- * @param array  $block         The full block, including name and attributes.
- */
-function enqueue_files_for_one_core_block( $block_content ) {
-	// Enqueue the script for a single block type.
-	// Append the the fader class to to the block wrapper.
-	$tag = new WP_HTML_Tag_Processor( $block_content );
-	if ( $tag->next_tag() ) {
-		$tag->add_class( 'fader' );
-	}
-	$block_content = $tag->get_updated_html();
-	wp_enqueue_script( 'custom-script-for-core-block' );
-	wp_enqueue_style( 'test-styles' );
-	// Be sure to sure the return the block content.
-	return $block_content;
+	return (
+		<RichTextToolbarButton
+			icon={ Icon }
+			title={ __( 'Acronym', 'block-developer-cookbook' ) }
+			isActive={ isActive }
+			onClick={ () => {} }
+		/>
+	);
 }
 ```
 
-Run the build command add Cover and Image blocks to test. Bon appetit!
+Next, add the conditional to render `AcronymPopover` if `isPopoverVisible` is true and add ` () => togglePopover()` to the `onClick` property of `RichTextToolbarButton`
+
+**Don't forget the <></> tags to ensure we return a single element**
+
+```js
+function AcronymEdit( { isActive, onChange, value, contentRef } ) {
+	const [ isPopoverVisible, setIsPopoverVisible ] = useState( false );
+
+	const togglePopover = () => setIsPopoverVisible( ( state ) => ! state );
+
+	return (
+		<>
+			<RichTextToolbarButton
+				icon={ Icon }
+				title={ __( 'Acronym', 'block-developer-cookbook' ) }
+				isActive={ isActive }
+				onClick={ () => togglePopover() }
+			/>
+			{ isPopoverVisible && (
+				<AcronymPopover
+					value={ value }
+					onChange={ onChange }
+					onClose={ togglePopover }
+					contentRef={ contentRef }
+				/>
+			) }
+		</>
+	);
+}
+```
+
+You now have a working custom format!

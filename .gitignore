@@ -6,6 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 .DS_Store
 plugins/gutenberg
+test
 
 # Coverage directory used by tools like istanbul
 coverage
