@@ -8,6 +8,7 @@ import { useBlockProps, RichText } from '@wordpress/block-editor';
  * Internal Dependencies
  */
 import './editor.scss';
+import Autobots from './icon';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -19,11 +20,13 @@ import './editor.scss';
  */
 export default function Edit( { attributes: { message }, setAttributes } ) {
 	return (
-		<RichText
-			tagName="p"
-			value={ message }
-			{ ...useBlockProps() }
-			onChange={ ( message ) => setAttributes( { message } ) }
-		/>
+		<div { ...useBlockProps( { className: 'has-text-align-center' } ) }>
+			<Autobots width="100" className="autobots" fill="#fff" />
+			<RichText
+				tagName="p"
+				value={ message }
+				onChange={ ( message ) => setAttributes( { message } ) }
+			/>
+		</div>
 	);
 }

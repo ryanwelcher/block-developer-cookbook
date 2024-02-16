@@ -3,7 +3,7 @@
 	"apiVersion": 3,
 	"name": "block-developers-cookbook/transforms",
 	"version": "0.1.0",
-	"title": "Transforms",
+	"title": "Transformer",
 	"category": "block-developers-cookbook",
 	"example": {},
 	"attributes": {

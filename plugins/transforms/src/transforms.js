@@ -23,6 +23,29 @@ const transformers = {
 				} );
 			},
 		},
+		{
+			type: 'block',
+			blocks: [ 'core/cover' ],
+			transform: ( { message }, innerBlocks ) => {
+				const newInnerBlocks = [
+					...innerBlocks,
+					createBlock( 'core/paragraph', {
+						align: 'center',
+						content: message,
+						fontSize: 'large',
+						placeholder: 'Write title…',
+					} ),
+				];
+
+				return createBlock(
+					'core/cover',
+					{
+						customOverlayColor: '#be0b24',
+					},
+					newInnerBlocks
+				);
+			},
+		},
 	],
 	from: [
 		{
@@ -38,6 +61,18 @@ const transformers = {
 			type: 'block',
 			blocks: [ 'core/heading' ],
 			transform: ( { content } ) => {
+				return createBlock( 'block-developers-cookbook/transforms', {
+					message: content,
+				} );
+			},
+		},
+		{
+			type: 'block',
+			blocks: [ 'core/cover' ],
+			transform: ( attributes, innerBlocks ) => {
+				const [ firstBlock ] = innerBlocks;
+				const { content } =
+					firstBlock.attributes || 'More that meets the eye!';
 				return createBlock( 'block-developers-cookbook/transforms', {
 					message: content,
 				} );

@@ -5,8 +5,18 @@
  * Replace them with your own styles or remove the file completely.
  */
 .wp-block-block-developers-cookbook-transforms {
-	background-color: #BE0B24;
+	background-color: #be0b24;
 	color: #fff;
 	padding: 2rem;
 	font-size: 2rem;
+	border-radius: 1rem;
+
+	.autobots {
+		position: absolute;
+		top: -45px;
+		left: calc(50% - 50px);
+		fill: #be0b24;
+		stroke: #000;
+		stroke-width: .1px;
+	}
 }
