@@ -1,7 +1,7 @@
 {
-	"name": "@block-developer-cookbook/acronym-format",
-	"version": "2.0.0",
-	"description": "Create a custom format to define acronyms inside of text.",
+	"name": "@block-developer-cookbook/transforms",
+	"version": "1.0.0",
+	"description": "A primer on using the Block Transforms API",
 	"main": "index.js",
 	"author": {
 		"name": "Ryan Welcher",
