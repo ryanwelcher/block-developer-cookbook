@@ -1,9 +1,17 @@
 /**
  * WordPress dependencies
  */
+{{#isCompletedVariant}}
 import { createBlock } from '@wordpress/blocks';
+{{/isCompletedVariant}}
 
 const transformers = {
+	{{#isStartVariant}}
+	to: [],
+	from: [],
+	{{/isStartVariant}}
+	{{#isCompletedVariant}}
+
 	to: [
 		{
 			type: 'block',
@@ -14,29 +22,11 @@ const transformers = {
 				} );
 			},
 		},
-		{
-			type: 'block',
-			blocks: [ 'core/heading' ],
-			transform: ( { message } ) => {
-				return createBlock( 'core/heading', {
-					content: message,
-				} );
-			},
-		},
 	],
 	from: [
 		{
 			type: 'block',
 			blocks: [ 'core/paragraph' ],
-			transform: ( { content } ) => {
-				return createBlock( 'block-developers-cookbook/transforms', {
-					message: content,
-				} );
-			},
-		},
-		{
-			type: 'block',
-			blocks: [ 'core/heading' ],
 			transform: ( { content } ) => {
 				return createBlock( 'block-developers-cookbook/transforms', {
 					message: content,
@@ -60,5 +50,6 @@ const transformers = {
 			},
 		},
 	],
+	{{/isCompletedVariant}}
 };
 export default transformers;

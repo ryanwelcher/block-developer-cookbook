@@ -28,9 +28,6 @@ import Autobots from './icon';
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
 registerBlockType( metadata.name, {
-	/**
-	 * @see ./edit.js
-	 */
 	edit: Edit,
 	transforms: transformers,
 	icon: Autobots,
