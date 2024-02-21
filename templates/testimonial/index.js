@@ -8,29 +8,33 @@ module.exports = {
 			prettier: '@wordpress/prettier-config',
 		},
 		category: 'text',
-		attributes: {
-			authorName: {
-				type: 'string',
-			},
-		},
-		example: {
-			attributes: {
-				authorName: 'WordPress',
-			},
-		},
-		supports: {
-			html: false,
-			multiple: false,
-		},
+		attributes: {},
+		example: {},
+		supports: {},
 		customBlockJSON: {
 			icon: 'format-quote',
-			usesContext: [ 'postId', 'postType' ],
 		},
 		render: 'file:./render.php',
 	},
 	variants: {
 		start: {},
-		completed: {},
+		completed: {
+			attributes: {
+				authorName: { type: 'string' },
+			},
+			supports: {
+				multiple: false,
+			},
+			example: {
+				attributes: {
+					authorName: 'WordPress',
+				},
+			},
+			customBlockJSON: {
+				icon: 'format-quote',
+				usesContext: [ 'postId', 'postType' ],
+			},
+		},
 	},
 	pluginTemplatesPath: join( __dirname, 'files/plugin' ),
 	blockTemplatesPath: join( __dirname, 'files/block' ),

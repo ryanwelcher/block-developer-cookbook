@@ -1,11 +1,32 @@
+{{#isStartVariant}}
+/**
+ * WordPress Dependencies
+ */
+import { useBlockProps } from '@wordpress/block-editor';
+
+/**
+ * The edit function describes the structure of your block in the context of the
+ * editor. This represents what the editor will render when the block is used.
+ *
+ * @param {*} props
+ * @return {WPElement} Element to render.
+ */
+export default function Edit( props ) {
+	return (
+		<blockquote { ...useBlockProps() }>
+			<p>This is where the testimonial content will go.</p>
+			<cite>Author Name goes here</cite>
+		</blockquote>
+	);
+}
+{{/isStartVariant}}
+{{#isCompletedVariant}}
 /**
  * WordPress Dependencies
  */
 import { __ } from '@wordpress/i18n';
 import { useBlockProps, RichText } from '@wordpress/block-editor';
-{{#isCompletedVariant}}
 import { useEntityProp } from '@wordpress/core-data';
-{{/isCompletedVariant}}
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -19,35 +40,19 @@ import { useEntityProp } from '@wordpress/core-data';
 export default function Edit( {
 	attributes: { authorName },
 	setAttributes,
-	{{#isCompletedVariant}}
 	context: { postType, postId },
-	{{/isCompletedVariant}}
 } ) {
-	{{#isCompletedVariant}}
 	const [ meta, updateMeta ] = useEntityProp(
 		'postType',
 		postType,
 		'meta',
 		postId
 	);
-	const { testimonial } = meta;
-	{{/isCompletedVariant}}
+	const { testimonial } = meta
 
 
 	return (
 		<blockquote { ...useBlockProps() }>
-			{{#isStartVariant}}
-				<RichText
-					placeholder={ __(
-						'Testimonial goes here',
-						'block-developer-cookbook'
-					) }
-					tagName="p"
-					value={ 'Testimonial content goes here' }
-					onChange={ ( newTestimonialContent ) => {} }
-				/>
-			{{/isStartVariant}}
-			{{#isCompletedVariant}}
 			<RichText
 				placeholder={ __(
 					'Testimonial goes here',
@@ -62,7 +67,6 @@ export default function Edit( {
 					} )
 				}
 			/>
-			{{/isCompletedVariant}}
 			<cite>
 				<RichText
 					tagName="span"
@@ -81,3 +85,4 @@ export default function Edit( {
 		</blockquote>
 	);
 }
+{{/isCompletedVariant}}
