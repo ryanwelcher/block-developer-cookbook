@@ -12,26 +12,23 @@ The block.json file that was created during the scaffold needs a few updates. Fo
 
 ```js
 attributes: {
-authorName: {
-type: 'string',
-},
-},
+	authorName: {
+		type: 'string',
+		},
+	},
 example: {
-               attributes: {
-                   authorName: 'WordPress',
-               },
-           },
-
-
-
+	attributes: {
+		authorName: 'WordPress',
+	},
+}
 ```
 
 Next, we want to only allow a single instance of this block as having multiple blocks would overwrite the post meta for each. The `supports.multiple` property allows us to define this.
 
 ```js
 supports: {
-           multiple: false,
-       },
+	multiple: false,
+},
 ```
 
 Finally, we want to use some [block context](https://developer.wordpress.org/block-editor/reference-guides/block-api/block-context/) to know post ID and post type of the post where the block has been inserted. We can enable that functionality via the `usesContext` property.
@@ -44,20 +41,26 @@ Step 2 - Registering the post meta.
 
 Before the block can read from and write to post meta, you will need to register some!
 
-Add the following code to the `testimonial.php` file to register the `testimonial` custom field to Posts.
+Add the following code to the `testimonial.php` file to register the `testimonial` custom field to Posts inside the same hook where we are registering our block.
 
 ```php
-// Register the custom post meta.
-register_post_meta(
-	'post',
-	'testimonial',
-	array(
-		'show_in_rest'      => true,
-		'single'            => true,
-		'type'              => 'string',
-		'sanitize_callback' => 'wp_kses_post',
-	)
-);
+function testimonial_block_init() {
+	// Register the custom post meta.
+	register_post_meta(
+		'post',
+		'testimonial',
+		array(
+			'show_in_rest'      => true,
+			'single'            => true,
+			'type'              => 'string',
+			'sanitize_callback' => 'wp_kses_post',
+		)
+	);
+
+	// Register our block.
+	register_block_type( __DIR__ . '/build' );
+}
+add_action( 'init', 'testimonial_block_init' );
 ```
 
 This code registers the `testimonial` field and associates it to the `post` post type. The `show_is_rest` field is required to be set to `true` in order to access this field in our block.
@@ -428,7 +431,7 @@ At this point, we’re done in the block editor. Save and test this block to ens
 
 ## Step 5 - Setting up the render.php
 
-Let’s get the front end of this block wired up. In the `src/render.php` file:
+Let’s get the front end of this block wired up. Open the `src/render.php` file:
 
 ```php
 <?php
@@ -483,5 +486,7 @@ $author_name = $attributes['authorName'];
   </cite>
 </blockquote>
 ```
+
+You now have a fully functional block that is connected to post meta.
 
 Bon appetite!
