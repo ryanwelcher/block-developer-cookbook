@@ -1,0 +1,26 @@
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+.wp-block-block-developer-cookbook-iapi-gallery-slider {
+	overflow: hidden;
+
+	.slider-container {
+		display: flex;
+		transition: 0.5s;
+
+		.wp-block-cover {
+			flex: 1 0 100%;
+		}
+	}
+
+	.buttons {
+		margin-top: 1rem;
+		padding: 0 2rem;
+		display: flex;
+		justify-content: space-between;
+	}
+}

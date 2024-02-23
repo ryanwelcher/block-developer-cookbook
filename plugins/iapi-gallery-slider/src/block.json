@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "block-developer-cookbook/iapi-gallery-slider",
+	"version": "0.1.0",
+	"title": "Iapi Gallery Slider",
+	"category": "widgets",
+	"icon": "media-interactive",
+	"description": "An interactive block with the Interactivity API",
+	"example": {},
+	"supports": {
+		"interactivity": true,
+		"align": true,
+		"alignWide": true
+	},
+	"allowedBlocks": [
+		"core/query-pagination-previous",
+		"core/query-pagination-numbers",
+		"core/query-pagination-next"
+	],
+	"textdomain": "iapi-gallery-slider",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php",
+	"viewScriptModule": "file:./view.js"
+}
