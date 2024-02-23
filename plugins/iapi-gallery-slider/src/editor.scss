@@ -4,4 +4,10 @@
  * Replace them with your own styles or remove the file completely.
  */
 
-.wp-block-block-developer-cookbook-iapi-gallery-slider {}
+.wp-block-block-developer-cookbook-iapi-gallery-slider {
+	overflow: visible;
+
+	.slider-container {
+		display: block;
+	}
+}

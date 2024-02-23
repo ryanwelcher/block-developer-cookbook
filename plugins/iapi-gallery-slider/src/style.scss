@@ -6,6 +6,7 @@
  */
 
 .wp-block-block-developer-cookbook-iapi-gallery-slider {
+	position: relative;
 	overflow: hidden;
 
 	.slider-container {
@@ -19,8 +20,22 @@
 
 	.buttons {
 		margin-top: 1rem;
-		padding: 0 2rem;
+		padding: 0 1rem;
 		display: flex;
 		justify-content: space-between;
+		position: relative;
+
+		button {
+			transition: scale .2s ease-in;
+			background: none;
+			border: none;
+			cursor: pointer;
+			font-size: 2rem;
+		}
+
+		button:hover:not(:disabled) {
+			scale: (1.2);
+		}
 	}
+
 }

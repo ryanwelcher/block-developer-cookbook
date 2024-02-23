@@ -10,14 +10,14 @@
 	"example": {},
 	"supports": {
 		"interactivity": true,
-		"align": true,
 		"alignWide": true
 	},
-	"allowedBlocks": [
-		"core/query-pagination-previous",
-		"core/query-pagination-numbers",
-		"core/query-pagination-next"
-	],
+	"attributes": {
+		"continous": {
+			"type": "boolean"
+		}
+	},
+	"allowedBlocks": [ "core/cover", "core/image" ],
 	"textdomain": "iapi-gallery-slider",
 	"editorScript": "file:./index.js",
 	"editorStyle": "file:./index.css",

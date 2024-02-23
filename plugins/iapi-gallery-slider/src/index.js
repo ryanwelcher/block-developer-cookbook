@@ -15,6 +15,7 @@ import { InnerBlocks } from '@wordpress/block-editor';
  */
 import './style.scss';
 import './editor.scss';
+import './theme.scss';
 
 /**
  * Internal dependencies

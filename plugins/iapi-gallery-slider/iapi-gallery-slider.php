@@ -30,16 +30,26 @@ function iapi_gallery_slider_iapi_gallery_slider_block_init() {
 add_action( 'init', 'iapi_gallery_slider_iapi_gallery_slider_block_init' );
 
 
+
+
 /**
  * Filter the block to add the needed directives to the inner cover blocks.
  */
 add_filter(
 	'render_block_block-developer-cookbook/iapi-gallery-slider',
-	function( $block_content) {
-		$covers = new \WP_HTML_Tag_Processor( $block_content );
-		while( $covers->next_tag( array( 'tag_name' => 'DIV', 'class_name' => 'wp-block-cover' ) ) ) {
-			$covers->set_attribute('data-wp-interactive', '{"namespace":"iapi-gallery"}');
-			$covers->set_attribute('data-wp-init', 'callbacks.initSlide');
+	function( $block_content ) {
+		$allowed_blocks = array( 'wp-block-cover', 'wp-block-image' );
+		$covers        = new \WP_HTML_Tag_Processor( $block_content );
+
+		while ( $covers->next_tag() ) {
+			$classes = explode( ' ', $covers->get_attribute( 'class' ) );
+
+			foreach ( $allowed_blocks as $block_class ) {
+				if ( in_array( $block_class, $classes, true ) ) {
+					$covers->set_attribute( 'data-wp-interactive', '{"namespace":"iapi-gallery"}' );
+					$covers->set_attribute( 'data-wp-init', 'callbacks.initSlide' );
+				}
+			}
 		}
 		$block_content = $covers->get_updated_html();
 		return $block_content;

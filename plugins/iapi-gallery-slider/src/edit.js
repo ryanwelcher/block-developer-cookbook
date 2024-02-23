@@ -1,17 +1,13 @@
 /**
- * Retrieves the translation of text.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-i18n/
+ * WordPress dependencies
  */
+import {
+	useBlockProps,
+	useInnerBlocksProps,
+	InspectorControls,
+} from '@wordpress/block-editor';
+import { PanelBody, ToggleControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-
-/**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
- */
-import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
 
 /**
  * The edit function describes the structure of your block in the context of the
@@ -20,12 +16,15 @@ import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
  *
  * @param {Object}   props               Properties passed to the function.
- * @param {Object}   props.attributes    Available block attributes.
- * @param {Function} props.setAttributes Function that updates individual attributes.
  *
  * @return {Element} Element to render.
  */
-export default function Edit( props ) {
+export default function Edit( {
+	attributes: { continous },
+	setAttributes,
+	...props
+} ) {
+	console.log( props );
 	const blockProps = useBlockProps();
 	const innerBlockProps = useInnerBlocksProps(
 		{
@@ -33,12 +32,30 @@ export default function Edit( props ) {
 		},
 		{
 			orientation: 'horizontal',
+			template: [ [ 'core/cover', {} ] ],
+			defaultBlock: {
+				name: 'core/cover',
+			},
+			allowedBlocks: [ 'core/cover', 'core/image' ],
 		}
 	);
-
 	return (
 		<div { ...blockProps }>
 			<div { ...innerBlockProps }></div>
+			<InspectorControls>
+				<PanelBody title={ __( 'Slider Controls' ) }>
+					<ToggleControl
+						label={ __( 'Continuous' ) }
+						help={ __(
+							'If enabled, the slider will loop back to the first slide after the last slide.'
+						) }
+						checked={ continous }
+						onChange={ () =>
+							setAttributes( { continous: ! continous } )
+						}
+					/>
+				</PanelBody>
+			</InspectorControls>
 		</div>
 	);
 }

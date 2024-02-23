@@ -10,20 +10,19 @@
  * @see https://github.com/WordPress/gutenberg/blob/trunk/docs/reference-guides/block-api/block-metadata.md#render
  */
 
-// Generate unique id for aria-controls.
-$unique_id = wp_unique_id( 'p-' );
 ?>
-
-<div <?php echo get_block_wrapper_attributes(); ?>
+<div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>
 	data-wp-interactive='{ "namespace": "iapi-gallery" }'
 	data-wp-init="callbacks.setupSlider"
 	data-wp-on-document--keydown="callbacks.onKeyDown"
+	<?php echo data_wp_context( $attributes ); ?>
+
 >
 	<div class="slider-container" data-wp-style--transform="state.currentPos">
 		<?php echo wp_kses_post( $content ); ?>
 	</div>
 	<div class="buttons">
-		<button data-wp-on--click="actions.prevImage" data-wp-bind--disabled="state.noPrevSlide">Prev</button>
-		<button data-wp-on--click="actions.nextImage"data-wp-bind--disabled="state.noNextSlide">Next</button>
+		<button data-wp-on--click="actions.prevImage" data-wp-bind--disabled="state.noPrevSlide" aria-label="go to previous slide">&lt;</button>
+		<button data-wp-on--click="actions.nextImage"data-wp-bind--disabled="state.noNextSlide" aria-label="go to next slide">&gt;</button>
 	</div>
 </div>
