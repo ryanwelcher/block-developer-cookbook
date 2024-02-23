@@ -38,7 +38,7 @@ add_action( 'init', 'iapi_gallery_slider_iapi_gallery_slider_block_init' );
 add_filter(
 	'render_block_block-developer-cookbook/iapi-gallery-slider',
 	function( $block_content ) {
-		$allowed_blocks = array( 'wp-block-cover', 'wp-block-image' );
+		$allowed_blocks = array( 'wp-block-cover', 'wp-block-image', 'wp-block-media-text' );
 		$covers        = new \WP_HTML_Tag_Processor( $block_content );
 
 		while ( $covers->next_tag() ) {

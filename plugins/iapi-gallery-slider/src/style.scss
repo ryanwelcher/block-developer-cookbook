@@ -6,14 +6,15 @@
  */
 
 .wp-block-block-developer-cookbook-iapi-gallery-slider {
-	position: relative;
 	overflow: hidden;
 
 	.slider-container {
 		display: flex;
 		transition: 0.5s;
 
-		.wp-block-cover {
+		.wp-block-cover,
+		.wp-block-image,
+		.wp-block-media-text {
 			flex: 1 0 100%;
 		}
 	}

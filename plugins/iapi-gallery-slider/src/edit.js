@@ -36,7 +36,7 @@ export default function Edit( {
 			defaultBlock: {
 				name: 'core/cover',
 			},
-			allowedBlocks: [ 'core/cover', 'core/image' ],
+			allowedBlocks: [ 'core/cover', 'core/image', 'core/media-text' ],
 		}
 	);
 	return (
