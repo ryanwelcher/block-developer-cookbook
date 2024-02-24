@@ -5,6 +5,7 @@ import {
 	useBlockProps,
 	useInnerBlocksProps,
 	InspectorControls,
+	InnerBlocks,
 } from '@wordpress/block-editor';
 import { PanelBody, ToggleControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
@@ -19,12 +20,7 @@ import { __ } from '@wordpress/i18n';
  *
  * @return {Element} Element to render.
  */
-export default function Edit( {
-	attributes: { continous },
-	setAttributes,
-	...props
-} ) {
-	console.log( props );
+export default function Edit( { attributes: { continous }, setAttributes } ) {
 	const blockProps = useBlockProps();
 	const innerBlockProps = useInnerBlocksProps(
 		{
@@ -32,10 +28,6 @@ export default function Edit( {
 		},
 		{
 			orientation: 'horizontal',
-			template: [ [ 'core/cover', {} ] ],
-			defaultBlock: {
-				name: 'core/cover',
-			},
 			allowedBlocks: [ 'core/cover', 'core/image', 'core/media-text' ],
 		}
 	);
