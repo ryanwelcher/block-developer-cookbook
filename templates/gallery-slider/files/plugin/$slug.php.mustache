@@ -1,17 +1,35 @@
 <?php
 /**
- * Plugin Name:       Iapi Gallery Slider
- * Description:       An interactive block with the Interactivity API
- * Version:           0.1.0
+ * Plugin Name:       {{title}}
+{{#pluginURI}}
+ * Plugin URI:        {{{pluginURI}}}
+{{/pluginURI}}
+{{#description}}
+ * Description:       {{description}}
+{{/description}}
  * Requires at least: 6.1
  * Requires PHP:      7.0
- * Author:            The WordPress Contributors
- * License:           GPL-2.0-or-later
- * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       iapi-gallery-slider
+ * Version:           {{version}}
+{{#author}}
+ * Author:            {{author}}
+{{/author}}
+{{#license}}
+ * License:           {{license}}
+{{/license}}
+{{#licenseURI}}
+ * License URI:       {{{licenseURI}}}
+{{/licenseURI}}
+ * Text Domain:       {{textdomain}}
+{{#domainPath}}
+ * Domain Path:       {{{domainPath}}}
+{{/domainPath}}
+{{#updateURI}}
+ * Update URI:        {{{updateURI}}}
+{{/updateURI}}
  *
- * @package           block-developer-cookbook
+ * @package           {{namespace}}
  */
+
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -24,11 +42,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
-function iapi_gallery_slider_iapi_gallery_slider_block_init() {
+function {{namespaceSnakeCase}}_{{slugSnakeCase}}_block_init() {
 	register_block_type_from_metadata( __DIR__ . '/build' );
 }
-add_action( 'init', 'iapi_gallery_slider_iapi_gallery_slider_block_init' );
-
+add_action( 'init', '{{namespaceSnakeCase}}_{{slugSnakeCase}}_block_init' );
+{{#isCompletedVariant}}
 /**
  * Filter the render_block to add the needed directives to the inner cover blocks.
  */
@@ -41,7 +59,7 @@ function add_directives_to_inner_blocks( $block_content ) {
 
 		foreach ( $allowed_blocks as $block_class ) {
 			if ( in_array( $block_class, $classes, true ) ) {
-				$covers->set_attribute( 'data-wp-interactive', '{"namespace":"iapi-gallery"}' );
+				$covers->set_attribute( 'data-wp-interactive', '{ "namespace":"{{slug}}" }' );
 				$covers->set_attribute( 'data-wp-init', 'callbacks.initSlide' );
 			}
 		}
@@ -49,4 +67,5 @@ function add_directives_to_inner_blocks( $block_content ) {
 	$block_content = $covers->get_updated_html();
 	return $block_content;
 }
-add_filter( 'render_block_block-developer-cookbook/iapi-gallery-slider', 'add_directives_to_inner_blocks' );
+add_filter( 'render_block_{{namespace}}/{{slug}}', 'add_directives_to_inner_blocks' );
+{{/isCompletedVariant}}

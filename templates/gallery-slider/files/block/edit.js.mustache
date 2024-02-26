@@ -1,6 +1,11 @@
 /**
  * WordPress dependencies
  */
+{{#isStartVariant}}
+import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
+import { __ } from '@wordpress/i18n';
+{{/isStartVariant}}
+{{#isCompletedVariant}}
 import {
 	useBlockProps,
 	useInnerBlocksProps,
@@ -8,29 +13,32 @@ import {
 } from '@wordpress/block-editor';
 import { PanelBody, ToggleControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-
-import { useBlockProps, useInnerBlocksProps } from '@wordpress/block-editor';
-import { __ } from '@wordpress/i18n';
+{{/isCompletedVariant}}
 
 /**
  * The edit function describes the structure of your block in the context of the
  * editor. This represents what the editor will render when the block is used.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#edit
- *
- * @param {Object}   props               Properties passed to the function.
- *
- * @return {Element} Element to render.
  */
+{{#isStartVariant}}
+export default function Edit() {
+{{/isStartVariant}}
+{{#isCompletedVariant}}
 export default function Edit( { attributes: { continuous }, setAttributes } ) {
+{{/isCompletedVariant}}
 	const blockProps = useBlockProps();
+	{{#isStartVariant}}
+	const innerBlockProps = useInnerBlocksProps();
+	{{/isStartVariant}}
+	{{#isCompletedVariant}}
 	const innerBlockProps = useInnerBlocksProps(
 		{ className: 'slider-container' },
 		{ allowedBlocks: [ 'core/cover', 'core/image', 'core/media-text' ] }
 	);
+	{{/isCompletedVariant}}
 	return (
 		<div { ...blockProps }>
 			<div { ...innerBlockProps }></div>
+			{{#isCompletedVariant}}
 			<InspectorControls>
 				<PanelBody title={ __( 'Slider Controls' ) }>
 					<ToggleControl
@@ -45,6 +53,7 @@ export default function Edit( { attributes: { continuous }, setAttributes } ) {
 					/>
 				</PanelBody>
 			</InspectorControls>
+			{{/isCompletedVariant}}
 		</div>
 	);
 }
