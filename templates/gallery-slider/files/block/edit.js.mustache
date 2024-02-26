@@ -26,15 +26,10 @@ export default function Edit() {
 export default function Edit( { attributes: { continuous }, setAttributes } ) {
 {{/isCompletedVariant}}
 	const blockProps = useBlockProps();
-	{{#isStartVariant}}
-	const innerBlockProps = useInnerBlocksProps();
-	{{/isStartVariant}}
-	{{#isCompletedVariant}}
 	const innerBlockProps = useInnerBlocksProps(
 		{ className: 'slider-container' },
 		{ allowedBlocks: [ 'core/cover', 'core/image', 'core/media-text' ] }
 	);
-	{{/isCompletedVariant}}
 	return (
 		<div { ...blockProps }>
 			<div { ...innerBlockProps }></div>

@@ -42,10 +42,10 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
-function {{namespaceSnakeCase}}_{{slugSnakeCase}}_block_init() {
+function block_developer_cookbook_{{slugSnakeCase}}_block_init() {
 	register_block_type_from_metadata( __DIR__ . '/build' );
 }
-add_action( 'init', '{{namespaceSnakeCase}}_{{slugSnakeCase}}_block_init' );
+add_action( 'init', 'block_developer_cookbook_{{slugSnakeCase}}_block_init' );
 {{#isCompletedVariant}}
 /**
  * Filter the render_block to add the needed directives to the inner cover blocks.

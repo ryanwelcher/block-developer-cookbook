@@ -1,8 +1,8 @@
-In this recipe, you will create a custom testimonial block that will read from and save to post meta.
+In this recipe, you will create a gallery slider that uses the Interactivity API. **Requires WordPress 6.5 or Gutenberg 17.6**
 
 ## Usage
 
-`npx @wordpress/create-block example-plugin --template @block-developer-cookbook/testimonial`
+`npx @wordpress/create-block gallery-slider --template @block-developer-cookbook/gallery-slider
 
 ## Variants
 

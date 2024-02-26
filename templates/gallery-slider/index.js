@@ -2,7 +2,6 @@ const { join } = require( 'path' );
 
 module.exports = {
 	defaultValues: {
-		slug: 'gallery-slider',
 		namespace: 'block-developers-cookbook',
 		description: 'A gallery slider built using the Interactivity API',
 		customPackageJSON: {
@@ -32,8 +31,10 @@ module.exports = {
 			},
 			example: {},
 			customBlockJSON: {
+				icon: 'media-interactive',
 				viewScriptModule: 'file:./view.js',
 			},
+
 		},
 	},
 	pluginTemplatesPath: join( __dirname, 'files/plugin' ),

@@ -42,7 +42,7 @@ const { state, actions } = store( '{{slug}}', {
 		},
 	},
 	actions: {
-		prevImage: () => {
+		prevSlide: () => {
 			const ctx = getContext();
 			if ( ctx.continuous && ctx.currentSlide === 0 ) {
 				ctx.currentSlide = ctx.totalSlides - 1;
@@ -50,7 +50,7 @@ const { state, actions } = store( '{{slug}}', {
 			}
 			ctx.currentSlide--;
 		},
-		nextImage: () => {
+		nextSlide: () => {
 			const ctx = getContext();
 			if ( ctx.continuous && ctx.currentSlide === ctx.totalSlides - 1 ) {
 				ctx.currentSlide = 0;
@@ -94,6 +94,7 @@ const { state, actions } = store( '{{slug}}', {
 	},
 } );
 {{/isCompletedVariant}}
+
 /**
  * Helper function to unwrap the proxies and display the underlying data.
  * @param {*} data
