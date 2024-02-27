@@ -1,492 +1,608 @@
 # Overview
+In this recipe, we’re going to create a custom gallery slider block that is powered by the Interactivity API (IAPI). This slider will use the Cover, Media & Text, and Image blocks as slides and we’ll filter these core blocks to allow them to support the IAPI. Finally, we’ll add an attribute to the block and use it inside the store that powers the slider.
 
-In this recipe, you will create a Testimonial block that will store the testimonial in custom post meta and save the Author Name to a block attribute. This block is based on the one created for [Creating a custom block that stores post meta](https://developer.wordpress.org/news/2023/03/03/creating-a-custom-block-that-stores-post-meta/) from [developer.wordpress.org/news](developer.wordpress.org/news). It uses a single attribute to store the name of the testimonial author while the actual testimonial content will be stored in post meta.
+# Step 1 - Block configuration
 
-## Setup
-
-Run `npm run prep:testimonial` from the root of the repository to scaffold the files for this recipe into the `plugins/testimonial` directory. Once scaffolding has been completed, be sure to activate the new plugin and start the build process using `npm run start`.
-
-## Step 1 - Block configuration
-
-The block.json file that was created during the scaffold needs a few updates. For starters, we need to save the Author of the testimonial as a block attribute. Add the following snippet to register a new attribute to store the author name. We can also update the `example` property to match
+Blocks that leverage the IAPI need to opt-in in two steps. The first is via the `supports.interactive` property in `block.json`. Add the following to the opt in and add some alignment options for our block
 
 ```js
-attributes: {
-	authorName: {
-		type: 'string',
-		},
-	},
-example: {
-	attributes: {
-		authorName: 'WordPress',
-	},
-}
+"supports": {
+       "interactivity": true,
+       "align": true,
+       "alignWide": true
+ },
 ```
-
-Next, we want to only allow a single instance of this block as having multiple blocks would overwrite the post meta for each. The `supports.multiple` property allows us to define this.
+Next, we need to tell the `@wordpress/scripts` package where to find the view.js file to be loaded as a module for this block. This is done via the new `viewScriptModule` property.
 
 ```js
-supports: {
-	multiple: false,
-},
+"viewScriptModule": "file:./view.js"
 ```
-
-Finally, we want to use some [block context](https://developer.wordpress.org/block-editor/reference-guides/block-api/block-context/) to know post ID and post type of the post where the block has been inserted. We can enable that functionality via the `usesContext` property.
+There is a new experimental flag that we need to use for our `build` and `start` commands to enable the view.js file to be processed as a module.
 
 ```js
-usesContext: [ 'postId', 'postType' ],
+build: 'wp-scripts build --experimental-modules',
+start: 'wp-scripts start --experimental-modules',
 ```
 
-Step 2 - Registering the post meta.
-
-Before the block can read from and write to post meta, you will need to register some!
-
-Add the following code to the `testimonial.php` file to register the `testimonial` custom field to Posts inside the same hook where we are registering our block.
+# Step 2 - Preparing the render.php
+Open the  `./src/render.php` file and it should looked like this:
 
 ```php
-function testimonial_block_init() {
-	// Register the custom post meta.
-	register_post_meta(
-		'post',
-		'testimonial',
-		array(
-			'show_in_rest'      => true,
-			'single'            => true,
-			'type'              => 'string',
-			'sanitize_callback' => 'wp_kses_post',
-		)
-	);
+<?php
+/**
+* PHP file to use when rendering the block type on the server to show on the front end.
+*
+* The following variables are exposed to the file:
+*     $attributes (array): The block attributes.
+*     $content (string): The block default content.
+*     $block (WP_Block): The block instance.
+*
+* @see https://github.com/WordPress/gutenberg/blob/trunk/docs/reference-guides/block-api/block-metadata.md#render
+*/
 
-	// Register our block.
-	register_block_type( __DIR__ . '/build' );
-}
-add_action( 'init', 'testimonial_block_init' );
+
+?>
+<div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>>
+   <div class="slider-container">
+       <?php echo wp_kses_post( $content ); ?>
+   </div>
+   <div class="buttons">
+       <button aria-label="go to previous slide">&lt;</button>
+       <p>1/10</p>
+       <button aria-label="go to next slide">&gt;</button>
+   </div>
+</div>
 ```
+The second step to enable the IAPI for a block is to add the `data-wp-interactive` directive to the render.php. A directive is added to the markup to add specific behavior to the DOM elements of the block. Read more about directives [here](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-interactivity/packages-interactivity-api-reference/#the-directives)
 
-This code registers the `testimonial` field and associates it to the `post` post type. The `show_is_rest` field is required to be set to `true` in order to access this field in our block.
+Add the following to outermost div:
 
-## Step 3 - Saving the Author Name to block attributes
+```php
+<div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?> data-wp-interactive='{ "namespace": "gellery-slider" }'>
+   <div class="slider-container">
+       <?php echo wp_kses_post( $content ); ?>
+   </div>
+   <div class="buttons">
+       <button aria-label="go to previous slide">&lt;</button>
+       <p>1/10</p>
+       <button aria-label="go to next slide">&gt;</button>
+   </div>
+</div>
+```
+This new attribute contains an object with a single property; `namespace`. This property must match the name of the store that we’ll be defining in the `view.js` file. Pay special attention to the usage of single and double quotes here as it’s a common place for errors to occur if the quotes are not correct.
 
-Open the `./src/edit/js` file and it should looked like this:
+# Step 3 - Defining a store
+Interactive blocks use a store to manage the state of the block as well as provide actions and callbacks for the block to use. Open the `./src/view.js` to see how a store is defined.
 
 ```js
 /**
- * WordPress Dependencies
- */
-import { useBlockProps } from '@wordpress/block-editor';
-
-/**
- * The edit function describes the structure of your block in the context of the
- * editor. This represents what the editor will render when the block is used.
- *
- * @param {*} props
- * @return {WPElement} Element to render.
- */
-export default function Edit( props ) {
-	return (
-		<blockquote { ...useBlockProps() }>
-			<p>This is where the testimonial content will go.</p>
-			<cite>Author Name goes here</cite>
-		</blockquote>
-	);
-}
+* WordPress dependencies
+*/
+import { store } from '@wordpress/interactivity';
+store( 'gallery-slider', {
+   state: {},
+   actions: {},
+   callbacks: {},
+} );
 ```
+After importing the `store` function from the '@wordpress/interactivity' package, we create a store by passing the name of the store and an object representing the store’s definition.
 
-At this point, we only have hard coded contents. Let’s start by making it editable. Import the `RichText` component from the `@wordpress/block-editor` package and replace the `<cite />` tag with it.
+In the starting code, we have `state`, `actions`, and `callbacks`. While these properties can technically be anything, it is recommended to follow this naming convention.
+State
+The state object is used to store the global state for this store and hold functions that return derived state (values calculate from state or context)
+Actions
+The action object should store functions that can be triggered by a user such as clicking on a button.
+Callbacks
+This object should contain functions that respond to things that happen programmatically or automatically. Such as when the block is loaded or when watching for a change in state.
+
+It should be noted that actions and callbacks both respond to things that happen in the block and as such there can be a fair amount of overlap between these concepts - there is no wrong answer here so use your judgment to the best place to put your functions.
+
+The store conveniently returns references to all of these items so that they can be accessed in other areas of the store.
+
+Step 4 - State vs Context
+State and context are used to track what is happening inside our block at any given time. The important difference between these is that `state` is global while `context` is local. Anything in `state` will be available to all instances of our block while `context` will only be available to a single instance.
+
+As an example, let’s define a `currentSlide` variable in state and provide an action to change it to the next slide.
 
 ```js
 /**
- * WordPress Dependencies
- */
-import { __ } from '@wordpress/i18n';
-import { useBlockProps, RichText } from '@wordpress/block-editor';
+* WordPress dependencies
+*/
+import { store } from '@wordpress/interactivity';
+const { state } = store( 'gallery-slider', {
+   state: { currentSlide: 0 },
+   actions: {
+       nextImage: () => {
+           state.currentSlide++;
+       },
+   },
+   callbacks: {},
+} );
+```
+If we triggered `nextImage`, then every instance of this block would have its `currentSlide` property changed and the image would change for each slider. That’s not what we’re looking for so instead, we are going to use context to ensure `currentSlide` and the other properties we need are different for each instance of the block.
 
-/**
- * The edit function describes the structure of your block in the context of the
- * editor. This represents what the editor will render when the block is used.
- *
- * @param {*} props
- * @return {WPElement} Element to render.
- */
-export default function Edit( props ) {
-	return (
-		<blockquote { ...useBlockProps() }>
-			<p>This is where the testimonial content will go.</p>
-			<RichText
-				tagName="cite"
-				placeholder={ __( 'Author name', 'block-developer-cookbook' ) }
-				allowedFormats={ [] }
-				disableLineBreaks
-				value={ 'Author Name goes here' }
-				onChange={ ( newAuthorName ) => console.log( newAuthorName ) }
-			/>
-		</blockquote>
-	);
-}
+We define context in `./src/render.php` by using the `data_wp_context` function by passing it an array containing the items and their starting values. Update the code with the following to create the context properties we want to track for the slider.
+
+```php
+$context = array_merge(
+   $attributes,
+   array(
+       'slides'       => array(),
+       'currentSlide' => 0,
+       'totalSlides'  => 0,
+   )
+);
+
+?>
+<div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>
+   data-wp-interactive='{ "namespace": "gellery-slider" }'
+   <?php echo data_wp_context( $context ); ?>
+   >
+   <div class="slider-container">
+       <?php echo wp_kses_post( $content ); ?>
+   </div>
+   <div class="buttons">
+       <button aria-label="go to previous slide">&lt;</button>
+       <p>1/10</p>
+       <button aria-label="go to next slide">&gt;</button>
+   </div>
+</div>
 ```
 
-In the code above, we are setting the `tagName` property to `cite` to make sure the wrapping element for our editable content is a `<cite />` tag.
+# Step 5 - Change the active slide
+In order to change the slide being viewed, we need to create two actions and bind them to the next and previous buttons.
 
-The `placeholder` prop is the content that is shown when there is no text in the field.
-
-The `allowedFormats` prop accepts an array of formats that can be applied to this field. In this case, we don’t want any so we pass an empty array so that no formats are available.
-
-`disableLinkBreaks` ensures that if the user hits the enter key, a new line is not created.
-
-The `value` and `onChange` props are still hard coded as we need to use items from the `props` object passed to the Edit component to complete them.
-
-Let’s use object destructuring to retrieve the `authorName` attribute and `setAttributes` functions and use them for the `value` and `onChange` props.
+Let’s start by creating the actions. In `view.js` add the following stubs for the `prevImage` and `nextImage` functions:
 
 ```js
 /**
- * WordPress Dependencies
- */
-import { __ } from '@wordpress/i18n';
-import { useBlockProps, RichText } from '@wordpress/block-editor';
-
-/**
- * The edit function describes the structure of your block in the context of the
- * editor. This represents what the editor will render when the block is used.
- *
- * @param {*} props
- * @return {WPElement} Element to render.
- */
-export default function Edit( { attributes: { authorName }, setAttributes } ) {
-	return (
-		<blockquote { ...useBlockProps() }>
-			<p>This is where the testimonial content will go.</p>
-			<RichText
-				tagName="cite"
-				placeholder={ __( 'Author name', 'block-developer-cookbook' ) }
-				allowedFormats={ [] }
-				disableLineBreaks
-				value={ authorName }
-				onChange={ ( newAuthorName ) =>
-					setAttributes( { authorName: newAuthorName } )
-				}
-			/>
-		</blockquote>
-	);
-}
+* WordPress dependencies
+*/
+import { store } from '@wordpress/interactivity';
+store( 'gallery-slider', {
+   state: {},
+   actions: {
+       prevSlide: () => {
+           console.log( 'Previous image' );
+       },
+       nextSlide: () => {
+           console.log( 'Next image' );
+       },
+   },
+   callbacks: {},
+} );
 ```
+Next, we need to connect our buttons to these functions. We can use the `data-on` directive for this. This directive is used to run code on dispatched DOM events like `click` or `keyup` using the format of `data-wp-on–{event-name}` and the value is which action we want to run. So to add the prevImage action to the previous button we would add the following:
 
-Save and test this out! Our block should now be saving the authorName as expected in the block editor (the front end comes later).
+```php
+<button aria-label="go to previous slide" data-wp-on--click="actions.prevSlide">&lt;</button
+```
+Update the buttons with the new directive:
 
-## Step 4 - Saving and retrieving the testimonial content
+```php
+$context = array_merge(
+   $attributes,
+   array(
+       'slides'       => array(),
+       'currentSlide' => 0,
+       'totalSlides'  => 0,
+   )
+);
 
-Next, let’s look at how we can access the `testimonial` custom field in our block. To do this, we’re going to use a hook called `useEntityProp` which we can import from the `@wordpress/core-data` package.
+
+?>
+<div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>
+   data-wp-interactive='{ "namespace": "gellery-slider" }'
+   <?php echo data_wp_context( $context ); ?>
+   >
+   <div class="slider-container">
+       <?php echo wp_kses_post( $content ); ?>
+   </div>
+   <div class="buttons">
+       <button aria-label="go to previous slide" data-wp-on--click="actions.prevSlide">&lt;</button>
+       <p>1/10</p>
+       <button aria-label="go to next slide" data-wp-on--click="actions.nextSlide">&gt;</button>
+   </div>
+</div>
+```
+Test the block and make sure that when you click the buttons, you see the correct message in the console.
+
+Now that we’ve got the buttons connected, we need to update the `currentSlide` property that was defined in the context in `render.php`. We can access context using the `getContext` function provided by the `@wordpress/interactivity` package.
+
+Import that now and add the following to the store:
 
 ```js
-import { useEntityProp } from '@wordpress/core-data';
+import { getContext } from '@wordpress/interactivity';
+store( 'gallery-slider', {
+   state: {},
+   actions: {
+       prevSlide: () => {
+           const ctx = getContext();
+           ctx.currentSlide--;
+       },
+       nextSlide: () => {
+           const ctx = getContext();
+           ctx.currentSlide++;
+       },
+   },
+   callbacks: {},
+} );
+```
+This is going to change the current slide but instead of testing it using the console, let’s create a new binding that we’ll use later to actually move the slides.
+
+In render.php, add the following to the `slides-container` div:
+
+```php
+data-wp-style--transform="state.currentPos"
 ```
 
-useEntityProp accepts 4 parameters:
+This `wp-style` binds a value to a given CSS property. In this case, we’re binding the `transform` CSS property to the value that is returned from `state.currentPos`.
 
-kind The entity kind.
-name The entity name.
-prop The property name.
-id An entity ID to use instead of the context-provided one.
-
-In our case, the `kind` is going to be `postType`, the `name` is `post`, the `prop` we want is `meta` and we’re going to use the current post ID as the `id`. Remember we set `usesContext` to use `postType` and `postId`? Well we can get those values from the `props` passed to the `Edit` component. Let’s do that now and and set up the `useEntityProp` hook
+Let’s define that now in our store.
 
 ```js
-/**
- * WordPress Dependencies
- */
-import { __ } from '@wordpress/i18n';
-import { useBlockProps, RichText } from '@wordpress/block-editor';
-import { useEntityProp } from '@wordpress/core-data';
-
-/**
- * The edit function describes the structure of your block in the context of the
- * editor. This represents what the editor will render when the block is used.
- *
- * @param {*} props
- * @return {WPElement} Element to render.
- */
-export default function Edit( {
-	attributes: { authorName },
-	setAttributes,
-	context: { postType, postId },
-} ) {
-	const [ meta, updateMeta ] = useEntityProp(
-		'postType',
-		postType,
-		'meta',
-		postId
-	);
-
-	return (
-		<blockquote { ...useBlockProps() }>
-			<p>This is where the testimonial content will go.</p>
-			<RichText
-				tagName="cite"
-				placeholder={ __( 'Author name', 'block-developer-cookbook' ) }
-				allowedFormats={ [] }
-				disableLineBreaks
-				value={ authorName }
-				onChange={ ( newAuthorName ) =>
-					setAttributes( { authorName: newAuthorName } )
-				}
-			/>
-		</blockquote>
-	);
-}
-```
-
-Now that we have the hook set up, let’s talk about what it returns.
-
-As with many hooks in React, `useEntityProp` returns a tuple of two items ( A tuple is simply an array of known length with items that are typed ).
-
-The items in order are the data that is being retrieved ( in our case the post meta ) and a function to update that same data. Because it returns an array, we can use array destructuring to retrieve those items in order and name them whatever we want.
-
-Once we have the post meta, we need to retrieve the `testimonial` field from the object that is returned that contains ALL of the post meta for this piece of content.
-
-```js
-/**
- * WordPress Dependencies
- */
-import { __ } from '@wordpress/i18n';
-import { useBlockProps, RichText } from '@wordpress/block-editor';
-import { useEntityProp } from '@wordpress/core-data';
-
-/**
- * The edit function describes the structure of your block in the context of the
- * editor. This represents what the editor will render when the block is used.
- *
- * @param {*} props
- * @return {WPElement} Element to render.
- */
-export default function Edit( {
-	attributes: { authorName },
-	setAttributes,
-	context: { postType, postId },
-} ) {
-	const [ meta, updateMeta ] = useEntityProp(
-		'postType',
-		postType,
-		'meta',
-		postId
-	);
-
-	const { testimonial } = meta;
-
-	return (
-		<blockquote { ...useBlockProps() }>
-			<p>This is where the testimonial content will go.</p>
-			<RichText
-				tagName="cite"
-				placeholder={ __( 'Author name', 'block-developer-cookbook' ) }
-				allowedFormats={ [] }
-				disableLineBreaks
-				value={ authorName }
-				onChange={ ( newAuthorName ) =>
-					setAttributes( { authorName: newAuthorName } )
-				}
-			/>
-		</blockquote>
-	);
-}
-```
-
-Let’s replace that `<p>` tag with another RichText component so we can edit it in the block editor.
-
-```js
-/**
- * WordPress Dependencies
- */
-import { __ } from '@wordpress/i18n';
-import { useBlockProps, RichText } from '@wordpress/block-editor';
-import { useEntityProp } from '@wordpress/core-data';
-
-/**
- * The edit function describes the structure of your block in the context of the
- * editor. This represents what the editor will render when the block is used.
- *
- * @param {*} props
- * @return {WPElement} Element to render.
- */
-export default function Edit( {
-	attributes: { authorName },
-	setAttributes,
-	context: { postType, postId },
-} ) {
-	const [ meta, updateMeta ] = useEntityProp(
-		'postType',
-		postType,
-		'meta',
-		postId
-	);
-
-	const { testimonial } = meta;
-
-	return (
-		<blockquote { ...useBlockProps() }>
-			<RichText
-				tagName="p"
-				placeholder={ __(
-					'Testimonial goes here',
-					'block-developer-cookbook'
-				) }
-				value={ testimonial }
-				onChange={ ( newTestimonialContent ) =>
-					console.log( newTestimonialContent )
-				}
-			/>
-			<RichText
-				tagName="cite"
-				placeholder={ __( 'Author name', 'block-developer-cookbook' ) }
-				allowedFormats={ [] }
-				disableLineBreaks
-				value={ authorName }
-				onChange={ ( newAuthorName ) =>
-					setAttributes( { authorName: newAuthorName } )
-				}
-			/>
-		</blockquote>
-	);
-}
-```
-
-Now the block should be displaying the value of the `testimonial` field. You can test this by showing the custom fields in the block editor preferences and adding the field.
-
-Congratulations! Your block is now reading post meta but we’re not quite done. We still need to update the post meta from the block.
-
-To do that, we use the function provided by the `useEntityProp` hook that we called `updateMeta`. It’s important to note that this function will update all of the post meta so we need to be careful to only change the `testimonial` field and keep the value of any others the same.
-
-We can use the [spread operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) to do this.
-
-```js
-updateMeta( {
-	...meta,
-	testimonial: newTestimonialContent,
+import { store, getContext } from '@wordpress/interactivity';
+store( 'gallery-slider', {
+   state: {
+       get currentPos() {
+           const ctx = getContext();
+		console.log( ctx.currenSlide )
+           return `translateX(-${ ctx.currentSlide * 100 }%)`;
+       },
+   },
+   actions: {
+       prevSlide: () => {
+           const ctx = getContext();
+           ctx.currentSlide--;
+       },
+       nextSlide: () => {
+           const ctx = getContext();
+           ctx.currentSlide++;
+       },
+   },
+   callbacks: {},
 } );
 ```
 
-This syntax is creating a new object by spreading the contents of the `meta` object and then overriding the `testimonial` field with the new value.
+Notice the use of the `get` keyword. This indicates that this is a JavaScript getter and it is expected to return a value. In this case we’re returning where the slides-container should move to. You may also be wondering why we put this in the `state` object. This function is creating some derived state (values based on state or in our case context) for our block so it makes sense to keep there.
 
-Add that the `onChange` property now:
+Save and test block and and you should see that the slides are now moving and the value of `currentSlide` is being output to the console.
+
+The issue we now have is that we can keep clicking the buttons to move the slides even if we don’t have any more to show.
+
+Let’s fix that by disabling the next button when on the last slide and the previous button when on the first slide. We can do that with the `wp-bind` directive. This directive allows us to bind a value to any valid attributes for a tag. In this case, we want to use the  `disabled` attributes so let’s has `data-wp-bind–disabled` to each of the buttons with a new function name.
+
+```php
+$context = array_merge(
+   array(
+       'slides'       => array(),
+       'currentSlide' => 0,
+       'totalSlides'  => 0,
+   )
+);
+
+
+?>
+<div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>
+   data-wp-interactive='{ "namespace": "gallery-slider" }'
+   <?php echo data_wp_context( $context ); ?>
+   >
+   <div class="slider-container" data-wp-style--transform="state.currentPos">
+       <?php echo wp_kses_post( $content ); ?>
+   </div>
+   <div class="buttons">
+       <button aria-label="go to previous slide" data-wp-on--click="actions.prevSlide" data-wp-bind--disabled="state.noPrevSlide">&lt;</button>
+       <p>1/10</p>
+       <button aria-label="go to next slide" data-wp-on--click="actions.nextSlide" data-wp-bind--disabled="state.noNextSlide">&gt;</button>
+   </div>
+</div>
+```
+Next, add the new functions to our state object in `view.js`:
+
+```js
+import { store, getContext } from '@wordpress/interactivity';
+store( 'gallery-slider', {
+   state: {
+       get currentPos() {
+           const ctx = getContext();
+           return `translateX(-${ ctx.currentSlide * 100 }%)`;
+       },
+       get noPrevSlide() {
+           const ctx = getContext();
+           return ctx.currentSlide === 0;
+       },
+       get noNextSlide() {
+           const ctx = getContext();
+           return ctx.currentSlide === ctx.totalSlides - 1;
+       },
+   },
+   actions: {
+       prevSlide: () => {
+           const ctx = getContext();
+           ctx.currentSlide--;
+       },
+       nextSlide: () => {
+           const ctx = getContext();
+           ctx.currentSlide++;
+       },
+   },
+   callbacks: {},
+} );
+```
+
+The `noPrevSlide` and `noNextSlide` will return `true` or `false` based on their inner logic which in turn will set the `disabled` attribute as needed for each button.
+
+Right now, we’re not tracking the slides in our store so for testing, you can change the value for `totalSlides` in `render.php` to 5 to see the buttons in action. Don’t forget to change it back!
+
+# Step 6 - Initializing the slides
+The slides for our slider are core blocks, specifically the Cover, Media & Text, and Image blocks. We could try to count the blocks using a query selector in JavaScript but that can get complicated. Instead, let’s have the slides initialize themselves using a function from our store!
+
+Start by adding a new function to the `callbacks` to handle the initialization of a slide:
+```js
+import { store, getContext, getElement } from '@wordpress/interactivity';
+store( 'gallery-slider', {
+   state: {
+       get currentPos() {
+           const ctx = getContext();
+           return `translateX(-${ ctx.currentSlide * 100 }%)`;
+       },
+       get noPrevSlide() {
+           const ctx = getContext();
+           return ctx.currentSlide === 0;
+       },
+       get noNextSlide() {
+           const ctx = getContext();
+           return ctx.currentSlide === ctx.totalSlides - 1;
+       },
+   },
+   actions: {
+       prevSlide: () => {
+           const ctx = getContext();
+           ctx.currentSlide--;
+       },
+       nextSlide: () => {
+           const ctx = getContext();
+           ctx.currentSlide++;
+       },
+   },
+   callbacks: {
+       initSlide: () => {
+           const ctx = getContext();
+           // This is called by the core/cover blocks inside this block.
+           // Adds the element reference to the `slides` array.
+           const { ref } = getElement();
+           ctx.slides.push( ref );
+           ctx.totalSlides = ctx.slides.length;
+
+
+           // The returned function executes when the element is removed from
+           // the DOM.
+           return () => {
+               ctx.slides = ctx.slides.filter( ( s ) => s !== ref );
+           };
+       },
+   },
+} );
+```
+
+The `initSlide` function will be bound to  each inner block and when it’s called it will add a reference to itself in the `slides` array and then update the `totalSlide` variable to the new length.
+
+The next part is getting core blocks to interact with our store. We’re going to modify the rendered HTML of the block by using the `WP_HTML_Tag_Processor` to add the directives to our blocks. All this is being done inside a `render_block` filter.
+
+Add the following snippet to the main plugin PHP file
+```php
+/**
+* Filter the render_block to add the needed directives to the inner cover blocks.
+*/
+function add_directives_to_inner_blocks( $block_content ) {
+   $allowed_blocks = array( 'wp-block-cover', 'wp-block-image', 'wp-block-media-text' );
+   $covers         = new \WP_HTML_Tag_Processor( $block_content );
+
+
+   while ( $covers->next_tag() ) {
+       $classes = explode( ' ', $covers->get_attribute( 'class' ) );
+
+
+       foreach ( $allowed_blocks as $block_class ) {
+           if ( in_array( $block_class, $classes, true ) ) {
+               $covers->set_attribute( 'data-wp-interactive', '{"namespace":"gallery-slider"}' );
+               $covers->set_attribute( 'data-wp-init', 'callbacks.initSlide' );
+           }
+       }
+   }
+   $block_content = $covers->get_updated_html();
+   return $block_content;
+}
+add_filter( 'render_block_block-developer-cookbook/gallery-slider', 'add_directives_to_inner_blocks' );
+```
+
+In order for the core blocks to use our store, we need to add the `data-wp-interactive` directive to the root element with a value of our store name `gallery-slider`. We can then use the `data-wp-init` directive to call the `initSlide` function when the block is rendered.
+
+The `WP_HTML_Tag_Processor` class allows us to add these new directives by scanning for all of the tags in the `$block_content` for the existence of certain classes and if found, it adds these new attributes to the markup.
+
+Make sure to add some slides and then save and test the block.
+
+# Step 7 - Introducing block attributes
+In the `edit.js`, we have a control to toggle continuous mode. This mode will go back to the first slide once the user has reached the end of the slides and clicks the next button.
+
+We need to pass this value into our `store` before we can use it so let’s add all of our block attributes to our `$context` array in render.php.
+
+```php
+$context = array_merge(
+   $attributes,
+   array(
+       'slides'       => array(),
+       'currentSlide' => 0,
+       'totalSlides'  => 0,
+   )
+);
+```
+Now we have  will have access to the attribute called `continuous` that was defined in `block.json` in our store and we can update it accordingly
 
 ```js
 /**
- * WordPress Dependencies
- */
-import { __ } from '@wordpress/i18n';
-import { useBlockProps, RichText } from '@wordpress/block-editor';
-import { useEntityProp } from '@wordpress/core-data';
+* WordPress dependencies
+*/
+import { store, getElement, getContext } from '@wordpress/interactivity';
 
-/**
- * The edit function describes the structure of your block in the context of the
- * editor. This represents what the editor will render when the block is used.
- *
- * @param {*} props
- * @return {WPElement} Element to render.
- */
-export default function Edit( {
-	attributes: { authorName },
-	setAttributes,
-	context: { postType, postId },
-} ) {
-	const [ meta, updateMeta ] = useEntityProp(
-		'postType',
-		postType,
-		'meta',
-		postId
-	);
 
-	const { testimonial } = meta;
+const { state, actions } = store( 'iapi-gallery', {
+   state: {
+       get noPrevSlide() {
+           const ctx = getContext();
+           if ( ctx.continuous ) {
+               return false;
+           }
+           return ctx.currentSlide === 0;
+       },
+       get noNextSlide() {
+           const ctx = getContext();
+           if ( ctx.continuous ) {
+               return false;
+           }
+           return ctx.currentSlide === ctx.totalSlides - 1;
+       },
+       get currentPos() {
+           const ctx = getContext();
+           return `translateX(-${ ctx.currentSlide * 100 }%)`;
+       },
+       get imageIndex() {
+           const ctx = getContext();
+           return `${ ctx.currentSlide + 1 }/${ ctx.totalSlides }`;
+       },
+   },
+   actions: {
+       prevImage: () => {
+           const ctx = getContext();
+           if ( ctx.continuous && ctx.currentSlide === 0 ) {
+               ctx.currentSlide = ctx.totalSlides - 1;
+               return;
+           }
+           ctx.currentSlide--;
+       },
+       nextImage: () => {
+           const ctx = getContext();
+           if ( ctx.continuous && ctx.currentSlide === ctx.totalSlides - 1 ) {
+               ctx.currentSlide = 0;
+               return;
+           }
+           ctx.currentSlide++;
+       },
+    },
+   callbacks: {
+       initSlide: () => {
+           const ctx = getContext();
+           // This is called by the core/cover blocks inside this block.
+           // Adds the element reference to the `slides` array.
+           const { ref } = getElement();
+           ctx.slides.push( ref );
+           ctx.totalSlides = ctx.slides.length;
 
-	return (
-		<blockquote { ...useBlockProps() }>
-			<RichText
-				tagName="p"
-				placeholder={ __(
-					'Testimonial goes here',
-					'block-developer-cookbook'
-				) }
-				value={ testimonial }
-				onChange={ ( newTestimonialContent ) =>
-					updateMeta( {
-						...meta,
-						testimonial: newTestimonialContent,
-					} )
-				}
-			/>
-			<RichText
-				tagName="cite"
-				placeholder={ __( 'Author name', 'block-developer-cookbook' ) }
-				allowedFormats={ [] }
-				disableLineBreaks
-				value={ authorName }
-				onChange={ ( newAuthorName ) =>
-					setAttributes( { authorName: newAuthorName } )
-				}
-			/>
-		</blockquote>
-	);
-}
+
+           // The returned function executes when the element is removed from
+           // the DOM.
+           return () => {
+               ctx.slides = ctx.slides.filter( ( s ) => s !== ref );
+           };
+       },
+   },
+} );
 ```
+Save and test toggling this mode on and off.
 
-At this point, we’re done in the block editor. Save and test this block to ensure that you’re both reading and writing from post meta.
-
-## Step 5 - Setting up the render.php
-
-Let’s get the front end of this block wired up. Open the `src/render.php` file:
+# Step 8 - Adding keyboard support
+Almost there! The last step is to add keyboard support for the gallery. We’re going to use the `wp-on-document` directive bound to the `keydown` event. Add the following to the main wrapper div:
 
 ```php
-<?php
-/**
-* Render file.
-*
-* @see https://github.com/WordPress/gutenberg/blob/trunk/docs/reference-guides/block-api/block-metadata.md#render
-*/
-
-
-?>
-<?php
-$testimonial = 'Testimonial content';
-$author_name = 'Author Name'
-?>
-<blockquote <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>>
-   <p><?php echo esc_html( $testimonial ); ?></p>
-   <cite>
-       <span><?php echo esc_html( $author_name ); ?></span>
-   </cite>
-</blockquote>
+data-wp-on-document--keydown="actions.onKeyDown"
 ```
 
-The values are again hard coded, so let’s get them from the block attributes and context.
+Now, let’s add the onKeyDown function to the actions property of our store:
 
-There are three variables that are available in this file:
-
-`$attributes` - the saved block attributes
-`$content` - any content that the block outputs. This used for innerBlocks.
-`$block` - the block instance
-
-For our purposes we only need the `$attributes` to access `authorName` and `$block` to access the context and get the `postId` which is then used to retrieve the post meta value.
-
-```php
-<?php
+```js
 /**
-* Render file.
-*
-* @see https://github.com/WordPress/gutenberg/blob/trunk/docs/reference-guides/block-api/block-metadata.md#render
+* WordPress dependencies
 */
+import { store, getElement, getContext } from '@wordpress/interactivity';
 
 
-?>
-<?php
-$testimonial = get_post_meta( $block->context['postId'], 'testimonial', true );
-$author_name = $attributes['authorName'];
-?>
-<blockquote <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>>
-  <p><?php echo esc_html( $testimonial ); ?></p>
-  <cite>
-      <span><?php echo esc_html( $author_name ); ?></span>
-  </cite>
-</blockquote>
+const { state, actions } = store( 'iapi-gallery', {
+   state: {
+       get noPrevSlide() {
+           const ctx = getContext();
+           if ( ctx.continuous ) {
+               return false;
+           }
+           return ctx.currentSlide === 0;
+       },
+       get noNextSlide() {
+           const ctx = getContext();
+           if ( ctx.continuous ) {
+               return false;
+           }
+           return ctx.currentSlide === ctx.totalSlides - 1;
+       },
+       get currentPos() {
+           const ctx = getContext();
+           return `translateX(-${ ctx.currentSlide * 100 }%)`;
+       },
+       get imageIndex() {
+           const ctx = getContext();
+           return `${ ctx.currentSlide + 1 }/${ ctx.totalSlides }`;
+       },
+   },
+   actions: {
+       prevImage: () => {
+           const ctx = getContext();
+           if ( ctx.continuous && ctx.currentSlide === 0 ) {
+               ctx.currentSlide = ctx.totalSlides - 1;
+               return;
+           }
+           ctx.currentSlide--;
+       },
+       nextImage: () => {
+           const ctx = getContext();
+           if ( ctx.continuous && ctx.currentSlide === ctx.totalSlides - 1 ) {
+               ctx.currentSlide = 0;
+               return;
+           }
+           ctx.currentSlide++;
+       },
+       onKeyDown: ( e ) => {
+           switch ( e.key ) {
+               case 'ArrowLeft': {
+                   if ( ! state.noPrevSlide ) {
+                       actions.prevImage();
+                   }
+                   break;
+               }
+               case 'ArrowRight': {
+                   if ( ! state.noNextSlide ) {
+                       actions.nextImage();
+                   }
+                   break;
+               }
+           }
+       },
+   },
+   callbacks: {
+       initSlide: () => {
+           const ctx = getContext();
+           // This is called by the core/cover blocks inside this block.
+           // Adds the element reference to the `slides` array.
+           const { ref } = getElement();
+           ctx.slides.push( ref );
+           ctx.totalSlides = ctx.slides.length;
+
+
+           // The returned function executes when the element is removed from
+           // the DOM.
+           return () => {
+               ctx.slides = ctx.slides.filter( ( s ) => s !== ref );
+           };
+       },
+   },
+} );
 ```
 
-You now have a fully functional block that is connected to post meta.
-
-Bon appetite!
+Save and test and you now have a gallery block powered by the Interactivity API
