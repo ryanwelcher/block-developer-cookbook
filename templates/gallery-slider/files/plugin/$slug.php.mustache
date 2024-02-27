@@ -7,7 +7,7 @@
 {{#description}}
  * Description:       {{description}}
 {{/description}}
- * Requires at least: 6.1
+ * Requires at least: 6.5
  * Requires PHP:      7.0
  * Version:           {{version}}
 {{#author}}
@@ -50,7 +50,7 @@ add_action( 'init', 'block_developer_cookbook_{{slugSnakeCase}}_block_init' );
 /**
  * Filter the render_block to add the needed directives to the inner cover blocks.
  */
-function add_directives_to_inner_blocks( $block_content ) {
+function block_developer_cookbook_{{slugSnakeCase}}_add_directives_to_inner_blocks( $block_content ) {
 	$allowed_blocks = array( 'wp-block-cover', 'wp-block-image', 'wp-block-media-text' );
 	$covers         = new \WP_HTML_Tag_Processor( $block_content );
 
@@ -67,5 +67,5 @@ function add_directives_to_inner_blocks( $block_content ) {
 	$block_content = $covers->get_updated_html();
 	return $block_content;
 }
-add_filter( 'render_block_{{namespace}}/{{slug}}', 'add_directives_to_inner_blocks' );
+add_filter( 'render_block_{{namespace}}/{{slug}}', 'block_developer_cookbook_{{slugSnakeCase}}_add_directives_to_inner_blocks' );
 {{/isCompletedVariant}}

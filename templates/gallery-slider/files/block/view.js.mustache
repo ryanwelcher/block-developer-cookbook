@@ -10,14 +10,13 @@ store( '{{slug}}', {
 } );
 {{/isStartVariant}}
 {{#isCompletedVariant}}
+/**
+ * WordPress dependencies
+ */
 import { store, getElement, getContext } from '@wordpress/interactivity';
 
 const { state, actions } = store( '{{slug}}', {
 	state: {
-		get totalSlides() {
-			const ctx = getContext();
-			return ctx.totalSlides;
-		},
 		get noPrevSlide() {
 			const ctx = getContext();
 			if ( ctx.continuous ) {
@@ -35,14 +34,10 @@ const { state, actions } = store( '{{slug}}', {
 		get currentPos() {
 			const ctx = getContext();
 			return `translateX(-${ ctx.currentSlide * 100 }%)`;
-		},
-		get imageIndex() {
-			const ctx = getContext();
-			return `${ ctx.currentSlide + 1 }/${ ctx.totalSlides }`;
-		},
+		}
 	},
 	actions: {
-		prevSlide: () => {
+		prevImage: () => {
 			const ctx = getContext();
 			if ( ctx.continuous && ctx.currentSlide === 0 ) {
 				ctx.currentSlide = ctx.totalSlides - 1;
@@ -50,7 +45,7 @@ const { state, actions } = store( '{{slug}}', {
 			}
 			ctx.currentSlide--;
 		},
-		nextSlide: () => {
+		nextImage: () => {
 			const ctx = getContext();
 			if ( ctx.continuous && ctx.currentSlide === ctx.totalSlides - 1 ) {
 				ctx.currentSlide = 0;
@@ -58,8 +53,6 @@ const { state, actions } = store( '{{slug}}', {
 			}
 			ctx.currentSlide++;
 		},
-	},
-	callbacks: {
 		onKeyDown: ( e ) => {
 			switch ( e.key ) {
 				case 'ArrowLeft': {
@@ -75,8 +68,9 @@ const { state, actions } = store( '{{slug}}', {
 					break;
 				}
 			}
-			debugLog( state );
 		},
+	},
+	callbacks: {
 		initSlide: () => {
 			const ctx = getContext();
 			// This is called by the core/cover blocks inside this block.
