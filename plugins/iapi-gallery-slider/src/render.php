@@ -10,7 +10,7 @@
  * @see https://github.com/WordPress/gutenberg/blob/trunk/docs/reference-guides/block-api/block-metadata.md#render
  */
 
- $context = array_merge(
+$context = array_merge(
 	$attributes,
 	array(
 		'slides'       => array(),
@@ -22,8 +22,7 @@
 ?>
 <div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>
 	data-wp-interactive='{ "namespace": "iapi-gallery" }'
-	data-wp-init="callbacks.setupSlider"
-	data-wp-on-document--keydown="callbacks.onKeyDown"
+	data-wp-on-document--keydown="actions.onKeyDown"
 	<?php echo data_wp_context( $context ); ?>
 
 >

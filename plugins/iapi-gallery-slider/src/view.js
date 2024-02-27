@@ -5,10 +5,6 @@ import { store, getElement, getContext } from '@wordpress/interactivity';
 
 const { state, actions } = store( 'iapi-gallery', {
 	state: {
-		get totalSlides() {
-			const ctx = getContext();
-			return ctx.totalSlides;
-		},
 		get noPrevSlide() {
 			const ctx = getContext();
 			if ( ctx.continuous ) {
@@ -49,8 +45,6 @@ const { state, actions } = store( 'iapi-gallery', {
 			}
 			ctx.currentSlide++;
 		},
-	},
-	callbacks: {
 		onKeyDown: ( e ) => {
 			switch ( e.key ) {
 				case 'ArrowLeft': {
@@ -66,8 +60,9 @@ const { state, actions } = store( 'iapi-gallery', {
 					break;
 				}
 			}
-			debugLog( state );
 		},
+	},
+	callbacks: {
 		initSlide: () => {
 			const ctx = getContext();
 			// This is called by the core/cover blocks inside this block.

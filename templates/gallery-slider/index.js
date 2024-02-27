@@ -8,33 +8,31 @@ module.exports = {
 			prettier: '@wordpress/prettier-config',
 		},
 		category: 'media',
-		attributes: {},
+		attributes: {
+			continuous: {
+				type: 'boolean',
+			},
+		},
 		example: {},
-		supports: {},
 		customBlockJSON: {
 			icon: 'media-interactive',
 		},
 		render: 'file:./render.php',
+		viewScript: null,
 	},
 	variants: {
 		start: {},
 		completed: {
-			attributes: {
-				continuous: {
-					type: 'boolean',
-				},
-			},
 			supports: {
 				interactivity: true,
 				align: true,
 				alignWide: true,
 			},
-			example: {},
-			customBlockJSON: {
-				icon: 'media-interactive',
-				viewScriptModule: 'file:./view.js',
+			viewScriptModule: 'file:./view.js',
+			customScripts: {
+				build: 'wp-scripts build --experimental-modules',
+				start: 'wp-scripts start --experimental-modules',
 			},
-
 		},
 	},
 	pluginTemplatesPath: join( __dirname, 'files/plugin' ),
