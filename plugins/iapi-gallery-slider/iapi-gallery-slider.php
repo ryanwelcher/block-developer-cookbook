@@ -29,31 +29,24 @@ function iapi_gallery_slider_iapi_gallery_slider_block_init() {
 }
 add_action( 'init', 'iapi_gallery_slider_iapi_gallery_slider_block_init' );
 
-
-
-
 /**
- * Filter the block to add the needed directives to the inner cover blocks.
+ * Filter the render_block to add the needed directives to the inner cover blocks.
  */
-add_filter(
-	'render_block_block-developer-cookbook/iapi-gallery-slider',
-	function( $block_content ) {
-		$allowed_blocks = array( 'wp-block-cover', 'wp-block-image', 'wp-block-media-text' );
-		$covers        = new \WP_HTML_Tag_Processor( $block_content );
+function add_directives_to_inner_blocks( $block_content ) {
+	$allowed_blocks = array( 'wp-block-cover', 'wp-block-image', 'wp-block-media-text' );
+	$covers         = new \WP_HTML_Tag_Processor( $block_content );
 
-		while ( $covers->next_tag() ) {
-			$classes = explode( ' ', $covers->get_attribute( 'class' ) );
+	while ( $covers->next_tag() ) {
+		$classes = explode( ' ', $covers->get_attribute( 'class' ) );
 
-			foreach ( $allowed_blocks as $block_class ) {
-				if ( in_array( $block_class, $classes, true ) ) {
-					$covers->set_attribute( 'data-wp-interactive', '{"namespace":"iapi-gallery"}' );
-					$covers->set_attribute( 'data-wp-init', 'callbacks.initSlide' );
-				}
+		foreach ( $allowed_blocks as $block_class ) {
+			if ( in_array( $block_class, $classes, true ) ) {
+				$covers->set_attribute( 'data-wp-interactive', '{"namespace":"iapi-gallery"}' );
+				$covers->set_attribute( 'data-wp-init', 'callbacks.initSlide' );
 			}
 		}
-		$block_content = $covers->get_updated_html();
-		return $block_content;
-	},
-	10,
-	2
-);
+	}
+	$block_content = $covers->get_updated_html();
+	return $block_content;
+}
+add_filter( 'render_block_block-developer-cookbook/iapi-gallery-slider', 'add_directives_to_inner_blocks' );

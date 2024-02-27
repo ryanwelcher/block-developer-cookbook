@@ -1,30 +1,18 @@
 {
 	"name": "block-developers-cookbook",
 	"version": "0.1.0",
-	"description": "Example block scaffolded with Create Block tool.",
+	"description": "The home of all of the templates for The Block Developer Cookbook",
 	"author": "Ryan Welcher",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"scripts": {
-		"format": "wp-scripts format",
-		"lint:css": "wp-scripts lint-style",
-		"lint:js": "wp-scripts lint-js",
-		"packages-update": "wp-scripts packages-update",
-		"plugin-zip": "wp-scripts plugin-zip",
-		"wp-now": "wp-now",
-		"block": "cd ./plugins && npx @wordpress/create-block --template ../templates/bdc --variant dynamic",
-		"plugin": "cd ./plugins && npx @wordpress/create-block --template ../templates/bdc --variant plugin",
-		"build": "pnpm -r build",
-		"start": "pnpm -r start",
-		"npm run prep:acronym-format": "cd plugins && npx @wordpress/create-block@latest acronym-format --template ../templates/acronym-format",
-		"prep:custom-build-process": "cd plugins && npx @wordpress/create-block@latest custom-build-process --template ../templates/custom-build-process",
-		"prep:simple-fade-effect": "cd plugins && npx @wordpress/create-block@latest simple-fade-effect --template ../templates/simple-fade-effect",
-		"prep:transforms": "cd plugins && npx @wordpress/create-block@latest transforms --template ../templates/transforms",
-		"prep:testimonial": "cd plugins && npx @wordpress/create-block@latest testimonial --template ../templates/testimonial"
+		"prep:acronym-format": "cd plugins && npx @wordpress/create-block@latest acronym-format --template ../templates/acronym-format --category block-developer-cookbook",
+		"prep:custom-build-process": "cd plugins && npx @wordpress/create-block@latest custom-build-process --template ../templates/custom-build-process --category block-developer-cookbook",
+		"prep:simple-fade-effect": "cd plugins && npx @wordpress/create-block@latest simple-fade-effect --template ../templates/simple-fade-effect --category block-developer-cookbook",
+		"prep:transforms": "cd plugins && npx @wordpress/create-block@latest transforms --template ../templates/transforms --category block-developer-cookbook",
+		"prep:testimonial": "cd plugins && npx @wordpress/create-block@latest testimonial --template ../templates/testimonial --category block-developer-cookbook",
+		"prep:gallery-slider": "cd plugins && npx @wordpress/create-block@latest gallery-slider --template ../templates/gallery-slider --category block-developer-cookbook"
 	},
-	"devDependencies": {
-		"@wordpress/scripts": "^26.11.0",
-		"@wp-now/wp-now": "^0.1.61"
-	},
+	"devDependencies": {},
 	"prettier": "@wordpress/prettier-config"
 }

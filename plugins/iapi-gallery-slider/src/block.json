@@ -2,12 +2,11 @@
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
 	"name": "block-developer-cookbook/iapi-gallery-slider",
-	"version": "0.1.0",
-	"title": "Iapi Gallery Slider",
-	"category": "widgets",
+	"version": "1.0.0",
+	"title": "Gallery Slider",
+	"category": "media",
 	"icon": "media-interactive",
-	"description": "An interactive block with the Interactivity API",
-	"allowedBlocks": [ "core/cover", "core/image" ],
+	"description": "A gallery slider built using the Interactivity API",
 	"example": {},
 	"supports": {
 		"interactivity": true,
@@ -15,7 +14,7 @@
 		"alignWide": true
 	},
 	"attributes": {
-		"continous": {
+		"continuous": {
 			"type": "boolean"
 		}
 	},

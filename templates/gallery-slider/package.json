@@ -1,0 +1,26 @@
+{
+	"name": "@block-developer-cookbook/gallery-slider",
+	"version": "1.0.0",
+	"description": "Create a gallery slider using the Interactivity API",
+	"main": "index.js",
+	"author": {
+		"name": "Ryan Welcher",
+		"url": "https://ryanwelcher.com"
+	},
+	"license": "GPL-2.0-or-later",
+	"keywords": [
+		"wordpress",
+		"create block"
+	],
+	"homepage": "https://blockdevelopercookbook.com/",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ryanwelcher/block-developer-cookbook.git"
+	},
+	"bugs": {
+		"url": "https://github.com/ryanwelcher/block-developer-cookbook/issues"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
+}

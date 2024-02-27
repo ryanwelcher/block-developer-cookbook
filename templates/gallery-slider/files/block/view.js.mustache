@@ -1,9 +1,21 @@
 /**
  * WordPress dependencies
  */
+{{#isStartVariant}}
+import { store } from '@wordpress/interactivity';
+store( '{{slug}}', {
+	state: {},
+	actions: {},
+	callbacks: {},
+} );
+{{/isStartVariant}}
+{{#isCompletedVariant}}
+/**
+ * WordPress dependencies
+ */
 import { store, getElement, getContext } from '@wordpress/interactivity';
 
-const { state, actions } = store( 'iapi-gallery', {
+const { state, actions } = store( '{{slug}}', {
 	state: {
 		get noPrevSlide() {
 			const ctx = getContext();
@@ -22,11 +34,7 @@ const { state, actions } = store( 'iapi-gallery', {
 		get currentPos() {
 			const ctx = getContext();
 			return `translateX(-${ ctx.currentSlide * 100 }%)`;
-		},
-		get imageIndex() {
-			const ctx = getContext();
-			return `${ ctx.currentSlide + 1 }/${ ctx.totalSlides }`;
-		},
+		}
 	},
 	actions: {
 		prevImage: () => {
@@ -79,6 +87,12 @@ const { state, actions } = store( 'iapi-gallery', {
 		},
 	},
 } );
+{{/isCompletedVariant}}
 
+/**
+ * Helper function to unwrap the proxies and display the underlying data.
+ * @param {*} data
+ * @return
+ */
 const debugLog = ( data ) =>
 	console.log( JSON.parse( JSON.stringify( data ) ) );

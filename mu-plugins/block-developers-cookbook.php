@@ -26,28 +26,3 @@ add_filter(
 	},
 	10
 );
-
-// // Add some post meta.
-// add_action(
-// 	'init',
-// 	function() {
-// 		register_post_meta(
-// 			'post',
-// 			'firstName',
-// 			array(
-// 				'show_in_rest' => true,
-// 				'single'       => true,
-// 				'type'         => 'string',
-// 			)
-// 		);
-// 		register_post_meta(
-// 			'post',
-// 			'lastName',
-// 			array(
-// 				'show_in_rest' => true,
-// 				'single'       => true,
-// 				'type'         => 'string',
-// 			)
-// 		);
-// 	}
-// );
