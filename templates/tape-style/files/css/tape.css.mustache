@@ -1,0 +1,23 @@
+.wp-block-image.is-style-tape {
+	overflow: visible;
+	position: relative;
+}
+
+.wp-block-image.is-style-tape::before {
+	content: "";
+	display: block;
+	position: absolute;
+	height: 2rem;
+	width: 7rem;
+	z-index: 1;
+	top: -0.5rem;
+	left: 50%;
+	margin: auto auto auto -3.5rem;
+	transform: rotate(8deg);
+	background: rgba(255, 255, 235, 0.5);
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3), 0 0 4rem rgba(255, 255, 235, 0.5) inset;
+}
+
+.wp-lightbox-overlay.active .wp-block-image.is-style-tape::before {
+	display: none;
+}

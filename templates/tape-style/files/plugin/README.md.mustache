@@ -1,0 +1,116 @@
+# Overview
+
+In this recipe, we're going to register a custom block style to make our images look like they are taped to the screen!
+
+# Step 1 - Registering the style
+
+Open the main plugin file in the root of the plugin directory. It should only contain a stubbed function and an action.
+
+```php
+/**
+ * Register block styles.
+ */
+function register_image_block_styles() {
+}
+add_action( 'init', __NAMESPACE__ . '\register_image_block_styles' );
+```
+
+In order to register a custom block style, we will need to use the [`register_block_style`](register_block_style) function which takes two parameters:
+
+1. The block name to associate this style with.
+2. An array of style properties
+
+Add the following snippet to register the new style and associate it with the Image block.
+
+```php
+register_block_style(
+	'core/image',
+	array(
+		'name'  => 'tape',
+		'label' => __( 'Tape', 'block-developers-cookbook' ),
+	)
+);
+```
+
+So far, we've only defined the name and label for this style but we still need provide the CSS that makes up this style. There are two ways we can do this; inline and with an external file.
+
+# Step 2 - Adding the styles inline
+
+In order to define our styles inline in the `register_block_style` call, we can use the `inline_style` property of the array of style properties. It accepts a string containing the CSS we want to use for this style. (Don't worry, it's provided😄 ).
+Add update `register_block_style` to use the following code:
+
+```php
+register_block_style(
+	'core/image',
+	array(
+		'name'         => 'tape',
+		'label'        => __( 'Tape', 'block-developer-cookbook' ),
+		'inline_style' => '.wp-block-image.is-style-tape {
+			overflow: visible;
+			position: relative;
+			}
+			.wp-block-image.is-style-tape::before {
+					content: "";
+					display: block;
+					position: absolute;
+					height: 2rem;
+					width: 7rem;
+					z-index: 1;
+					top: -0.5rem;
+					left: 50%;
+					margin: auto auto auto -3.5rem;
+					transform: rotate(8deg);
+					background: rgba(255, 255, 235, 0.5);
+					box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.3), 0 0 4rem rgba(255, 255, 235, 0.5) inset;
+			}
+			.wp-lightbox-overlay.active .wp-block-image.is-style-tape::before,
+					display: none;
+			}',
+	)
+);
+```
+
+At this point, you will have a working style that can be applied to Image blocks. Congrats!
+
+This approach is great when you have a small amount of CSS but already, we can see that this will get hard to maintain and keep formatted. Which brings us to the other way to provide the CSS - an external file.
+
+# Step 3 - Using an external file
+
+This approach require that we enqueue a separate via using the [`wp_enqueue_block_style`](https://developer.wordpress.org/reference/functions/wp_enqueue_block_style/) function.
+
+This function also accepts two parameters:
+
+1. The block name to enqueue the stylesheet for.
+2. An array of args for the enqueueing process. (Very similar the other wp_enqueue_* functions)
+
+First, we no longer need to use `inline_style` so let's remove it.
+
+```php
+register_block_style(
+	'core/image',
+	array(
+		'name'  => 'tape',
+		'label' => __( 'Tape', 'block-developers-cookbook' ),
+	)
+);
+```
+
+Now, let's enqueue the provided stylesheet in the `css` directory.
+
+```php
+wp_enqueue_block_style(
+		'core/image',
+		array(
+			'handle' => 'block-developers-cookbook-block-core-image',
+			'src'    => plugin_dir_url( __FILE__ ) . 'css/tape.css',
+			'path'   => plugin_dir_path( __FILE__ ) . 'css/tape.css',
+			'deps'   => array(),
+			'ver'    => '1',
+		)
+	);
+```
+
+Save and test and you should still have your custom style but now it's much more manageable from code standpoint.
+
+
+Well done!

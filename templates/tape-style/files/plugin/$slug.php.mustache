@@ -1,0 +1,60 @@
+<?php
+/**
+ * Plugin Name:       {{title}}
+{{#pluginURI}}
+ * Plugin URI:        {{{pluginURI}}}
+{{/pluginURI}}
+{{#description}}
+ * Description:       {{description}}
+{{/description}}
+ * Requires at least: 6.4
+ * Requires PHP:      7.0
+ * Version:           {{version}}
+{{#author}}
+ * Author:            {{author}}
+{{/author}}
+{{#license}}
+ * License:           {{license}}
+{{/license}}
+{{#licenseURI}}
+ * License URI:       {{{licenseURI}}}
+{{/licenseURI}}
+ * Text Domain:       {{textdomain}}
+{{#domainPath}}
+ * Domain Path:       {{{domainPath}}}
+{{/domainPath}}
+{{#updateURI}}
+ * Update URI:        {{{updateURI}}}
+{{/updateURI}}
+ *
+ * @package           {{namespace}}
+ */
+
+namespace BlockDevelopersCookbook;
+
+/**
+ * Register block styles.
+ */
+function register_image_block_styles() {
+	{{#isCompletedVariant}}
+	register_block_style(
+		'core/image',
+		array(
+			'name'  => 'tape',
+			'label' => __( 'Tape', '{{namespace}}' ),
+		)
+	);
+
+	wp_enqueue_block_style(
+		'core/image',
+		array(
+			'handle' => 'block-developers-cookbook-block-core-image',
+			'src'    => plugin_dir_url( __FILE__ ) . 'css/tape.css',
+			'path'   => plugin_dir_path( __FILE__ ) . 'css/tape.css',
+			'deps'   => array(),
+			'ver'    => '1',
+		)
+	);
+	{{/isCompletedVariant}}
+}
+add_action( 'init', __NAMESPACE__ . '\register_image_block_styles' );
