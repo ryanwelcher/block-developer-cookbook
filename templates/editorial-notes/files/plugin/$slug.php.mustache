@@ -1,0 +1,63 @@
+<?php
+/**
+ * Plugin Name:       {{title}}
+{{#pluginURI}}
+ * Plugin URI:        {{{pluginURI}}}
+{{/pluginURI}}
+{{#description}}
+ * Description:       {{description}}
+{{/description}}
+ * Requires at least: 6.4
+ * Requires PHP:      7.0
+ * Version:           {{version}}
+{{#author}}
+ * Author:            {{author}}
+{{/author}}
+{{#license}}
+ * License:           {{license}}
+{{/license}}
+{{#licenseURI}}
+ * License URI:       {{{licenseURI}}}
+{{/licenseURI}}
+ * Text Domain:       {{textdomain}}
+{{#domainPath}}
+ * Domain Path:       {{{domainPath}}}
+{{/domainPath}}
+{{#updateURI}}
+ * Update URI:        {{{updateURI}}}
+{{/updateURI}}
+ *
+ * @package           {{namespace}}
+ */
+
+namespace BlockDevelopersCookbook;
+{{#isCompletedVariant}}
+add_action(
+	'enqueue_block_editor_assets',
+	function() {
+		$notes_field_file = plugin_dir_path( __FILE__ ) . '/build/notes-field.asset.php';
+
+		if ( file_exists( $notes_field_file ) ) {
+			$assets = include $notes_field_file;
+
+			// Enqueue the JavaScript that contains our filters.
+			wp_enqueue_script(
+				'notes-field',
+				plugin_dir_url( __FILE__ ) . '/build/notes-field.js',
+				$assets['dependencies'],
+				$assets['version'],
+				true
+			);
+
+			// Enqueue the CSS for the has-notes class.
+			wp_enqueue_style(
+				'notes-class',
+				plugin_dir_url( __FILE__ ) . '/build/notes-field.css',
+				array(),
+				$assets['version'],
+			);
+		}
+
+	}
+);
+{{/isCompletedVariant}}
