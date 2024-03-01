@@ -58,7 +58,7 @@ function enqueue_files_for_acronym_format() {
 
 This code checks to make sure that the `acronym.asset.php` generated when you ran the build process is in place. Then if that file exists, it enqueues the JS and CSS for the format.
 
-## Step 3 - Defining the format settings and registering it.
+## Step 3 - Defining the format settings and registering it
 
 At this point, you are enqueueing empty files. So let's start adding some JavaScript!
 
@@ -95,7 +95,6 @@ Now, register the new format. The [registerFormatType](https://developer.wordpre
 
 ```js
 registerFormatType( name, acronymFormat );
-``;
 ```
 
 # Step 4 - Creating the component to display the format
