@@ -3,6 +3,7 @@ const { join } = require( 'path' );
 module.exports = {
 	defaultValues: {
 		namespace: 'block-developers-cookbook',
+		description: 'A tutorial on how to lock post saving based on the word count.',
 		editorScript: 'file:./word-counter.js',
 		npmDependencies: ['@wordpress/icons'],
 		customPackageJSON: {
