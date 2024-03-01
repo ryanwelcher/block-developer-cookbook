@@ -6,7 +6,7 @@ In this recipe, you will customize the build process provided by @wordpress/scri
 
 Run `npm run prep:custom-build-process` from the root of the repository
 
-## Step 1
+## Step 1 - Changing the location of block files
 
 After scaffolding the plugin, run `npm run start`. The command will run but you will see the following message in your terminal and there are no files added to the build directory.
 
@@ -23,7 +23,7 @@ start: 'wp-scripts start --webpack-src-dir=blocks',
 
 You have now told the scripts package to look for block files in a blocks directory instead of the default src directory. Test this by running `npm run build`.
 
-## Step 2
+## Step 2 - Adding a custom webpack file
 
 Now that you have the block building, you need to get the custom Javascript and CSS files building.
 
@@ -41,7 +41,7 @@ module.exports = {
 
 This code is importing the default configuration from the scripts package and simply exporting it again. If you ran either of the build commands now, scripts would detect this file and use it as its configuration. We’ve made no changes so everything will work as expected. Try running `npm run build` to confirm that everything works as it did before
 
-## Step 3
+## Step 3 - Adding more entry points
 
 In order to get your custom JS/CSS building you’ll need to add some new entry points to the webpack configuration file. Entry points are the way to tell Webpack where to find a file you want to build.
 
@@ -79,7 +79,7 @@ entry: {
 
 Run the build command now to confirm that you now have both the new files and the block building into the build directory.
 
-## Step 4
+## Step 4 - Cleaning up the files we don't need
 
 You may have also noticed that there is now an empty variation-style.js file in your build directory. This is because Webpack creates a javascript file for every entry point even if it’s a CSS file!
 
@@ -102,7 +102,3 @@ plugins: [
 ```
 
 Run the build command again and you’re done. Bon appetit!
-
-```
-
-```
