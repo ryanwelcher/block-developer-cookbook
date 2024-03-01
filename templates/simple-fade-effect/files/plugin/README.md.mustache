@@ -2,15 +2,7 @@
 
 In this recipe, you will load custom JavaScript and CSS files for the cover and image blocks to create a simple fade-in effect when the block is scrolled into view. You don't want to load files unless they are needed so you will only enqueue them when the block(s) are on the page.
 
-## Setup
-
-Run ` npm run prep:simple-fade-effect` from the root of the repository
-
-## Step 1
-
-After scaffolding the plugin, run `npm run start` to build the provided JavaScript and CSS that creates the fade-in effect.
-
-## Step 2
+## Step 1 - Registering the files to be loaded
 
 Typically when enqueueing a file, you would use `wp_enqueue_script` to both register and enqueue the file. For this recipe, you will need to break that out into two steps: registering first and then enqueueing later.
 
@@ -50,7 +42,7 @@ function register_custom_js_script() {
 
 This code does a number of things. First it checks to make sure that the `index.asset.php` generated when you ran the build process is in place. Then if that file exists, it registers the JS and CSS.
 
-## Step 3
+## Step 2 - Enqueuing the files only when needed
 
 Now that you have the files registered, you need to enqueue them only when the block(s) are on the page. As of WordPress 6.4, there is no dedicated hook for this so the best place way to do this is to use either the `render_block` or `render_block_{name}` filters.
 
@@ -90,7 +82,7 @@ function enqueue_files_for_core_blocks( $block_content, $block ) {
 
 This code adds a filter to `render_block` and then checks to see if the block being rendered is either the `core/cover` or `core/image` block. If it is, it then uses the HTML Tag Processor to add a new class to the main wrapper (this is only to achieve the effect of the fade-in). It then enqueues the JS and CSS we need to complete the effect.
 
-## Step 4 ( Optional)
+## Step 3 (Optional) - Using dedicated block filters
 
 This recipe is complete but you could also use dedicated filter for each block instead of doing the check
 

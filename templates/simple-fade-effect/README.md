@@ -1,4 +1,4 @@
-In this recipe, you will load custom JavaScript and CSS files for the cover and image blocks to create a simple fade-in effect when the block is scrolled into view. You don't want to load files unless they are needed so you will only enqueue them when the block(s) are on the page.
+This template provides a tutorial to demonstrate how to load custom JavaScript and CSS files for the cover and image blocks to create a simple fade-in effect when the block is scrolled into view
 
 ## Usage
 
@@ -6,5 +6,10 @@ In this recipe, you will load custom JavaScript and CSS files for the cover and 
 
 ## Variants
 
--   `start` - starting files
--   `completed` - final files
+-   `start` - scaffolds starting files for the tutorial
+-   `completed` - scaffolds the completed files for the tutorial
+
+## Tutorial
+
+The tutorial can be found in the main README.md file of the generated plugin or at [https://blockdevelopercookbook.com/recipes/simple-fade-in-effect/](https://blockdevelopercookbook.com/recipes/simple-fade-in-effect/)
+
