@@ -1,6 +1,6 @@
 {
 	"name": "@block-developer-cookbook/customize-build-process",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "A template to demonstrate customizing build process in a WordPress plugin.",
 	"main": "index.js",
 	"author": {
@@ -16,7 +16,7 @@
 	"homepage": "https://blockdevelopercookbook.com/",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/ryanwelcher/block-developer-cookbook.git"
+		"url": "git+https://github.com/ryanwelcher/block-developer-cookbook.git"
 	},
 	"bugs": {
 		"url": "https://github.com/ryanwelcher/block-developer-cookbook/issues"

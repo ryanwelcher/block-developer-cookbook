@@ -1,6 +1,6 @@
 {
 	"name": "@block-developer-cookbook/editorial-notes",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "A template to demonstrate how add custom attributes and controls to core blocks.",
 	"main": "index.js",
 	"author": {

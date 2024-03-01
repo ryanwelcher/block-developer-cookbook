@@ -1,4 +1,4 @@
-In this template, you will customize the build process provided by @wordpress/scripts and to be able to build a plugin that contains a single custom block , a custom Javascript file that registers a block variation, and a custom CSS file that corresponds to the block variation. We want to keep the code for our block in a blocks directory and the JS/CSS files in a resources directory.
+This template provides a tutorial on who to custom the build process provided by @wordpress/scripts to be able to compile both blocks and non-block items at the same time some different locations in the source code.
 
 ## Usage
 
@@ -6,5 +6,9 @@ In this template, you will customize the build process provided by @wordpress/sc
 
 ## Variants
 
--   `start` - starting files
--   `completed` - final files
+-   `start` - scaffolds starting files for the tutorial
+-   `completed` - scaffolds the completed files for the tutorial
+
+## Tutorial
+
+The tutorial can be found in the main README.md file of the generated plugin or at [https://blockdevelopercookbook.com/recipes/customize-the-build-process/](https://blockdevelopercookbook.com/recipes/customize-the-build-process/)
