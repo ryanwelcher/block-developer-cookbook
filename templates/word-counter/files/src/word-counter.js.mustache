@@ -1,0 +1,69 @@
+/**
+ * WordPress dependencies
+ */
+import { useEffect, useState } from '@wordpress/element';
+import { registerPlugin } from '@wordpress/plugins';
+import { useSelect, useDispatch } from '@wordpress/data';
+import { count } from '@wordpress/wordcount';
+import { serialize } from '@wordpress/blocks';
+import { PluginDocumentSettingPanel } from '@wordpress/edit-post';
+import { __ } from '@wordpress/i18n';
+import { store as blockEditorStore } from '@wordpress/block-editor';
+
+/**
+ * Internal dependencies
+ */
+import WordCountDisplayComponent from './components/wordCountDisplay';
+
+const Render = () => {
+	// Get the blocks from the editor.
+	const blocks = useSelect( ( select ) =>
+		select( blockEditorStore ).getBlocks()
+	);
+
+	// Get the lockPostSaving and unlockPostSaving functions from the editor
+	const { lockPostSaving, unlockPostSaving } = useDispatch( 'core/editor' );
+
+	// Define the word count display state.
+	const [ wordCountDisplay, setWordCountDisplay ] = useState( '' );
+
+	// Define the required word count.
+	const wordCount = 200;
+
+	useEffect( () => {
+		// Define a variable to track whether the post should be locked
+		let lockPost = false;
+
+		// Get the WordCount
+		const currentWordCount = count( serialize( blocks ), 'words' );
+		setWordCountDisplay( currentWordCount );
+
+		// If the word count is less than the required, lock the post saving.
+		if ( currentWordCount < wordCount ) {
+			lockPost = true;
+		}
+
+		// Lock or enable saving.
+		if ( lockPost === true ) {
+			lockPostSaving();
+		} else {
+			unlockPostSaving();
+		}
+	}, [ blocks, lockPostSaving, unlockPostSaving ] );
+
+	return (
+		<PluginDocumentSettingPanel
+			name="block-developer-cookbook-word-counter"
+			title={ __( 'Word Count', 'block-developers-cookbook' ) }
+		>
+			<WordCountDisplayComponent
+				wordCount={ wordCountDisplay }
+				required={ wordCount }
+			/>
+		</PluginDocumentSettingPanel>
+	);
+};
+
+registerPlugin( 'block-developer-cookbook-word-counter', {
+	render: Render,
+} );

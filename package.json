@@ -15,7 +15,8 @@
 		"prep:post-meta-testimonial": "cd plugins && npx @wordpress/create-block@latest post-meta-testimonial --template ../templates/testimonial --category block-developer-cookbook",
 		"prep:gallery-slider": "cd plugins && npx @wordpress/create-block@latest gallery-slider --template ../templates/gallery-slider --category block-developer-cookbook",
 		"prep:tape-style": "cd plugins && npx @wordpress/create-block@latest tape-style --template ../templates/tape-style --category block-developer-cookbook",
-		"prep:editorial-notes": "cd plugins && npx @wordpress/create-block@latest editorial-notes --template ../templates/editorial-notes --category block-developer-cookbook"
+		"prep:editorial-notes": "cd plugins && npx @wordpress/create-block@latest editorial-notes --template ../templates/editorial-notes --category block-developer-cookbook",
+		"prep:word-counter": "cd plugins && npx @wordpress/create-block@latest word-counter --template ../templates/word-counter --category block-developer-cookbook"
 	},
 	"devDependencies": {},
 	"prettier": "@wordpress/prettier-config"
