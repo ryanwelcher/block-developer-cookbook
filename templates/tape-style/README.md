@@ -1,10 +1,14 @@
-In this recipe, we're going to register a custom block style to make our images look like they are taped to the screen!
+This template provides a tutorial on how to register a custom block style for the Image block.
 
 ## Usage
 
-`npx @wordpress/create-block tape-style --template @block-developer-cookbook/tape-style
+`npx @wordpress/create-block tape-style --template @block-developer-cookbook/tape-style`
 
 ## Variants
 
--   `start` - starting files
--   `completed` - final files
+-   `start` - scaffolds starting files for the tutorial
+-   `completed` - scaffolds the completed files for the tutorial
+
+## Tutorial
+
+The tutorial can be found in the main README.md file of the generated plugin or at [https://blockdevelopercookbook.com/recipes/custom-image-block-style/](https://blockdevelopercookbook.com/recipes/custom-image-block-style/)
