@@ -2,18 +2,15 @@ const { join } = require( 'path' );
 
 module.exports = {
 	defaultValues: {
-		slug: 'testimonial',
 		namespace: 'block-developers-cookbook',
 		customPackageJSON: {
 			prettier: '@wordpress/prettier-config',
 		},
+		dashicon: 'format-quote',
 		category: 'text',
 		attributes: {},
 		example: {},
 		supports: {},
-		customBlockJSON: {
-			icon: 'format-quote',
-		},
 		render: 'file:./render.php',
 	},
 	variants: {
@@ -31,7 +28,6 @@ module.exports = {
 				},
 			},
 			customBlockJSON: {
-				icon: 'format-quote',
 				usesContext: [ 'postId', 'postType' ],
 			},
 		},

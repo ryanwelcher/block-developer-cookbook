@@ -15,7 +15,7 @@
 	"homepage": "https://blockdevelopercookbook.com/",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/ryanwelcher/block-developer-cookbook.git"
+		"url": "git+https://github.com/ryanwelcher/block-developer-cookbook.git"
 	},
 	"bugs": {
 		"url": "https://github.com/ryanwelcher/block-developer-cookbook/issues"

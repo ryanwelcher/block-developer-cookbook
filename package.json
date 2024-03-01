@@ -12,7 +12,7 @@
 		"prep:custom-build-process": "cd plugins && npx @wordpress/create-block@latest custom-build-process --template ../templates/custom-build-process --category block-developer-cookbook",
 		"prep:simple-fade-effect": "cd plugins && npx @wordpress/create-block@latest simple-fade-effect --template ../templates/simple-fade-effect --category block-developer-cookbook",
 		"prep:transforms": "cd plugins && npx @wordpress/create-block@latest transforms --template ../templates/transforms --category block-developer-cookbook",
-		"prep:testimonial": "cd plugins && npx @wordpress/create-block@latest testimonial --template ../templates/testimonial --category block-developer-cookbook",
+		"prep:post-meta-testimonial": "cd plugins && npx @wordpress/create-block@latest post-meta-testimonial --template ../templates/testimonial --category block-developer-cookbook",
 		"prep:gallery-slider": "cd plugins && npx @wordpress/create-block@latest gallery-slider --template ../templates/gallery-slider --category block-developer-cookbook",
 		"prep:tape-style": "cd plugins && npx @wordpress/create-block@latest tape-style --template ../templates/tape-style --category block-developer-cookbook",
 		"prep:editorial-notes": "cd plugins && npx @wordpress/create-block@latest editorial-notes --template ../templates/editorial-notes --category block-developer-cookbook"

@@ -2,39 +2,35 @@
 
 In this recipe, you will create a Testimonial block that will store the testimonial in custom post meta and save the Author Name to a block attribute. This block is based on the one created for [Creating a custom block that stores post meta](https://developer.wordpress.org/news/2023/03/03/creating-a-custom-block-that-stores-post-meta/) from [developer.wordpress.org/news](developer.wordpress.org/news). It uses a single attribute to store the name of the testimonial author while the actual testimonial content will be stored in post meta.
 
-## Setup
-
-Run `npm run prep:testimonial` from the root of the repository to scaffold the files for this recipe into the `plugins/testimonial` directory. Once scaffolding has been completed, be sure to activate the new plugin and start the build process using `npm run start`.
-
 ## Step 1 - Block configuration
 
 The block.json file that was created during the scaffold needs a few updates. For starters, we need to save the Author of the testimonial as a block attribute. Add the following snippet to register a new attribute to store the author name. We can also update the `example` property to match
 
-```js
-attributes: {
-	authorName: {
-		type: 'string',
-		},
-	},
-example: {
-	attributes: {
-		authorName: 'WordPress',
-	},
-}
+```json
+"attributes": {
+	"authorName": {
+		"type": "string"
+	}
+},
+"example": {
+	"attributes": {
+		"authorName": "WordPress"
+	}
+},
 ```
 
 Next, we want to only allow a single instance of this block as having multiple blocks would overwrite the post meta for each. The `supports.multiple` property allows us to define this.
 
 ```js
-supports: {
-	multiple: false,
+"supports": {
+	"multiple": false
 },
 ```
 
 Finally, we want to use some [block context](https://developer.wordpress.org/block-editor/reference-guides/block-api/block-context/) to know post ID and post type of the post where the block has been inserted. We can enable that functionality via the `usesContext` property.
 
 ```js
-usesContext: [ 'postId', 'postType' ],
+"usesContext": [ "postId", "postType" ]
 ```
 
 Step 2 - Registering the post meta.
@@ -67,7 +63,7 @@ This code registers the `testimonial` field and associates it to the `post` post
 
 ## Step 3 - Saving the Author Name to block attributes
 
-Open the `./src/edit/js` file and it should looked like this:
+Open the `./src/edit.js` file and it should looked like this:
 
 ```js
 /**
@@ -348,7 +344,7 @@ export default function Edit( {
 }
 ```
 
-Now the block should be displaying the value of the `testimonial` field. You can test this by showing the custom fields in the block editor preferences and adding the field.
+Now the block should be displaying the value of the `testimonial` field.
 
 Congratulations! Your block is now reading post meta but we’re not quite done. We still need to update the post meta from the block.
 
