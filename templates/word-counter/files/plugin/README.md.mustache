@@ -246,6 +246,7 @@ registerPlugin( 'block-developer-cookbook-word-counter', {
 In order to use the `count` function to get the number of works in our list of blocks, we need to convert the array of block into string that if can understand. The `serialize` function from the `@wordpress/blocks'` can do that for us.
 
 ```js
+/*
  * WordPress dependencies
  */
 import { registerPlugin } from '@wordpress/plugins';
@@ -360,7 +361,7 @@ registerPlugin( 'block-developer-cookbook-word-counter', {
 } );
 ```
 
-`useState` takes a single paramater representing the default value of our data returns a tuple that is the data we are storing and a function to update that data. By using array destructuring, we can name these items whatever we want.
+`useState` takes a single parameter representing the default value of our data returns a tuple that is the data we are storing and a function to update that data. By using array destructuring, we can name these items whatever we want.
 
 Now, add the `useEffect` hook
 
@@ -441,6 +442,9 @@ The block (or site) editor has its own internal state that keeps track everythin
 To send the messages to lock or unlock the post, we're going to use the `useDispatch` hook from the `@wordpress/data`. This hook is very similar to the `useSelect` hook we used before. It also accepts parameter of a store name, but instead of return data from the store, it returns the dispatchers for that store.
 
 ```js
+/**
+ * WordPress dependencies
+ */
 import { registerPlugin } from '@wordpress/plugins';
 import { PluginPostStatusInfo } from '@wordpress/edit-post';
 import { useSelect, useDispatch } from '@wordpress/data';
@@ -449,6 +453,11 @@ import { count } from '@wordpress/wordcount';
 import { serialize } from '@wordpress/blocks';
 import { useEffect, useState } from '@wordpress/element';
 import { store as editorStore } from '@wordpress/editor';
+
+/**
+ * Internal dependencies
+ */
+import WordCountDisplayComponent from './components/wordCountDisplay';
 
 const Render = () => {
 	// Get the blocks from the editor.,
@@ -489,7 +498,10 @@ const Render = () => {
 
 	return (
 		<PluginPostStatusInfo>
-			{ `There are ${ wordCountDisplay } words in the content` }
+			<WordCountDisplayComponent
+				wordCount={ wordCountDisplay }
+				required={ requiredWordCount }
+			/>
 		</PluginPostStatusInfo>
 	);
 };
@@ -501,6 +513,6 @@ registerPlugin( 'block-developer-cookbook-word-counter', {
 
 We're destructuring out the `lockPostSaving` and `unlockPostSaving` functions from the `editorStore` store that we imported and alias from the package and replaced the console messages with the approach function.
 
-Now, as you make changes to the content the post will lock and unlock as needed
+Now, as you make changes to the content the post will lock and unlock as needed. Notice that we're also importing a custom component to make the display a little nicer. Have a look at the source code in `src/components/wordCountDisplay.js`
 
-Thank you, Chef!s
+Thank you, Chef!
