@@ -26,5 +26,6 @@ Run any of the following scripts to scaffold a recipe and then follow the tutori
 | `npm run prep:gallery-slider`        | [Interactive API Gallery Slider](https://blockdevelopercookbook.com/recipes/interactive-api-gallery-slider/) |
 | `npm run prep:tape-style`            | [Custom Image block style](https://blockdevelopercookbook.com/recipes/custom-image-block-style/)             |
 | `npm run prep:editorial-notes`       | [Editorial Notes](https://blockdevelopercookbook.com/recipes/editorial-notes/)                               |
+| `npm run prep:word-counter`          | [Editorial Notes](https://blockdevelopercookbook.com/recipes/editorial-notes/)                               |
 
 All of the these command will scaffold a new plugin in the `plugins` directory of this repo, set some defaults, and assign them the custom block category of `Block Developer Cookbook'. Beyond that, there is no difference between the plugins scaffolded using these commands and the [templates publish on NPM](https://www.npmjs.com/settings/block-developer-cookbook/packages) - in fact this repo uses those!
