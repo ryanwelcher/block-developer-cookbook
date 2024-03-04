@@ -6,6 +6,8 @@ You can use this repo as a local development environment with the [`@wordpress/e
 
 ## Setup
 
+Please ensure you have all of the [requirements for a block development environment](https://developer.wordpress.org/block-editor/getting-started/devenv/).
+
 Checkout this repo.
 
 ```bash
