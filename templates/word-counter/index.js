@@ -1,11 +1,13 @@
 const { join } = require( 'path' );
-
+const { version } = require( './package.json' );
 module.exports = {
 	defaultValues: {
+		version,
 		namespace: 'block-developers-cookbook',
-		description: 'A tutorial on how to lock post saving based on the word count.',
+		description:
+			'A tutorial on how to lock post saving based on the word count.',
 		editorScript: 'file:./word-counter.js',
-		npmDependencies: ['@wordpress/icons'],
+		npmDependencies: [ '@wordpress/icons' ],
 		customPackageJSON: {
 			prettier: '@wordpress/prettier-config',
 		},

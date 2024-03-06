@@ -1,6 +1,6 @@
 {
 	"name": "@block-developer-cookbook/word-counter",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "A template to demonstrate how to lock post saving based on word count",
 	"main": "index.js",
 	"author": {

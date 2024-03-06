@@ -27,17 +27,16 @@
  * Update URI:        {{{updateURI}}}
 {{/updateURI}}
  *
- * @package           {{namespace}}
+ * @package {{namespace}}
  */
 
 namespace BlockDevelopersCookbook;
 {{#isCompletedVariant}}
-add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_files_for_word_counter' );
 
 /**
  * Enqueue the files for the format.
  */
-function enqueue_files_for_word_counter() {
+function {{slugSnakeCase}}_enqueue_script() {
 	$word_counter_file = plugin_dir_path( __FILE__ ) . '/build/word-counter.asset.php';
 
 	if ( file_exists( $word_counter_file ) ) {
@@ -51,4 +50,5 @@ function enqueue_files_for_word_counter() {
 		);
 	}
 }
+add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\{{slugSnakeCase}}_enqueue_script' );
 {{/isCompletedVariant}}

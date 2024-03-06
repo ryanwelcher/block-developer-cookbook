@@ -1,6 +1,7 @@
 /**
  * WordPress dependencies
  */
+ {{#isCompletedVariant}}
 import { useEffect, useState } from '@wordpress/element';
 import { registerPlugin } from '@wordpress/plugins';
 import { useSelect, useDispatch } from '@wordpress/data';
@@ -67,3 +68,4 @@ const Render = () => {
 registerPlugin( 'block-developer-cookbook-word-counter', {
 	render: Render,
 } );
+{{/isCompletedVariant}}
