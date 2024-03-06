@@ -1,6 +1,6 @@
 {
 	"name": "@block-developer-cookbook/tape-style",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "A template to demonstrate how to load a custom block style",
 	"main": "index.js",
 	"author": {
