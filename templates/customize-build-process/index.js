@@ -1,8 +1,9 @@
 const { join } = require( 'path' );
+const { version } = require( './package.json' );
 
 module.exports = {
 	defaultValues: {
-		slug: 'customize-build-process',
+		version,
 		folderName: 'blocks/custom-block',
 		namespace: 'block-developers-cookbook',
 		customPackageJSON: {
@@ -10,17 +11,13 @@ module.exports = {
 		},
 		example: {},
 		npmDevDependencies: [ 'webpack-remove-empty-scripts' ],
+		render: 'file:./render.php',
 	},
 	variants: {
 		start: {},
 		completed: {
 			customScripts: {
 				build: 'wp-scripts build --webpack-src-dir=blocks',
-				format: 'wp-scripts format',
-				'lint:css': 'wp-scripts lint-style',
-				'lint:js': 'wp-scripts lint-js',
-				'packages-update': 'wp-scripts packages-update',
-				'plugin-zip': 'wp-scripts plugin-zip',
 				start: 'wp-scripts start --webpack-src-dir=blocks',
 			},
 		},

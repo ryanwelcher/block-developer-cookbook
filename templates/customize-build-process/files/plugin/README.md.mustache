@@ -2,10 +2,6 @@
 
 In this recipe, you will customize the build process provided by @wordpress/scripts and to be able to build a plugin that contains a single custom block , a custom Javascript file that registers a block variation, and a custom CSS file that corresponds to the block variation. We want to keep the code for our block in a blocks directory and the JS/CSS files in a resources directory.
 
-## Setup
-
-Run `npm run prep:custom-build-process` from the root of the repository
-
 ## Step 1 - Changing the location of block files
 
 After scaffolding the plugin, run `npm run start`. The command will run but you will see the following message in your terminal and there are no files added to the build directory.
@@ -46,10 +42,17 @@ This code is importing the default configuration from the scripts package and si
 In order to get your custom JS/CSS building you’ll need to add some new entry points to the webpack configuration file. Entry points are the way to tell Webpack where to find a file you want to build.
 
 ```jsx
-entry: {
-	variations: './resources/js/variations.js',
-	'variation-styles': './resources/scss/variation.scss',
-},
+// Import the original config from the @wordpress/scripts package.
+const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
+
+// Export the webpack config.
+module.exports = {
+	...defaultConfig,
+	entry: {
+		variations: './resources/js/variations.js',
+		'variation-styles': './resources/scss/variation.scss',
+	},
+};
 ```
 
 Test this out by running `npm run build` and you’ll see that the new files are successfully output into the build directory. But now there is an issue; the block is no longer being built. This is because you overrode the entry points for the configuration and Webpack doesn’t know where to find the blocks!
@@ -57,48 +60,85 @@ Test this out by running `npm run build` and you’ll see that the new files are
 You could try adding the default configuration back in by adding this:
 
 ```jsx
-entry: {
-	...defaultConfig.entry,
-	variations: './resources/js/variations.js',
-	'variation-styles': './resources/scss/variation.scss',
-},
+// Import the original config from the @wordpress/scripts package.
+const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
+
+// Export the webpack config.
+module.exports = {
+	...defaultConfig,
+	entry: {
+		...defaultConfig.entry,
+		variations: './resources/js/variations.js',
+		'variation-styles': './resources/scss/variation.scss',
+	},
+};
 ```
 
-This is a common pattern. You use the spread operator to add the context of the entry and then add your new ones. This will work with any other property (you will see this later) however, the scripts package has a very cool feature built into it that can detect blocks and build them as needed. You can re-enable this feature by importing it to and then adding it to the entry
+This is a common pattern. You use the spread operator to add the context of the entry and then add your new ones.
+
+This will work with any other property (you will see this later) however, the scripts package has a very cool feature built into it that can detect blocks and build them as needed.
+
+You can re-enable this feature by importing the `getWebpackEntryPoints` and then adding it to the entry.
 
 ```jsx
+// Import the original config from the @wordpress/scripts package.
+const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
 // Import the helper to find and generate the entry points in the src directory
 const { getWebpackEntryPoints } = require( '@wordpress/scripts/utils/config' );
-
-entry: {
-	...getWebpackEntryPoints(),
-	variations: './resources/js/variations.js',
-	'variation-styles': './resources/scss/variation.scss',
-},
+// Export the webpack config.
+module.exports = {
+	...defaultConfig,
+	entry: {
+	    ...getWebpackEntryPoints(),
+	    variations: './resources/js/variations.js',
+	    'variation-styles': './resources/scss/variation.scss',
+	},
+};
 ```
 
 Run the build command now to confirm that you now have both the new files and the block building into the build directory.
 
 ## Step 4 - Cleaning up the files we don't need
 
-You may have also noticed that there is now an empty variation-style.js file in your build directory. This is because Webpack creates a javascript file for every entry point even if it’s a CSS file!
+You may have also noticed that there is now an empty variation-style.js file in your build directory.
 
-You can clean this up by using the RemoveEmptyScriptsPlugin Webpack plugin. This plugin does exactly what the name implies, it removes empty scripts. You will need to extend the plugins section of the Webpack config to add this.
+This is because Webpack creates a javascript file for every entry point even if it’s a CSS file!
+
+You can clean this up by using the RemoveEmptyScriptsPlugin Webpack plugin.
+
+This plugin does exactly what the name implies, it removes empty scripts.
+
+You will need to extend the plugins section of the Webpack config to add this.
 
 ```jsx
+// Import the original config from the @wordpress/scripts package.
+const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
+
+// Import the helper to find and generate the entry points in the src directory
+const { getWebpackEntryPoints } = require( '@wordpress/scripts/utils/config' );
+
 // Plugin to remove empty emitted scripts
 const RemoveEmptyScriptsPlugin = require( 'webpack-remove-empty-scripts' );
 
-plugins: [
-	// Very important! Include WP's plugin config or the
-	// world will cease to exist as we know it.
-	...defaultConfig.plugins,
-	// Removes the empty `.js` files generated by webpack but
-	// sets it after WP has generated its `*.asset.php` file.
-	new RemoveEmptyScriptsPlugin( {
-	stage: RemoveEmptyScriptsPlugin.STAGE_AFTER_PROCESS_PLUGINS,
-	} ),
-],
+// Export the webpack config.
+module.exports = {
+	...defaultConfig,
+	entry: {
+		...getWebpackEntryPoints(),
+		variations: './resources/js/variations.js',
+		'variation-styles': './resources/scss/variation.scss',
+	},
+	plugins: [
+		// Very important! Include WP's plugin config or the
+		// world will cease to exist as we know it.
+		...defaultConfig.plugins,
+		// Removes the empty `.js` files generated by webpack but
+		// sets it after WP has generated its `*.asset.php` file.
+		new RemoveEmptyScriptsPlugin( {
+			stage: RemoveEmptyScriptsPlugin.STAGE_AFTER_PROCESS_PLUGINS,
+		} ),
+	],
+};
 ```
 
 Run the build command again and you’re done. Bon appetit!

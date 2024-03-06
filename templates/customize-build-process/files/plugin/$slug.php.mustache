@@ -27,8 +27,10 @@
  * Update URI:        {{{updateURI}}}
 {{/updateURI}}
  *
- * @package           {{namespace}}
+ * @package {{namespace}}
  */
+
+namespace BlockDevelopersCookbook;
 
 /**
  * Registers the block using the metadata loaded from the `block.json` file.
@@ -37,33 +39,31 @@
  *
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
-add_action(
-	'init',
-	function () {
-		register_block_type( __DIR__ . '/build/custom-block' );
-	}
-);
+function {{slugSnakeCase}}_init_block() {
+	register_block_type( __DIR__ . '/build/custom-block' );
+}
+add_action( 'init', __NAMESPACE__ . '\{{slugSnakeCase}}_init_block' );
 
-add_action(
-	'enqueue_block_editor_assets',
-	function () {
-		enqueue_variation_js();
-		enqueue_variation_css();
-	}
-);
+/**
+ * Enqueue the JS and CSS in the block editor
+ */
+function {{slugSnakeCase}}_enqueue_js_and_css() {
+		{{slugSnakeCase}}_enqueue_variation_js();
+		{{slugSnakeCase}}_enqueue_variation_css();
+}
+add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\{{slugSnakeCase}}_enqueue_js_and_css' );
 
-add_action(
-	'wp_enqueue_scripts',
-	function () {
-		enqueue_variation_css();
-	}
-);
+
+/**
+ * Enqueue the CSS on the front end.
+ */
+add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\{{slugSnakeCase}}_enqueue_variation_css' );
 
 
 /**
  * Function to enqueue the variation JS.
  */
-function enqueue_variation_js() {
+function {{slugSnakeCase}}_enqueue_variation_js() {
 	$js_file = plugin_dir_path( __FILE__ ) . '/build/variations.asset.php';
 	if ( file_exists( $js_file ) ) {
 		// Enqueue the JS file.
@@ -81,7 +81,7 @@ function enqueue_variation_js() {
 /**
  * Function to enqueue the variation CSS.
  */
-function enqueue_variation_css() {
+function {{slugSnakeCase}}_enqueue_variation_css() {
 	$css_file = plugin_dir_path( __FILE__ ) . '/build/variation-styles.asset.php';
 	if ( file_exists( $css_file ) ) {
 		// Enqueue the CSS file.
