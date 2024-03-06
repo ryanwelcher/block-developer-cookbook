@@ -14,6 +14,7 @@ module.exports = {
 				default: 'More than meets the eye!',
 			},
 		},
+		render: 'file./render.php',
 	},
 	variants: {
 		start: {},

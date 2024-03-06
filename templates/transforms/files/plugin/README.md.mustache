@@ -2,13 +2,13 @@
 
 In this recipe, you'll do some prep work to get familiar with how the [Block Transforms API](https://developer.wordpress.org/block-editor/reference-guides/block-api/block-transforms/) is used to determine what your custom block can be converted to, what blocks can be converted to your custom block, and even allow your block to be inserted via text!
 
-## Step 1 - The block your building
+## Step 1 - The block you're building
 
 You will be adding custom transforms for a provided custom block called Transformer. The block is very simple, it displays the Autobots logo and has single attribute called `message`. Feel free to look at the source code for the block to get a better understanding of how it is built.
 
 In order to register transforms for a block, they must be added to the `registerBlockType` call for the block via the `transforms` property.
 
-If you open `../src.index.js`, you will see the following:
+If you open `./src/index.js`, you will see the following:
 
 ```js
 registerBlockType( metadata.name, {
