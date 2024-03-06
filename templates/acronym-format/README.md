@@ -2,7 +2,7 @@ This template provides a tutorial on how to create a custom format using the For
 
 ## Usage
 
-`npx @wordpress/create-block example-plugin --template @block-developer-cookbook/acronym-format`
+`npx @wordpress/create-block acronym-format --template @block-developer-cookbook/acronym-format`
 
 ## Variants
 
