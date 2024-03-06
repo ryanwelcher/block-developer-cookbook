@@ -1,6 +1,6 @@
 {
 	"name": "@block-developer-cookbook/simple-fade-effect",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"description": "A template to demonstrate how to load custom JS/CSS to core blocks",
 	"main": "index.js",
 	"author": {

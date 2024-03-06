@@ -30,12 +30,14 @@
  * @package           {{namespace}}
  */
 
+namespace BlockDevelopersCookbook;
+
 {{#isCompletedVariant}}
 // Hooks.
-add_action( 'wp_enqueue_scripts', 'register_custom_js_script' );
-add_filter( 'render_block', 'enqueue_files_for_core_blocks', 10, 2 );
-// add_filter( 'render_block_core/cover', 'enqueue_files_for_one_core_block' );
-// add_filter( 'render_block_core/image', 'enqueue_files_for_one_core_block' );
+add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\register_custom_js_script' );
+add_filter( 'render_block', __NAMESPACE__ . '\enqueue_files_for_core_blocks', 10, 2 );
+// add_filter( 'render_block_core/cover', __NAMESPACE__ . '\enqueue_files_for_one_core_block' );
+// add_filter( 'render_block_core/image', __NAMESPACE__ . '\enqueue_files_for_one_core_block' );
 
 
 /**
