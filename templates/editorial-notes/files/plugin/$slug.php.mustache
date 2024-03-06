@@ -27,37 +27,57 @@
  * Update URI:        {{{updateURI}}}
 {{/updateURI}}
  *
- * @package           {{namespace}}
+ * @package {{namespace}}
  */
 
 namespace BlockDevelopersCookbook;
 {{#isCompletedVariant}}
-add_action(
-	'enqueue_block_editor_assets',
-	function() {
-		$notes_field_file = plugin_dir_path( __FILE__ ) . '/build/notes-field.asset.php';
 
-		if ( file_exists( $notes_field_file ) ) {
-			$assets = include $notes_field_file;
+/**
+ * Enqueue the JS containing our filters
+ */
+function {{slugSnakeCase}}_enqueue_scripts() {
+	$notes_field_file = plugin_dir_path( __FILE__ ) . '/build/notes-field.asset.php';
 
-			// Enqueue the JavaScript that contains our filters.
-			wp_enqueue_script(
-				'notes-field',
-				plugin_dir_url( __FILE__ ) . '/build/notes-field.js',
-				$assets['dependencies'],
-				$assets['version'],
-				true
-			);
+	if ( file_exists( $notes_field_file ) ) {
+		$assets = include $notes_field_file;
 
-			// Enqueue the CSS for the has-notes class.
-			wp_enqueue_style(
-				'notes-class',
-				plugin_dir_url( __FILE__ ) . '/build/notes-field.css',
-				array(),
-				$assets['version'],
-			);
-		}
+		// Enqueue the JavaScript that contains our filters.
+		wp_enqueue_script(
+			'notes-field',
+			plugin_dir_url( __FILE__ ) . '/build/notes-field.js',
+			$assets['dependencies'],
+			$assets['version'],
+			true
+		);
 
+		// Enqueue the CSS for the has-notes class.
+		wp_enqueue_style(
+			'notes-class',
+			plugin_dir_url( __FILE__ ) . '/build/notes-field.css',
+			array(),
+			$assets['version'],
+		);
 	}
-);
+}
+add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\{{slugSnakeCase}}_enqueue_scripts_styles' );
+
+/**
+ * Enqueue the editor only style
+ */
+function {{slugSnakeCase}}_enqueue_block_editor_css() {
+	$notes_field_file = plugin_dir_path( __FILE__ ) . '/build/notes-field.asset.php';
+	if ( file_exists( $notes_field_file ) ) {
+		$assets = include $notes_field_file;
+		// Enqueue the CSS for the has-notes class.
+		wp_enqueue_style(
+			'notes-class',
+			plugin_dir_url( __FILE__ ) . '/build/notes-field.css',
+			array(),
+			$assets['version'],
+		);
+	}
+}
+add_action( 'enqueue_block_assets', __NAMESPACE__ . '\{{slugSnakeCase}}_enqueue_block_editor_css' );
+
 {{/isCompletedVariant}}

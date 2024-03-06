@@ -1,7 +1,6 @@
 # Overview
 In this recipe, we’re going to use block filters to add a custom attribute and controls to all blocks to allow editors to add notes. Any blocks that have notes will have some custom CSS applied to them in the Block Editor to easily distinguish them from other blocks.
 
-
 # Step 1 - Configure the build process
 
 We’re not building any blocks in this recipe so let’s tell @wordpress/scripts where to find the file we want to use.
@@ -21,38 +20,44 @@ We’re now building files but we need to enqueue the generated JavaScript and C
 Add the following to the main PHP in the root directory
 
 ```php
-add_action(
-   'enqueue_block_editor_assets',
-   function() {
-       $notes_field_file = plugin_dir_path( __FILE__ ) . '/build/notes-field.asset.php';
+/**
+ * Enqueue the JS containing our filters
+ */
+function editorial_notes_enqueue_scripts() {
+	$notes_field_file = plugin_dir_path( __FILE__ ) . '/build/notes-field.asset.php';
 
+	if ( file_exists( $notes_field_file ) ) {
+		$assets = include $notes_field_file;
 
-       if ( file_exists( $notes_field_file ) ) {
-           $assets = include $notes_field_file;
+		// Enqueue the JavaScript that contains our filters.
+		wp_enqueue_script(
+			'notes-field',
+			plugin_dir_url( __FILE__ ) . '/build/notes-field.js',
+			$assets['dependencies'],
+			$assets['version'],
+			true
+		);
+	}
+}
+add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\editorial_notes_enqueue_scripts' );
 
-
-           // Enqueue the JavaScript that contains our filters.
-           wp_enqueue_script(
-               'notes-field',
-               plugin_dir_url( __FILE__ ) . '/build/notes-field.js',
-               $assets['dependencies'],
-               $assets['version'],
-               true
-           );
-
-
-           // Enqueue the CSS for the has-notes class.
-           wp_enqueue_style(
-               'notes-class',
-               plugin_dir_url( __FILE__ ) . '/build/notes-field.css',
-               array(),
-               $assets['version'],
-           );
-       }
-
-
-   }
-);
+/**
+ * Enqueue the editor only style
+ */
+function editorial_notes_enqueue_block_editor_css() {
+	$notes_field_file = plugin_dir_path( __FILE__ ) . '/build/notes-field.asset.php';
+	if ( file_exists( $notes_field_file ) ) {
+		$assets = include $notes_field_file;
+		// Enqueue the CSS for the has-notes class.
+		wp_enqueue_style(
+			'notes-class',
+			plugin_dir_url( __FILE__ ) . '/build/notes-field.css',
+			array(),
+			$assets['version'],
+		);
+	}
+}
+add_action( 'enqueue_block_assets', __NAMESPACE__ . '\editorial_notes_enqueue_block_editor_css' );
 ```
 
 This code is checking for and enqueueing the files we need using the enqueue_block_editor_assets hook to ensure it’s only being added to the block editor. This is important because none of the customizations we’re making pertain to how the block displays on the front end as so these files should not be loaded there.

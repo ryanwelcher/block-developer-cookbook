@@ -1,7 +1,9 @@
 const { join } = require( 'path' );
+const { version } = require( './package.json' );
 
 module.exports = {
 	defaultValues: {
+		version,
 		namespace: 'block-developers-cookbook',
 		editorScript: 'file:./notes-field.js',
 	},
