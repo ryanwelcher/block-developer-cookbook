@@ -7,7 +7,7 @@
 {{#description}}
  * Description:       {{description}}
 {{/description}}
- * Requires at least: 6.5
+ * Requires at least: 6.4
  * Requires PHP:      7.0
  * Version:           {{version}}
 {{#author}}
@@ -30,6 +30,7 @@
  * @package           {{namespace}}
  */
 
+namespace BlockDevelopersCookbook;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -42,30 +43,31 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * @see https://developer.wordpress.org/reference/functions/register_block_type/
  */
-function block_developer_cookbook_{{slugSnakeCase}}_block_init() {
+function {{slugSnakeCase}}_block_init() {
 	register_block_type_from_metadata( __DIR__ . '/build' );
 }
-add_action( 'init', 'block_developer_cookbook_{{slugSnakeCase}}_block_init' );
+add_action( 'init', __NAMESPACE__ . '\{{slugSnakeCase}}_block_init' );
 {{#isCompletedVariant}}
+
 /**
  * Filter the render_block to add the needed directives to the inner cover blocks.
  */
-function block_developer_cookbook_{{slugSnakeCase}}_add_directives_to_inner_blocks( $block_content ) {
+function {{slugSnakeCase}}_add_directives_to_inner_blocks( $block_content ) {
 	$allowed_blocks = array( 'wp-block-cover', 'wp-block-image', 'wp-block-media-text' );
 	$covers         = new \WP_HTML_Tag_Processor( $block_content );
 
 	while ( $covers->next_tag() ) {
-		$classes = explode( ' ', $covers->get_attribute( 'class' ) );
-
-		foreach ( $allowed_blocks as $block_class ) {
-			if ( in_array( $block_class, $classes, true ) ) {
+		// Retrieve and iterate over the classes assigned.
+		foreach ( $covers->class_list() as $class_name ) {
+			if ( in_array( $class_name, $allowed_blocks, true ) ) {
 				$covers->set_attribute( 'data-wp-interactive', '{ "namespace":"{{slug}}" }' );
 				$covers->set_attribute( 'data-wp-init', 'callbacks.initSlide' );
+				continue;
 			}
 		}
 	}
 	$block_content = $covers->get_updated_html();
 	return $block_content;
 }
-add_filter( 'render_block_{{namespace}}/{{slug}}', 'block_developer_cookbook_{{slugSnakeCase}}_add_directives_to_inner_blocks' );
+add_filter( 'render_block_{{namespace}}/{{slug}}', __NAMESPACE__ . '\{{slugSnakeCase}}_add_directives_to_inner_blocks' );
 {{/isCompletedVariant}}

@@ -1,7 +1,8 @@
 const { join } = require( 'path' );
-
+const { version } = require( './package.json' );
 module.exports = {
 	defaultValues: {
+		version,
 		namespace: 'block-developers-cookbook',
 		description: 'A gallery slider built using the Interactivity API',
 		customPackageJSON: {

@@ -37,7 +37,7 @@ const { state, actions } = store( '{{slug}}', {
 		}
 	},
 	actions: {
-		prevImage: () => {
+		prevSlide: () => {
 			const ctx = getContext();
 			if ( ctx.continuous && ctx.currentSlide === 0 ) {
 				ctx.currentSlide = ctx.totalSlides - 1;
@@ -45,7 +45,7 @@ const { state, actions } = store( '{{slug}}', {
 			}
 			ctx.currentSlide--;
 		},
-		nextImage: () => {
+		nextSlide: () => {
 			const ctx = getContext();
 			if ( ctx.continuous && ctx.currentSlide === ctx.totalSlides - 1 ) {
 				ctx.currentSlide = 0;
@@ -57,13 +57,13 @@ const { state, actions } = store( '{{slug}}', {
 			switch ( e.key ) {
 				case 'ArrowLeft': {
 					if ( ! state.noPrevSlide ) {
-						actions.prevImage();
+						actions.prevSlide();
 					}
 					break;
 				}
 				case 'ArrowRight': {
 					if ( ! state.noNextSlide ) {
-						actions.nextImage();
+						actions.nextSlide();
 					}
 					break;
 				}
