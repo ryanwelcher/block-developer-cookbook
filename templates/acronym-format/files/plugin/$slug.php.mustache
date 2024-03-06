@@ -30,10 +30,11 @@
  * @package           {{namespace}}
  */
 
+namespace BlockDevelopersCookbook;
 {{#isCompletedVariant}}
 // Hooks.
-add_action( 'wp_head', 'horrible_hack_to_add_some_css' );
-add_action( 'enqueue_block_editor_assets', 'enqueue_files_for_acronym_format' );
+add_action( 'wp_head', __NAMESPACE__ . '\horrible_hack_to_add_some_css' );
+add_action( 'enqueue_block_editor_assets',  __NAMESPACE__ . '\enqueue_files_for_acronym_format' );
 
 /**
  * Enqueue the files for the format.

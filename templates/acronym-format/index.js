@@ -1,8 +1,9 @@
 const { join } = require( 'path' );
+const { version } = require( './package.json' );
 
 module.exports = {
 	defaultValues: {
-		slug: 'acronym-format',
+		version,
 		namespace: 'block-developers-cookbook',
 		customPackageJSON: {
 			prettier: '@wordpress/prettier-config',

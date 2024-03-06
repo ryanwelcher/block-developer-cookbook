@@ -27,7 +27,7 @@ Add the following to the main php file of the plugin.
 
 ```php
 // Hooks.
-add_action( 'enqueue_block_editor_assets', 'enqueue_files_for_acronym_format' );
+add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_files_for_acronym_format' );
 
 /**
  * Enqueue the files for the format.
@@ -81,7 +81,7 @@ Update the `acronymFormat` object to give the format a title, a tag that will be
 
 ```js
 export const acronymFormat = {
-	title: __( 'Acronym', 'block-developer-cookbook' ),
+	title: __( 'Acronym', 'block-developers-cookbook' ),
 	tagName: 'abbr',
 	className: 'bdc-acronym',
 	edit: AcronymEdit,
@@ -180,10 +180,37 @@ function AcronymEdit( { isActive, onChange, value, contentRef } ) {
 	);
 }
 ```
-
-Next, add the conditional to render `AcronymPopover` if `isPopoverVisible` is true and add ` () => togglePopover()` to the `onClick` property of `RichTextToolbarButton`
+Next, add the conditional to render AcronymPopover if isPopoverVisible is true.
 
 **Don't forget the <></> tags to ensure we return a single element**
+
+```js
+function AcronymEdit( { isActive, onChange, value, contentRef } ) {
+    const [ isPopoverVisible, setIsPopoverVisible ] = useState( false );
+
+    const togglePopover = () => setIsPopoverVisible( ( state ) => ! state );
+
+    return (
+        <>
+            <RichTextToolbarButton
+                icon={ Icon }
+                title={ __( 'Acronym', 'block-developer-cookbook' ) }
+                isActive={ isActive }
+                onClick={ () => {} }
+            />
+            { isPopoverVisible && (
+                <AcronymPopover
+                    value={ value }
+                    onChange={ onChange }
+                    onClose={ togglePopover }
+                    contentRef={ contentRef }
+                />
+            ) }
+        </>
+    );
+}
+```
+ Next, add () => togglePopover() to the onClick property of RichTextToolbarButton
 
 ```js
 function AcronymEdit( { isActive, onChange, value, contentRef } ) {
