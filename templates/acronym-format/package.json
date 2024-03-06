@@ -1,6 +1,6 @@
 {
 	"name": "@block-developer-cookbook/acronym-format",
-	"version": "2.0.2",
+	"version": "2.0.3",
 	"description": "Create a custom format to define acronyms inside of text.",
 	"main": "index.js",
 	"author": {
