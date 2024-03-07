@@ -14,7 +14,7 @@ Checkout this repo.
 git clone git@github.com:ryanwelcher/block-developer-cookbook.git
 ```
 
-Run any of the following scripts to scaffold a recipe and then follow the tutorial in either the Readme or at [https://blockdevelopercookbook.com/](https://blockdevelopercookbook.com/)
+Run any of the following scripts to scaffold a recipe and then follow the tutorial in either the Readme or at [https://blockdevelopercookbook.com/](https://blockdevelopercookbook.com/). The content of the tutorials on the website is also provided in the README for each scaffolded plugin.
 
 | Script                                 | Recipe                                                                                                       |
 | -------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
@@ -28,4 +28,4 @@ Run any of the following scripts to scaffold a recipe and then follow the tutori
 | `npm run prep:editorial-notes`         | [Editorial Notes](https://blockdevelopercookbook.com/recipes/editorial-notes/)                               |
 | `npm run prep:word-counter`            | [Editorial Notes](https://blockdevelopercookbook.com/recipes/editorial-notes/)                               |
 
-All of the these command will scaffold a new plugin in the `plugins` directory of this repo, set some defaults, and assign them the custom block category of `Block Developer Cookbook'. Beyond that, there is no difference between the plugins scaffolded using these commands and the [templates publish on NPM](https://www.npmjs.com/settings/block-developer-cookbook/packages) - in fact this repo uses those!
+All of the these commands will scaffold a new plugin in the `plugins` directory of this repo, set some defaults, and assign them the custom block category of `Block Developer Cookbook'. Beyond that, there is no difference between the plugins scaffolded using these commands and the [templates published on NPM](https://www.npmjs.com/settings/block-developer-cookbook/packages) - in fact this repo uses those!
