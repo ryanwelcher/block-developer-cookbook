@@ -21,6 +21,10 @@ npm install
 
 Start the development environment (make sure you have [Docker installed](https://www.docker.com/products/docker-desktop/))
 
+```bash
+npm run env start
+```
+
 ## Using the recipes
 
 Run any of the following scripts to scaffold a recipe and then follow the tutorial in either the Readme or at [https://blockdevelopercookbook.com/](https://blockdevelopercookbook.com/). The content of the tutorials on the website is also provided in the README for each scaffolded plugin.
