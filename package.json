@@ -8,6 +8,7 @@
 	"scripts": {
 		"block": "cd ./plugins && npx @wordpress/create-block --template ../templates/bdc --variant dynamic",
 		"plugin": "cd ./plugins && npx @wordpress/create-block --template ../templates/bdc --variant plugin",
+		"env": "wp-env",
 		"prep:acronym-format": "cd plugins && npx @wordpress/create-block@latest acronym-format --template ../templates/acronym-format --category block-developer-cookbook",
 		"prep:customize-build-process": "cd plugins && npx @wordpress/create-block@latest customize-build-process --template ../templates/customize-build-process  --category block-developer-cookbook",
 		"prep:simple-fade-effect": "cd plugins && npx @wordpress/create-block@latest simple-fade-effect --template ../templates/simple-fade-effect --category block-developer-cookbook",
@@ -18,6 +19,8 @@
 		"prep:editorial-notes": "cd plugins && npx @wordpress/create-block@latest editorial-notes --template ../templates/editorial-notes --category block-developer-cookbook",
 		"prep:word-counter": "cd plugins && npx @wordpress/create-block@latest word-counter --template ../templates/word-counter --category block-developer-cookbook"
 	},
-	"devDependencies": {},
+	"devDependencies": {
+		"@wordpress/env": "^9.5.0"
+	},
 	"prettier": "@wordpress/prettier-config"
 }

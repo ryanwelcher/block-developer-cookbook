@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="WordPress Coding Standards for my twitch streams">
+<ruleset name="Coding standards for the BDC">
     <rule ref="WordPress"/>
 	<arg name="extensions" value="php"/>
 	<file>.</file>
