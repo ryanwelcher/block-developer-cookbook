@@ -61,7 +61,8 @@ add_action( 'enqueue_block_assets', __NAMESPACE__ . '\editorial_notes_enqueue_bl
 ```
 
 This code is checking for and enqueueing the files we need using the enqueue_block_editor_assets hook to ensure it’s only being added to the block editor. This is important because none of the customizations we’re making pertain to how the block displays on the front end as so these files should not be loaded there.
-Step 3 - Adding a custom attribute to all blocks
+
+# Step 3 - Adding a custom attribute to all blocks
 The first part of our recipe is to add a custom notes attribute to each registered block that will hold any added notes from the editor.
 
 We’re going to use a [Block Filter](https://developer.wordpress.org/block-editor/reference-guides/filters/block-filters/) called blocks.registerBlockType filter to do this. This filter allows us to modify the settings for a block at the point of registration.
