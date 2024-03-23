@@ -13,6 +13,13 @@ Checkout this repo.
 ```bash
 git clone git@github.com:ryanwelcher/block-developer-cookbook.git
 ```
+
+Navigate to the directory `block-developer-cookbook`
+
+```bash
+cd block-developer-cookbook
+```
+
 Install the dependencies
 
 ```bash
