@@ -153,7 +153,7 @@ import { useSelect } from '@wordpress/data';
 const Render = () => {
 	// Get the blocks from the editor.
 	const blocks = useSelect(
-		( select ) => select( blockEditorStore ).getBlocks(),
+		( select ) => select( 'core/block-editor' ).getBlocks(),
 		[]
 	);
 
