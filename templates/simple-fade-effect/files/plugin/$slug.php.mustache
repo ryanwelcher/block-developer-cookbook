@@ -77,7 +77,7 @@ function enqueue_files_for_core_blocks( $block_content, $block ) {
 	// Enqueue the same script for more than one block type.
 	if ( 'core/cover' === $block['blockName'] || 'core/image' === $block['blockName'] ) {
 		// Append the the fader class to to the block wrapper.
-		$tag = new WP_HTML_Tag_Processor( $block_content );
+		$tag = new \WP_HTML_Tag_Processor( $block_content );
 		if ( $tag->next_tag() ) {
 			$tag->add_class( 'fader' );
 		}
@@ -101,7 +101,7 @@ function enqueue_files_for_core_blocks( $block_content, $block ) {
 function enqueue_files_for_one_core_block( $block_content ) {
 	// Enqueue the script for a single block type.
 	// Append the the fader class to to the block wrapper.
-	$tag = new WP_HTML_Tag_Processor( $block_content );
+	$tag = new \WP_HTML_Tag_Processor( $block_content );
 	if ( $tag->next_tag() ) {
 		$tag->add_class( 'fader' );
 	}
