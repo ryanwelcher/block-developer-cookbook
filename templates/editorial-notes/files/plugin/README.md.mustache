@@ -119,9 +119,9 @@ Register the new filter and add the callback:
 /**
 * Add a custom control to the block inspector controls for every block.
 *
-* @param {WPElement} BlockEdit The original block edit component.
+* @param {Element} BlockEdit The original block edit component.
 *
-* @return {WPElement} Element to render.
+* @return {Element} Element to render.
 */
 function addEditorNotesField( BlockEdit ) {
    return ( props ) => {
@@ -154,9 +154,9 @@ Let’s add that now along with the `PanelBody` and `TextareaControl`:
 /**
 * Add a custom control to the block inspector controls for every block.
 *
-* @param {WPElement} BlockEdit The original block edit component.
+* @param {Element} BlockEdit The original block edit component.
 *
-* @return {WPElement} Element to render.
+* @return {Element} Element to render.
 */
 function addEditorNotesField( BlockEdit ) {
    return ( props ) => {
@@ -204,9 +204,9 @@ Next, we’re going to add a some code to make this run a little faster. We only
 /**
 * Add a custom control to the block inspector controls for every block.
 *
-* @param {WPElement} BlockEdit The original block edit component.
+* @param {Element} BlockEdit The original block edit component.
 *
-* @return {WPElement} Element to render.
+* @return {Element} Element to render.
 */
 function addEditorNotesField( BlockEdit ) {
    return ( props ) => {
@@ -259,9 +259,9 @@ For this we’re going to use the [`editor.BlockListBlock`](https://developer.wo
 /**
 * Add a custom class and CSS to show when a block has notes.
 *
-* @param {WPElement} BlockListBlock The original block list block component.
+* @param {Element} BlockListBlock The original block list block component.
 *
-* @return {WPElement} Element to render.
+* @return {Element} Element to render.
 */
 function addNotesDisplayClass( BlockListBlock ) {
    return ( props ) => {
