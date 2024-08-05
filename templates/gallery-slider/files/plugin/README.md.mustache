@@ -58,7 +58,7 @@ The second step to enable the IAPI for a block is to add the `data-wp-interactiv
 Add the following to outermost div:
 
 ```php
-<div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?> data-wp-interactive='{ "namespace": "gellery-slider" }'>
+<div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?> data-wp-interactive="gallery-slider>
    <div class="slider-container">
        <?php echo wp_kses_post( $content ); ?>
    </div>
@@ -135,7 +135,7 @@ $context = array_merge(
 
 ?>
 <div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>
-   data-wp-interactive='{ "namespace": "gellery-slider" }'
+   data-wp-interactive="gallery-slider
    <?php echo wp_interactivity_data_wp_context( $context ); ?>
    >
    <div class="slider-container">
@@ -192,7 +192,7 @@ $context = array_merge(
 
 ?>
 <div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>
-   data-wp-interactive='{ "namespace": "gellery-slider" }'
+   data-wp-interactive="gallery-slider"
    <?php echo wp_interactivity_data_wp_context( $context ); ?>
    >
    <div class="slider-container">
