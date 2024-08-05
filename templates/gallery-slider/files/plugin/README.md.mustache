@@ -58,7 +58,7 @@ The second step to enable the IAPI for a block is to add the `data-wp-interactiv
 Add the following to outermost div:
 
 ```php
-<div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?> data-wp-interactive='{ "namespace": "gellery-slider" }'>
+<div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?> data-wp-interactive="gallery-slider>
    <div class="slider-container">
        <?php echo wp_kses_post( $content ); ?>
    </div>
@@ -121,7 +121,7 @@ const { state } = store( 'gallery-slider', {
 ```
 If we triggered `nextImage`, then every instance of this block would have its `currentSlide` property changed and the image would change for each slider. That’s not what we’re looking for so instead, we are going to use context to ensure `currentSlide` and the other properties we need are different for each instance of the block.
 
-We define context in `./src/render.php` by using the `data_wp_context` function by passing it an array containing the items and their starting values. Update the code with the following to create the context properties we want to track for the slider.
+We define context in `./src/render.php` by using the `wp_interactivity_data_wp_context` function by passing it an array containing the items and their starting values. Update the code with the following to create the context properties we want to track for the slider.
 
 ```php
 $context = array_merge(
@@ -135,8 +135,8 @@ $context = array_merge(
 
 ?>
 <div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>
-   data-wp-interactive='{ "namespace": "gellery-slider" }'
-   <?php echo data_wp_context( $context ); ?>
+   data-wp-interactive="gallery-slider
+   <?php echo wp_interactivity_data_wp_context( $context ); ?>
    >
    <div class="slider-container">
        <?php echo wp_kses_post( $content ); ?>
@@ -192,8 +192,8 @@ $context = array_merge(
 
 ?>
 <div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>
-   data-wp-interactive='{ "namespace": "gellery-slider" }'
-   <?php echo data_wp_context( $context ); ?>
+   data-wp-interactive="gallery-slider"
+   <?php echo wp_interactivity_data_wp_context( $context ); ?>
    >
    <div class="slider-container">
        <?php echo wp_kses_post( $content ); ?>
@@ -285,7 +285,7 @@ $context = array_merge(
 ?>
 <div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>
    data-wp-interactive='{ "namespace": "gallery-slider" }'
-   <?php echo data_wp_context( $context ); ?>
+   <?php echo wp_interactivity_data_wp_context( $context ); ?>
    >
    <div class="slider-container" data-wp-style--transform="state.currentPos">
        <?php echo wp_kses_post( $content ); ?>

@@ -60,7 +60,7 @@ function {{slugSnakeCase}}_add_directives_to_inner_blocks( $block_content ) {
 		// Retrieve and iterate over the classes assigned.
 		foreach ( $covers->class_list() as $class_name ) {
 			if ( in_array( $class_name, $allowed_blocks, true ) ) {
-				$covers->set_attribute( 'data-wp-interactive', '{ "namespace":"{{slug}}" }' );
+				$covers->set_attribute( 'data-wp-interactive', '{{slug}}' );
 				$covers->set_attribute( 'data-wp-init', 'callbacks.initSlide' );
 				continue;
 			}
