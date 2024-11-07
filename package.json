@@ -6,8 +6,8 @@
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"scripts": {
-		"block": "cd ./plugins && npx @wordpress/create-block --template ../templates/bdc --variant dynamic",
-		"plugin": "cd ./plugins && npx @wordpress/create-block --template ../templates/bdc --variant plugin",
+		"block": "npx @wordpress/create-block@latest --template templates/bdc --variant dynamic",
+		"plugin": "npx @wordpress/create-block --template templates/bdc --variant plugin",
 		"env": "wp-env",
 		"prep:acronym-format": "cd plugins && npx @wordpress/create-block@latest acronym-format --template ../templates/acronym-format --category block-developer-cookbook",
 		"prep:customize-build-process": "cd plugins && npx @wordpress/create-block@latest customize-build-process --template ../templates/customize-build-process  --category block-developer-cookbook",
