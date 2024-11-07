@@ -4,18 +4,16 @@ logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.DS_Store
-plugins/editorial-notes
-plugins/gallery-slider
-plugins/gutenberg
-plugins/simple-fade-effect
-plugins/transforms
 
+# Coverage directory used by tools like istanbul
+coverage
 
-.vscode
+# Compiled binary addons (https://nodejs.org/api/addons.html)
+build/Release
+
 # Dependency directories
 node_modules/
-vendor/
+
 # Optional npm cache directory
 .npm
 
