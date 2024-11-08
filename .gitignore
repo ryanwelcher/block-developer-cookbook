@@ -10,6 +10,8 @@ plugins/gallery-slider
 plugins/gutenberg
 plugins/simple-fade-effect
 plugins/transforms
+plugins/customize-build-process
+plugins/invalidate-resolution
 
 
 .vscode
