@@ -17,7 +17,8 @@
 		"prep:gallery-slider": "cd plugins && npx @wordpress/create-block@latest gallery-slider --template ../templates/gallery-slider --category block-developer-cookbook",
 		"prep:tape-style": "cd plugins && npx @wordpress/create-block@latest tape-style --template ../templates/tape-style --category block-developer-cookbook",
 		"prep:editorial-notes": "cd plugins && npx @wordpress/create-block@latest editorial-notes --template ../templates/editorial-notes --category block-developer-cookbook",
-		"prep:word-counter": "cd plugins && npx @wordpress/create-block@latest word-counter --template ../templates/word-counter --category block-developer-cookbook"
+		"prep:word-counter": "cd plugins && npx @wordpress/create-block@latest word-counter --template ../templates/word-counter --category block-developer-cookbook",
+		"prep:bound-excerpt": "cd plugins && npx @wordpress/create-block@latest bound-excerpt --template ../templates/bound-excerpt --category block-developer-cookbook"
 	},
 	"devDependencies": {
 		"@wordpress/env": "^9.5.0"

@@ -1,0 +1,27 @@
+{
+  "name": "@block-developer-cookbook/bound-excerpt",
+  "version": "1.0.0",
+  "description": "Use the Block Bindings API to connect a paragraph block to display and manage the post excerpt",
+  "main": "index.js",
+  "repository": {
+		"type": "git",
+		"url": "git+https://github.com/ryanwelcher/block-developer-cookbook.git"
+	},
+  "keywords": [
+    "wordpress",
+    "create-block",
+    "block",
+    "template",
+    "block",
+    "bindings"
+  ],
+  "author": {
+		"name": "Ryan Welcher",
+		"url": "https://ryanwelcher.com"
+	},
+  "license": "GPL-2.0-or-later",
+  "bugs": {
+    "url": "https://github.com/ryanwelcher/block-developer-cookbook/issues"
+  },
+  "homepage": "https://github.com/ryanwelcher/block-developer-cookbook#readme"
+}
