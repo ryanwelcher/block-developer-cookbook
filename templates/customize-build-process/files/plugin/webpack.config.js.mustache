@@ -2,8 +2,6 @@
 // Import the original config from the @wordpress/scripts package.
 const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
 
-// Import the helper to find and generate the entry points in the src directory
-const { getWebpackEntryPoints } = require( '@wordpress/scripts/utils/config' );
 // Plugin to remove empty emitted scripts
 const RemoveEmptyScriptsPlugin = require( 'webpack-remove-empty-scripts' );
 
@@ -11,7 +9,7 @@ const RemoveEmptyScriptsPlugin = require( 'webpack-remove-empty-scripts' );
 module.exports = {
 	...defaultConfig,
 	entry: {
-		...getWebpackEntryPoints(),
+		...defaultConfig.entry(),
 		variations: './resources/js/variations.js',
 		'variation-styles': './resources/scss/variation.scss',
 	},
