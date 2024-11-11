@@ -3,6 +3,7 @@
  */
 import { __ } from '@wordpress/i18n';
 import { registerBlockBindingsSource } from '@wordpress/blocks';
+import { store as editorStore } from '@wordpress/editor';
 
 /**
  * Register the custom bindings so it can be edited in the block editor.
@@ -11,19 +12,21 @@ registerBlockBindingsSource( {
 	label: __( 'Excerpt' ),
 	name: 'block-developer-cookbook/excerpt',
 	getValues( { select } ) {
+		const currentExcerpt =
+			select( editorStore ).getEditedPostAttribute( 'excerpt' );
 		return {
-			content:
-				select( 'core/editor' ).getEditedPostAttribute( 'excerpt' ),
+			content: currentExcerpt,
 		};
 	},
 
 	setValues( { dispatch, bindings } ) {
-		dispatch( 'core/editor' ).editPost( {
-			excerpt: bindings?.content?.newValue,
+		const updatedContent = bindings?.content?.newValue;
+		dispatch( editorStore ).editPost( {
+			excerpt: updatedContent,
 		} );
 	},
 
-	canUserEditValue( { select, context } ) {
+	canUserEditValue() {
 		return true;
 	},
 } );

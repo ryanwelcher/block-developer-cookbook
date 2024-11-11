@@ -20,9 +20,9 @@ function register_excerpt_binding_source() {
 	register_block_bindings_source(
 		'block-developer-cookbook/excerpt',
 		array(
-			'label'              => __( 'Post Excerpt', 'bound-excerpt' ),
+			'label'              => __( 'Post Excerpt', 'connected-excerpt' ),
 			'get_value_callback' => __NAMESPACE__ . '\retrieve_excerpt_binding',
-			'uses_context'       => array( 'postId', 'postType' ),
+			'uses_context'       => array( 'postId' ),
 		)
 	);
 }
@@ -59,11 +59,11 @@ In the `src/variation.js` file add following:
 ```js
 registerBlockVariation( 'core/paragraph', {
 	name: 'block-developer-cookbook/excerpt',
-	title: __( 'Bound Excerpt', 'block-developer-cookbook' ),
+	title: __( 'Bound Excerpt', 'connected-excerpt' ),
 	icon,
 	description: __(
 		'Mange the post excerpt directly in a block using a custom binding.',
-		'block-developer-cookbook'
+		'connected-excerpt'
 	),
 	isActive: [ 'metadata.bindings.content.source' ],
 	attributes: {
@@ -95,7 +95,7 @@ Add the following to the `src/excerpt-binding.js` file:
 
 ```js
 registerBlockBindingsSource( {
-	label: __( 'Post Excerpt', 'bound-excerpt' ),
+	label: __( 'Post Excerpt', 'connected-excerpt' ),
 
 	name: 'block-developer-cookbook/excerpt',
 

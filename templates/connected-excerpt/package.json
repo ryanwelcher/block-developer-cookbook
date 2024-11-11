@@ -1,5 +1,5 @@
 {
-  "name": "@block-developer-cookbook/bound-excerpt",
+  "name": "@block-developer-cookbook/connected-excerpt",
   "version": "1.0.0",
   "description": "Use the Block Bindings API to connect a paragraph block to display and manage the post excerpt",
   "main": "index.js",

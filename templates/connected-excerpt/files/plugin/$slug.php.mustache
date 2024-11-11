@@ -43,11 +43,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function register_excerpt_binding_source() {
 	register_block_bindings_source(
-		'{{namespace}}/excerpt',
+		'{{namespace}}/connected-excerpt',
 		array(
 			'label'              => __( 'Post Excerpt', {{textdomain}} ),
 			'get_value_callback' => __NAMESPACE__ . '\retrieve_excerpt_binding',
-			'uses_context'       => array( 'postId', 'postType' ),
+			'uses_context'       => array( 'postId' ),
 		)
 	);
 }
@@ -57,7 +57,6 @@ function register_excerpt_binding_source() {
  */
 function retrieve_excerpt_binding( $source_args, $block_instance ) {
 	$post_id      = $block_instance->context['postId'];
-	$post_type    = $block_instance->context['postType'];
 	$current_post = get_post( $post_id );
 	return $current_post->post_excerpt;
 }

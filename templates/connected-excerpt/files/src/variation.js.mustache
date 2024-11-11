@@ -4,7 +4,7 @@
 import { __ } from '@wordpress/i18n';
 import { registerBlockVariation } from '@wordpress/blocks';
 import { postExcerpt as icon } from '@wordpress/icons';
-
+{{#isCompletedVariant}}
 /**
  * Register a block variation to make it easier to assign the custom binding.
  */
@@ -26,3 +26,4 @@ registerBlockVariation( 'core/paragraph', {
 	},
 	scope: [ 'inserter' ],
 } );
+{{/isCompletedVariant}}

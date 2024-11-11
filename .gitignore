@@ -12,7 +12,8 @@ plugins/simple-fade-effect
 plugins/transforms
 plugins/customize-build-process
 plugins/invalidate-resolution
-plugins/bound-excerpt
+plugins/connected-excerpt
+plugins/custom-binding-source
 
 
 .vscode

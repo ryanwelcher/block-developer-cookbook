@@ -43,9 +43,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
 /* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/editor */ "@wordpress/editor");
+/* harmony import */ var _wordpress_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_editor__WEBPACK_IMPORTED_MODULE_2__);
 /**
  * WordPress dependencies
  */
+
 
 
 
@@ -58,22 +61,21 @@ __webpack_require__.r(__webpack_exports__);
   getValues({
     select
   }) {
+    const currentExcerpt = select(_wordpress_editor__WEBPACK_IMPORTED_MODULE_2__.store).getEditedPostAttribute('excerpt');
     return {
-      content: select('core/editor').getEditedPostAttribute('excerpt')
+      content: currentExcerpt
     };
   },
   setValues({
     dispatch,
     bindings
   }) {
-    dispatch('core/editor').editPost({
-      excerpt: bindings?.content?.newValue
+    const updatedContent = bindings?.content?.newValue;
+    dispatch(_wordpress_editor__WEBPACK_IMPORTED_MODULE_2__.store).editPost({
+      excerpt: updatedContent
     });
   },
-  canUserEditValue({
-    select,
-    context
-  }) {
+  canUserEditValue() {
     return true;
   }
 });
@@ -1497,6 +1499,16 @@ module.exports = window["React"];
 /***/ ((module) => {
 
 module.exports = window["wp"]["blocks"];
+
+/***/ }),
+
+/***/ "@wordpress/editor":
+/*!********************************!*\
+  !*** external ["wp","editor"] ***!
+  \********************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["editor"];
 
 /***/ }),
 
