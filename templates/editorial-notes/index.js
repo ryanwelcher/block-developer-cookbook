@@ -7,6 +7,9 @@ module.exports = {
 		description,
 		namespace: 'block-developers-cookbook',
 		editorScript: 'file:./notes-field.js',
+		customPackageJSON: {
+			prettier: '@wordpress/prettier-config',
+		},
 	},
 	variants: {
 		start: {},
