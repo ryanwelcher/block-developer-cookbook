@@ -1,7 +1,7 @@
 {
 	"name": "@block-developer-cookbook/tape-style",
 	"version": "1.0.3",
-	"description": "A template to demonstrate how to load a custom block style",
+	"description": "Create a custom block style to make images look like they're taped to the screen.",
 	"main": "index.js",
 	"author": {
 		"name": "Ryan Welcher",
