@@ -1,7 +1,7 @@
 {
 	"name": "@block-developer-cookbook/editorial-notes",
 	"version": "1.0.2",
-	"description": "A template to demonstrate how add custom attributes and controls to core blocks.",
+	"description": "Add editorial notes to each block that are stored in a custom attribute.",
 	"main": "index.js",
 	"author": {
 		"name": "Ryan Welcher",

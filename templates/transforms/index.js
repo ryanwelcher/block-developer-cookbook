@@ -1,7 +1,9 @@
-const { join } = require( 'path' );
-
+const { join } = require('path');
+const { version, description } = require('./package.json');
 module.exports = {
 	defaultValues: {
+		version,
+		description,
 		slug: 'transforms',
 		namespace: 'block-developers-cookbook',
 		customPackageJSON: {
@@ -20,6 +22,6 @@ module.exports = {
 		start: {},
 		completed: {},
 	},
-	pluginTemplatesPath: join( __dirname, 'files/plugin' ),
-	blockTemplatesPath: join( __dirname, 'files/block' ),
+	pluginTemplatesPath: join(__dirname, 'files/plugin'),
+	blockTemplatesPath: join(__dirname, 'files/block'),
 };

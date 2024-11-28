@@ -1,9 +1,10 @@
-const { join } = require( 'path' );
-const { version } = require( './package.json' );
+const { join } = require('path');
+const { version, description } = require('./package.json');
 
 module.exports = {
 	defaultValues: {
 		version,
+		description,
 		namespace: 'block-developers-cookbook',
 		customPackageJSON: {
 			prettier: '@wordpress/prettier-config',
@@ -20,6 +21,6 @@ module.exports = {
 			},
 		},
 	},
-	pluginTemplatesPath: join( __dirname, 'files/plugin' ),
-	blockTemplatesPath: join( __dirname, 'files/src' ),
+	pluginTemplatesPath: join(__dirname, 'files/plugin'),
+	blockTemplatesPath: join(__dirname, 'files/src'),
 };

@@ -1,13 +1,14 @@
-const { join } = require( 'path' );
-const { version } = require( './package.json' );
+const { join } = require('path');
+const { version, description } = require('./package.json');
 module.exports = {
 	defaultValues: {
 		version,
+		description,
 		namespace: 'block-developers-cookbook',
 		description:
 			'A tutorial on how to lock post saving based on the word count.',
 		editorScript: 'file:./word-counter.js',
-		npmDependencies: [ '@wordpress/icons' ],
+		npmDependencies: ['@wordpress/icons'],
 		customPackageJSON: {
 			prettier: '@wordpress/prettier-config',
 		},
@@ -21,6 +22,6 @@ module.exports = {
 			},
 		},
 	},
-	pluginTemplatesPath: join( __dirname, 'files/plugin' ),
-	blockTemplatesPath: join( __dirname, 'files/src' ),
+	pluginTemplatesPath: join(__dirname, 'files/plugin'),
+	blockTemplatesPath: join(__dirname, 'files/src'),
 };

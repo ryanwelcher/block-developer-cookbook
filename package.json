@@ -20,7 +20,8 @@
 		"prep:word-counter": "cd plugins && npx @wordpress/create-block@latest word-counter --template ../templates/word-counter --category block-developer-cookbook"
 	},
 	"devDependencies": {
-		"@wordpress/env": "^9.5.0"
+		"@wordpress/env": "^9.5.0",
+		"@wordpress/prettier-config": "^4.13.0"
 	},
 	"prettier": "@wordpress/prettier-config"
 }

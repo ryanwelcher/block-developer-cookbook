@@ -1,8 +1,9 @@
-const { join } = require( 'path' );
-const { version } = require( './package.json' );
+const { join } = require('path');
+const { version, description } = require('./package.json');
 module.exports = {
 	defaultValues: {
 		version,
+		description,
 		folderName: 'css',
 		wpScripts: false,
 		namespace: 'block-developers-cookbook',
@@ -11,6 +12,6 @@ module.exports = {
 		start: {},
 		completed: {},
 	},
-	pluginTemplatesPath: join( __dirname, 'files/plugin' ),
-	blockTemplatesPath: join( __dirname, 'files/css' ),
+	pluginTemplatesPath: join(__dirname, 'files/plugin'),
+	blockTemplatesPath: join(__dirname, 'files/css'),
 };

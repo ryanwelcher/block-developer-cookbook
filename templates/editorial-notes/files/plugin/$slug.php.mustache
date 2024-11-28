@@ -54,7 +54,7 @@ function {{slugSnakeCase}}_enqueue_scripts() {
 		// Enqueue the CSS for the has-notes class.
 		wp_enqueue_style(
 			'notes-class',
-			plugin_dir_url( __FILE__ ) . '/build/notes-field.css',
+			plugin_dir_url( __FILE__ ) . 'build/notes-field.css',
 			array(),
 			$assets['version'],
 		);
@@ -72,7 +72,7 @@ function {{slugSnakeCase}}_enqueue_block_editor_css() {
 		// Enqueue the CSS for the has-notes class.
 		wp_enqueue_style(
 			'notes-class',
-			plugin_dir_url( __FILE__ ) . '/build/notes-field.css',
+			plugin_dir_url( __FILE__ ) . 'build/notes-field.css',
 			array(),
 			$assets['version'],
 		);
