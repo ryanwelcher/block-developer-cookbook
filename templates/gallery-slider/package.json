@@ -1,6 +1,6 @@
 {
 	"name": "@block-developer-cookbook/gallery-slider",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "Create a gallery slider using the Interactivity API",
 	"main": "index.js",
 	"author": {
