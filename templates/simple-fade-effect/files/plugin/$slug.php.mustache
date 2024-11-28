@@ -50,7 +50,7 @@ function register_custom_js_script() {
 		$js_assets = include $js_file;
 		wp_register_script(
 			'custom-script-for-core-block',
-			plugin_dir_url( __FILE__ ) . '/build/index.js',
+			plugin_dir_url( __FILE__ ) . 'build/index.js',
 			$js_assets['dependencies'],
 			$js_assets['version'],
 			true
@@ -58,7 +58,7 @@ function register_custom_js_script() {
 
 		wp_register_style(
 			'test-styles',
-			plugin_dir_url( __FILE__ ) . '/build/index.css',
+			plugin_dir_url( __FILE__ ) . 'build/index.css',
 			array(),
 			$js_assets['version'],
 		);
