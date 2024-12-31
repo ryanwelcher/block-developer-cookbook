@@ -1,0 +1,25 @@
+{
+	"name": "@ryanwelcher/all-the-things",
+	"version": "1.0.4",
+	"description": "A create-block template that I use to do all things.",
+	"main": "index.js",
+	"author": {
+		"name": "Ryan Welcher",
+		"url": "https://ryanwelcher.com"
+	},
+	"license": "GPL-2.0-or-later",
+	"keywords": [
+		"wordpress",
+		"create block"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ryanwelcher/all-the-things.git"
+	},
+	"bugs": {
+		"url": "https://github.com/ryanwelcher/all-the-things/issues"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
+}

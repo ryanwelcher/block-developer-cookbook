@@ -1,5 +1,15 @@
 {{^isPluginVariant}}
+{{#isInteractiveVariant}}
+import { store } from '@wordpress/interactivity';
+store( '{{slug}}', {
+	state: {},
+	actions: {},
+	callbacks: {},
+} );
+{{/isInteractiveVariant}}
+{{^isInteractiveVariant}}
 /* eslint-disable no-console */
 console.log("Hello World! (from {{namespace}}-{{slug}} block)");
 /* eslint-enable no-console */
+{{/isInteractiveVariant}}
 {{/isPluginVariant}}
