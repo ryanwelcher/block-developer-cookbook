@@ -26,3 +26,10 @@ vendor/
 
 # dotenv environment variables file
 .env
+
+## Studio stuff
+database
+mu-plugins
+!mu-plugins/block-developers-cookbook.php
+uploads
+db.php
