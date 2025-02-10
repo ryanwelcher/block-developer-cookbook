@@ -16,7 +16,7 @@ import { useBlockProps{{#isCompletedVariant}}, RichText, InnerBlocks{{/isComplet
 export default function Edit({{#isCompletedVariant}}{ attributes, setAttributes }{{/isCompletedVariant}}) {
     {{#isStartVariant}}
 	return (
-		<article { ...useBlockProps }>
+		<article { ...useBlockProps() }>
 			<div className="recipe-header">
 				<div className="recipe-meta">
 					<span className="recipe-time">
