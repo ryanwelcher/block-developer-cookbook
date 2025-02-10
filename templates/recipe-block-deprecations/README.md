@@ -2,7 +2,7 @@ This template provides a tutorial for using block deprecations.
 
 ## Usage
 
-npx @wordpress/create-block recipe-block --template @block-developer-cookbook/recipe-block-deprecations
+npx @wordpress/create-block recipe-block-deprecations --template @block-developer-cookbook/recipe-block-deprecations
 
 ## Variants
 
