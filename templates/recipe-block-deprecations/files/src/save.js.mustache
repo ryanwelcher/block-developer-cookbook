@@ -9,8 +9,7 @@ import { useBlockProps{{#isCompletedVariant}}, useInnerBlocksProps{{/isCompleted
  * @param {Object} props Block props.
  * @return {WPElement} Element to render.
  */
-export default function
- save({{#isCompletedVariant}}{ attributes }{{/isCompletedVariant}}) {
+export default function save({{#isCompletedVariant}}{ attributes }{{/isCompletedVariant}}) {
     {{#isStartVariant}}
 	return (
 		<article { ...useBlockProps.save() }>
