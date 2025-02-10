@@ -1,0 +1,225 @@
+/**
+ * Main block styles for both editor and front-end
+ *
+ * This file contains all the styles that get applied to the block
+ * both in the editor and on the front-end of the site.
+ */
+
+.wp-block-create-block-block-deprecation {
+	/* Custom properties */
+	--recipe-primary: #744253;
+	/* Deep raspberry */
+	--recipe-secondary: #F7E3D3;
+	/* Soft peach */
+	--recipe-text: #2C1810;
+	/* Dark brown */
+	--recipe-background: #FFFFFF;
+	/* White */
+	--recipe-border: #E8D5C9;
+	/* Light peach */
+
+	/* Base styles */
+	background: var(--recipe-background);
+	border-radius: 12px;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+	padding: 2rem;
+	margin: 2rem 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+	/* Recipe header */
+	.recipe-header {
+		margin-bottom: 2rem;
+		text-align: center;
+
+		.recipe-meta {
+			display: flex;
+			justify-content: center;
+			gap: 2rem;
+			margin-bottom: 1.5rem;
+			color: var(--recipe-primary);
+			font-size: 0.9rem;
+
+			span {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+
+				.dashicons {
+					font-size: 1.2rem;
+					width: auto;
+					height: auto;
+				}
+			}
+		}
+
+		.recipe-title {
+			color: var(--recipe-primary);
+			font-size: 2.5rem;
+			font-weight: 700;
+			margin: 0 0 1rem;
+			line-height: 1.2;
+		}
+
+		.recipe-description {
+			color: var(--recipe-text);
+			font-size: 1.1rem;
+			line-height: 1.6;
+			max-width: 600px;
+			margin: 0 auto;
+		}
+	}
+
+	/* Recipe content */
+	.recipe-content {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2rem;
+		margin-bottom: 2rem;
+
+		h3,
+		summary {
+			color: var(--recipe-primary);
+			font-size: 1.5rem;
+			margin-bottom: 1rem;
+			padding-bottom: 0.5rem;
+			border-bottom: 2px solid var(--recipe-border);
+		}
+
+		.recipe-ingredients {
+
+			ul,
+			ol {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+
+				li {
+					padding: 0.5rem 0;
+					border-bottom: 1px dashed var(--recipe-border);
+					color: var(--recipe-text);
+
+					&:last-child {
+						border-bottom: none;
+					}
+				}
+			}
+		}
+
+		.recipe-instructions {
+
+			ol,
+			ul {
+				padding-left: 1.5rem;
+				margin: 0;
+
+				li {
+					color: var(--recipe-text);
+					padding: 0.5rem 0;
+					line-height: 1.5;
+				}
+			}
+		}
+
+		/* Recipe content - add toggle icons */
+		details {
+			summary {
+				position: relative;
+				cursor: pointer;
+				list-style: none;
+				padding-right: 2rem;
+
+				&::-webkit-details-marker {
+					display: none;
+				}
+
+				/* Add toggle icon */
+				&::after {
+					font-family: dashicons;
+					content: "\f347";
+					/* dashicons-arrow-down */
+					position: absolute;
+					right: 0;
+					top: 50%;
+					transform: translateY(-50%);
+					color: var(--recipe-primary);
+					transition: transform 0.2s ease;
+					font-size: 1.2rem;
+					width: auto;
+					height: auto;
+					display: block;
+					line-height: 1;
+				}
+			}
+
+			/* Rotate icon when open */
+			&[open] summary::after {
+				transform: translateY(-50%) rotate(180deg);
+			}
+
+			/* Remove margin from h3 to align with icon */
+			h3 {
+				margin: 0;
+				display: inline-block;
+			}
+		}
+	}
+
+	/* Recipe footer */
+	.recipe-footer {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding-top: 1.5rem;
+		border-top: 2px solid var(--recipe-border);
+
+		.recipe-tags {
+			display: flex;
+			gap: 0.5rem;
+
+			.tag {
+				background: var(--recipe-secondary);
+				color: var(--recipe-primary);
+				padding: 0.25rem 0.75rem;
+				border-radius: 16px;
+				font-size: 0.9rem;
+				font-weight: 500;
+			}
+		}
+
+		.recipe-print {
+			display: flex;
+			align-items: center;
+			gap: 0.5rem;
+			background: var(--recipe-primary);
+			color: white;
+			border: none;
+			padding: 0.75rem 1.25rem;
+			border-radius: 8px;
+			cursor: pointer;
+			transition: background 0.2s ease;
+
+			&:hover {
+				background: darken(#744253, 10%);
+			}
+
+			.dashicons {
+				font-size: 1.2rem;
+				width: auto;
+				height: auto;
+			}
+		}
+	}
+}
+
+/* Editor-specific overrides */
+.editor-styles-wrapper .wp-block-create-block-block-deprecation {
+
+	/* Style adjustments for the block title in editor */
+	.block-title {
+		input[type="text"] {
+			font-size: 2rem;
+			font-weight: 700;
+			color: var(--recipe-primary);
+		}
+	}
+}
