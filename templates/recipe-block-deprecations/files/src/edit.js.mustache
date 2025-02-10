@@ -15,66 +15,68 @@ import { useBlockProps{{#isCompletedVariant}}, RichText, InnerBlocks{{/isComplet
  */
 export default function Edit({{#isCompletedVariant}}{ attributes, setAttributes }{{/isCompletedVariant}}) {
     {{#isStartVariant}}
-	<article { ...useBlockProps }>
-		<div className="recipe-header">
-			<div className="recipe-meta">
-				<span className="recipe-time">
-					<i className="dashicons dashicons-clock"></i>
-					30 mins
-				</span>
-				<span className="recipe-servings">
-					<i className="dashicons dashicons-groups"></i>4 servings
-				</span>
-				<span className="recipe-difficulty">
-					<i className="dashicons dashicons-chart-bar"></i>
-					Easy
-				</span>
-			</div>
-			<h2 className="recipe-title">Classic Chocolate Chip Cookies</h2>
-			<p className="recipe-description">
-				Soft and chewy chocolate chip cookies with a perfect golden edge. A
-				timeless recipe that never fails to bring smiles.
-			</p>
-		</div>
-
-		<div className="recipe-content">
-			<div className="recipe-ingredients">
-				<h3>Ingredients</h3>
-				<ul>
-					<li>2 1/4 cups all-purpose flour</li>
-					<li>1 cup butter, softened</li>
-					<li>3/4 cup sugar</li>
-					<li>3/4 cup brown sugar</li>
-					<li>2 large eggs</li>
-					<li>2 cups chocolate chips</li>
-				</ul>
+	return (
+		<article { ...useBlockProps }>
+			<div className="recipe-header">
+				<div className="recipe-meta">
+					<span className="recipe-time">
+						<i className="dashicons dashicons-clock"></i>
+						30 mins
+					</span>
+					<span className="recipe-servings">
+						<i className="dashicons dashicons-groups"></i>4 servings
+					</span>
+					<span className="recipe-difficulty">
+						<i className="dashicons dashicons-chart-bar"></i>
+						Easy
+					</span>
+				</div>
+				<h2 className="recipe-title">Classic Chocolate Chip Cookies</h2>
+				<p className="recipe-description">
+					Soft and chewy chocolate chip cookies with a perfect golden edge. A
+					timeless recipe that never fails to bring smiles.
+				</p>
 			</div>
 
-			<div className="recipe-instructions">
-				<h3>Instructions</h3>
-				<ol>
-					<li>Preheat oven to 375°F (190°C)</li>
-					<li>Cream together butter and sugars</li>
-					<li>Beat in eggs one at a time</li>
-					<li>Mix in dry ingredients</li>
-					<li>Fold in chocolate chips</li>
-					<li>Bake for 10-12 minutes</li>
-				</ol>
-			</div>
-		</div>
+			<div className="recipe-content">
+				<div className="recipe-ingredients">
+					<h3>Ingredients</h3>
+					<ul>
+						<li>2 1/4 cups all-purpose flour</li>
+						<li>1 cup butter, softened</li>
+						<li>3/4 cup sugar</li>
+						<li>3/4 cup brown sugar</li>
+						<li>2 large eggs</li>
+						<li>2 cups chocolate chips</li>
+					</ul>
+				</div>
 
-		<footer className="recipe-footer">
-			<div className="recipe-tags">
-				<span className="tag">Dessert</span>
-				<span className="tag">Baking</span>
-				<span className="tag">Cookies</span>
+				<div className="recipe-instructions">
+					<h3>Instructions</h3>
+					<ol>
+						<li>Preheat oven to 375°F (190°C)</li>
+						<li>Cream together butter and sugars</li>
+						<li>Beat in eggs one at a time</li>
+						<li>Mix in dry ingredients</li>
+						<li>Fold in chocolate chips</li>
+						<li>Bake for 10-12 minutes</li>
+					</ol>
+				</div>
 			</div>
-			<button className="recipe-print">
-				<i className="dashicons dashicons-printer"></i>
-				Print Recipe
-			</button>
-		</footer>
-	</article>
+
+			<footer className="recipe-footer">
+				<div className="recipe-tags">
+					<span className="tag">Dessert</span>
+					<span className="tag">Baking</span>
+					<span className="tag">Cookies</span>
+				</div>
+				<button className="recipe-print">
+					<i className="dashicons dashicons-printer"></i>
+					Print Recipe
+				</button>
+			</footer>
+		</article>
+	);
     {{/isStartVariant}}
     {{#isCompletedVariant}}
     const { name } = attributes;
