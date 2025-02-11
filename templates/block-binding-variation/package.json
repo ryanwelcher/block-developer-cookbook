@@ -1,0 +1,27 @@
+{
+	"name": "@block-developer-cookbook/block-binding-variation",
+	"version": "1.0.0",
+	"description": "Use a block binding variation to display custom meta data.",
+	"main": "index.js",
+	"author": {
+		"name": "Ryan Welcher",
+		"url": "https://ryanwelcher.com"
+	},
+	"license": "GPL-2.0-or-later",
+	"keywords": [
+		"wordpress",
+		"create block",
+		"block template"
+	],
+	"homepage": "https://blockdevelopercookbook.com/",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ryanwelcher/block-developer-cookbook.git"
+	},
+	"bugs": {
+		"url": "https://github.com/ryanwelcher/block-developer-cookbook/issues"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
+}

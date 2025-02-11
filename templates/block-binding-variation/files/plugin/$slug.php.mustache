@@ -1,0 +1,79 @@
+<?php
+/**
+ * Plugin Name:       {{title}}
+{{#pluginURI}}
+ * Plugin URI:        {{{pluginURI}}}
+{{/pluginURI}}
+{{#description}}
+ * Description:       {{description}}
+{{/description}}
+ * Requires at least: 6.1
+ * Requires PHP:      7.0
+ * Version:           {{version}}
+{{#author}}
+ * Author:            {{author}}
+{{/author}}
+{{#license}}
+ * License:           {{license}}
+{{/license}}
+{{#licenseURI}}
+ * License URI:       {{{licenseURI}}}
+{{/licenseURI}}
+ * Text Domain:       {{textdomain}}
+{{#domainPath}}
+ * Domain Path:       {{{domainPath}}}
+{{/domainPath}}
+{{#updateURI}}
+ * Update URI:        {{{updateURI}}}
+{{/updateURI}}
+ *
+ * @package {{namespace}}
+ */
+
+namespace BlockDevelopersCookbook;
+
+{{#isCompletedVariant}}
+/**
+ * Register custom post meta for block binding
+ */
+add_action(
+	'init',
+	function() {
+		register_post_meta(
+			'post',
+			'my_custom_data',
+			array(
+				'show_in_rest'  => true,
+				'single'        => true,
+				'type'          => 'string',
+				'auth_callback' => function() {
+					return current_user_can( 'edit_posts' );
+				},
+				'default'       => 'This is a default value',
+			)
+		);
+	}
+);
+
+
+{{/isCompletedVariant}}
+/**
+ * Register the block editor assets.
+ */
+add_action(
+	'enqueue_block_editor_assets',
+	function() {
+		$block_binding_shortcut_file = plugin_dir_path( __FILE__ ) . '/build/block-binding-shortcut.asset.php';
+
+		if ( file_exists( $block_binding_shortcut_file ) ) {
+			$assets = include $block_binding_shortcut_file;
+			wp_enqueue_script(
+				'block-binding-shortcut',
+				plugin_dir_url( __FILE__ ) . '/build/block-binding-shortcut.js',
+				$assets['dependencies'],
+				$assets['version'],
+				true
+			);
+		}
+	}
+);
