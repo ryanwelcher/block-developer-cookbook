@@ -1,10 +1,9 @@
 /**
  * WordPress Dependencies
  */
-{{#isCompletedVariant}}
 import { useBlockProps } from '@wordpress/block-editor';
 import { createBlock } from '@wordpress/blocks';
-{{/isCompletedVariant}}
+
 
 /**
  * Array of deprecation objects for the block
@@ -13,12 +12,18 @@ import { createBlock } from '@wordpress/blocks';
  * ordered from newest to oldest.
  */
 {{#isCompletedVariant}}
-const markupChange = {
+const convertListsToInnerBlocks = {
 	/**
-	 * Original version with basic markup
+	 * Version with headline attribute before InnerBlocks conversion
 	 */
-	attributes: {},
-	save: () => {
+	attributes: {
+		name: {
+			type: 'string',
+			default: 'Classic Chocolate Chip Cookies',
+		},
+	},
+	save: ( { attributes } ) => {
+		const { name } = attributes;
 		return (
 			<article { ...useBlockProps.save() }>
 				<div className="recipe-header">
@@ -36,9 +41,11 @@ const markupChange = {
 							Easy
 						</span>
 					</div>
-					<h2 className="recipe-title">
-						Classic Chocolate Chip Cookies
-					</h2>
+					<RichText.Content
+						tagName="h2"
+						className="recipe-title"
+						value={ name }
+					/>
 					<p className="recipe-description">
 						Soft and chewy chocolate chip cookies with a perfect
 						golden edge. A timeless recipe that never fails to bring
@@ -47,8 +54,10 @@ const markupChange = {
 				</div>
 
 				<div className="recipe-content">
-					<div className="recipe-ingredients">
-						<h3>Ingredients</h3>
+					<details open className="recipe-ingredients">
+						<summary>
+							<h3>Ingredients</h3>
+						</summary>
 						<ul>
 							<li>2 1/4 cups all-purpose flour</li>
 							<li>1 cup butter, softened</li>
@@ -57,10 +66,12 @@ const markupChange = {
 							<li>2 large eggs</li>
 							<li>2 cups chocolate chips</li>
 						</ul>
-					</div>
+					</details>
 
-					<div className="recipe-instructions">
-						<h3>Instructions</h3>
+					<details open className="recipe-instructions">
+						<summary>
+							<h3>Instructions</h3>
+						</summary>
 						<ol>
 							<li>Preheat oven to 375°F (190°C)</li>
 							<li>Cream together butter and sugars</li>
@@ -69,7 +80,7 @@ const markupChange = {
 							<li>Fold in chocolate chips</li>
 							<li>Bake for 10-12 minutes</li>
 						</ol>
-					</div>
+					</details>
 				</div>
 
 				<footer className="recipe-footer">
@@ -85,6 +96,69 @@ const markupChange = {
 				</footer>
 			</article>
 		);
+	},
+	/**
+	 * Migration function to convert lists to innerblocks
+	 *
+	 * @param {Object} attributes - Block attributes
+	 * @return {Array} Array containing new attributes and inner blocks
+	 */
+	migrate: ( attributes ) => {
+		// Create blocks for ingredients list
+		const ingredientItems = [
+			'2 1/4 cups all-purpose flour',
+			'1 cup butter, softened',
+			'3/4 cup sugar',
+			'3/4 cup brown sugar',
+			'2 large eggs',
+			'2 cups chocolate chips',
+		].map( ( content ) => createBlock( 'core/list-item', { content } ) );
+
+		// Create blocks for instructions list
+		const instructionItems = [
+			'Preheat oven to 375°F (190°C)',
+			'Cream together butter and sugars',
+			'Beat in eggs one at a time',
+			'Mix in dry ingredients',
+			'Fold in chocolate chips',
+			'Bake for 10-12 minutes',
+		].map( ( content ) => createBlock( 'core/list-item', { content } ) );
+
+		// Create the inner blocks structure
+		const innerBlocks = [
+			createBlock(
+				'core/details',
+				{
+					summary: 'Ingredients',
+					showContent: true,
+					className: 'recipe-ingredients',
+				},
+				[
+					createBlock(
+						'core/list',
+						{ ordered: false },
+						ingredientItems
+					),
+				]
+			),
+			createBlock(
+				'core/details',
+				{
+					summary: 'Instructions',
+					showContent: true,
+					className: 'recipe-instructions',
+				},
+				[
+					createBlock(
+						'core/list',
+						{ ordered: true },
+						instructionItems
+					),
+				]
+			),
+		];
+
+		return [ { name: attributes.name }, innerBlocks ];
 	},
 };
 
@@ -187,19 +261,12 @@ const changeAttributeName = {
 	},
 };
 
-const convertListsToInnerBlocks = {
+const markupChange = {
 	/**
-	 * Version with headline attribute before InnerBlocks conversion
+	 * Original version with basic markup
 	 */
-	attributes: {
-		headline: {
-			type: 'string',
-			default: 'Understanding Block Deprecations',
-		},
-	},
-	save: ( { attributes } ) => {
-		const { name } = attributes;
-
+	attributes: {},
+	save: () => {
 		return (
 			<article { ...useBlockProps.save() }>
 				<div className="recipe-header">
@@ -217,11 +284,9 @@ const convertListsToInnerBlocks = {
 							Easy
 						</span>
 					</div>
-					<RichText.Content
-						tagName="h2"
-						className="recipe-title"
-						value={ name }
-					/>
+					<h2 className="recipe-title">
+						Classic Chocolate Chip Cookies
+					</h2>
 					<p className="recipe-description">
 						Soft and chewy chocolate chip cookies with a perfect
 						golden edge. A timeless recipe that never fails to bring
@@ -230,10 +295,8 @@ const convertListsToInnerBlocks = {
 				</div>
 
 				<div className="recipe-content">
-					<details open className="recipe-ingredients">
-						<summary>
-							<h3>Ingredients</h3>
-						</summary>
+					<div className="recipe-ingredients">
+						<h3>Ingredients</h3>
 						<ul>
 							<li>2 1/4 cups all-purpose flour</li>
 							<li>1 cup butter, softened</li>
@@ -242,12 +305,10 @@ const convertListsToInnerBlocks = {
 							<li>2 large eggs</li>
 							<li>2 cups chocolate chips</li>
 						</ul>
-					</details>
+					</div>
 
-					<details open className="recipe-instructions">
-						<summary>
-							<h3>Instructions</h3>
-						</summary>
+					<div className="recipe-instructions">
+						<h3>Instructions</h3>
 						<ol>
 							<li>Preheat oven to 375°F (190°C)</li>
 							<li>Cream together butter and sugars</li>
@@ -256,10 +317,6 @@ const convertListsToInnerBlocks = {
 							<li>Fold in chocolate chips</li>
 							<li>Bake for 10-12 minutes</li>
 						</ol>
-					</details>
-
-					<div className="recipe-notes">
-						<InnerBlocks.Content />
 					</div>
 				</div>
 
@@ -277,72 +334,18 @@ const convertListsToInnerBlocks = {
 			</article>
 		);
 	},
-	/**
-	 * Migration function to convert lists to innerblocks
-	 *
-	 * @param {Object} attributes - Block attributes
-	 * @return {Array} Array containing new attributes and inner blocks
-	 */
-	migrate: ( attributes ) => {
-		// Create blocks for ingredients list
-		const ingredientItems = [
-			'2 1/4 cups all-purpose flour',
-			'1 cup butter, softened',
-			'3/4 cup sugar',
-			'3/4 cup brown sugar',
-			'2 large eggs',
-			'2 cups chocolate chips',
-		].map( ( content ) => createBlock( 'core/list-item', { content } ) );
-
-		// Create blocks for instructions list
-		const instructionItems = [
-			'Preheat oven to 375°F (190°C)',
-			'Cream together butter and sugars',
-			'Beat in eggs one at a time',
-			'Mix in dry ingredients',
-			'Fold in chocolate chips',
-			'Bake for 10-12 minutes',
-		].map( ( content ) => createBlock( 'core/list-item', { content } ) );
-
-		// Create the inner blocks structure
-		const innerBlocks = [
-			createBlock(
-				'core/details',
-				{
-					summary: 'Ingredients',
-					showContent: true,
-					className: 'recipe-ingredients',
-				},
-				[
-					createBlock(
-						'core/list',
-						{ ordered: false },
-						ingredientItems
-					),
-				]
-			),
-			createBlock(
-				'core/details',
-				{
-					summary: 'Instructions',
-					showContent: true,
-					className: 'recipe-instructions',
-				},
-				[
-					createBlock(
-						'core/list',
-						{ ordered: true },
-						instructionItems
-					),
-				]
-			),
-		];
-
-		return [ { name: attributes.name }, innerBlocks ];
-	},
 };
-const deprecations = [ changeAttributeName, changeAttributeName, markupChange ];
-
+/**
+ * Array of deprecation objects for the block
+ *
+ * Each object represents a previous version of the block,
+ * ordered from newest to oldest.
+ */
+const deprecations = [
+	markupChange,
+	changeAttributeName,
+	convertListsToInnerBlocks,
+];
 {{/isCompletedVariant}}
 {{#isStartVariant}}
 const deprecations = [];
