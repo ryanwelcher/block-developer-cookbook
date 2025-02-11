@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       Block Developers Cookbook
+ * Plugin Name:       The Block Developer Cookbook
  * Description:       Some global functionality for the Block Developer Cookbook
  * Requires at least: 6.1
  * Requires PHP:      7.0
@@ -18,8 +18,8 @@ add_filter(
 		array_unshift(
 			$categories,
 			array(
-				'slug'  => 'block-developers-cookbook',
-				'title' => __( 'Block Developers Cookbook', 'block-developers-cookbook' ),
+				'slug'  => 'block-developer-cookbook',
+				'title' => __( 'The Block Developer Cookbook', 'block-developer-cookbook' ),
 			)
 		);
 		return $categories;
