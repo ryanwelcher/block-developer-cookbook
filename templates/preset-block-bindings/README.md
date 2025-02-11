@@ -1,4 +1,4 @@
-This template provides a tutorial on how to create a block binding variation to display custom meta data.
+This template provides a tutorial on how to use a block variation to preset block bindings.
 
 ## Usage
 
