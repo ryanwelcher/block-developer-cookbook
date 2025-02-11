@@ -18,11 +18,12 @@
 		"prep:tape-style": "cd plugins && npx @wordpress/create-block@latest tape-style --template ../templates/tape-style --category block-developer-cookbook",
 		"prep:editorial-notes": "cd plugins && npx @wordpress/create-block@latest editorial-notes --template ../templates/editorial-notes --category block-developer-cookbook",
 		"prep:word-counter": "cd plugins && npx @wordpress/create-block@latest word-counter --template ../templates/word-counter --category block-developer-cookbook",
-		"prep:deprecations": "cd plugins && npx @wordpress/create-block@latest recipe-block-deprecations --template ../templates/recipe-block-deprecations --category block-developer-cookbook"
+		"prep:deprecations": "cd plugins && npx @wordpress/create-block@latest recipe-block-deprecations --template ../templates/recipe-block-deprecations --category block-developer-cookbook",
+		"prep:preset-block-bindings": "cd plugins && npx @wordpress/create-block@latest preset-block-bindings --template ../templates/preset-block-bindings --category block-developer-cookbook"
 	},
 	"devDependencies": {
-		"@wordpress/env": "^9.5.0",
-		"@wordpress/prettier-config": "^4.13.0"
+		"@wordpress/env": "^10.17.0",
+		"@wordpress/prettier-config": "^4.17.0"
 	},
 	"prettier": "@wordpress/prettier-config"
 }

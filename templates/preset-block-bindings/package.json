@@ -1,7 +1,7 @@
 {
-	"name": "@block-developer-cookbook/block-binding-variation",
+	"name": "@block-developer-cookbook/preset-block-bindings",
 	"version": "1.0.0",
-	"description": "Use a block binding variation to display custom meta data.",
+	"description": "Use a block binding variation to preset block bindings.",
 	"main": "index.js",
 	"author": {
 		"name": "Ryan Welcher",
