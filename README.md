@@ -49,5 +49,6 @@ Run any of the following scripts to scaffold a recipe and then follow the tutori
 | `npm run prep:word-counter`            | [Word Counter](https://blockdevelopercookbook.com/recipes/word-counter/)                                                   |
 | `npm run prep:deprecations`            | [Block Deprecations](https://blockdevelopercookbook.com/recipes/block-deprecations/)                                       |
 | `npm run prep:preset-block-bindings`   | [Preset block bindings with variations](https://blockdevelopercookbook.com/recipes/preset-block-bindings-with-variations/) |
+| `npm run prep:bound-excerpt`           | [Binding the excerpt to a block](https://blockdevelopercookbook.com/recipes/binding-the-excerpt-to-a-block/)               |
 
 All of the these commands will scaffold a new plugin in the `plugins` directory of this repo, set some defaults, and assign them the custom block category of `Block Developer Cookbook'. Beyond that, there is no difference between the plugins scaffolded using these commands and the [templates published on NPM](https://www.npmjs.com/settings/block-developer-cookbook/packages) - in fact this repo uses those!

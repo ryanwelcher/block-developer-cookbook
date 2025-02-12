@@ -1,0 +1,88 @@
+<?php
+/**
+ * Plugin Name:       {{title}}
+{{#pluginURI}}
+ * Plugin URI:        {{{pluginURI}}}
+{{/pluginURI}}
+{{#description}}
+ * Description:       {{description}}
+{{/description}}
+ * Requires at least: 6.1
+ * Requires PHP:      7.0
+ * Version:           {{version}}
+{{#author}}
+ * Author:            {{author}}
+{{/author}}
+{{#license}}
+ * License:           {{license}}
+{{/license}}
+{{#licenseURI}}
+ * License URI:       {{{licenseURI}}}
+{{/licenseURI}}
+ * Text Domain:       {{textdomain}}
+{{#domainPath}}
+ * Domain Path:       {{{domainPath}}}
+{{/domainPath}}
+{{#updateURI}}
+ * Update URI:        {{{updateURI}}}
+{{/updateURI}}
+ *
+ * @package {{namespace}}
+ */
+
+namespace BlockDevelopersCookbook;
+
+/**
+ * Enqueue the block editor JavaScript file.
+ * This loads our block binding implementation in the editor.
+ */
+add_action(
+	'enqueue_block_editor_assets',
+	function() {
+		$bound_excerpt_file = plugin_dir_path( __FILE__ ) . '/build/bound-excerpt.asset.php';
+
+		if ( file_exists( $bound_excerpt_file ) ) {
+			$assets = include $bound_excerpt_file;
+			wp_enqueue_script(
+				'bound-excerpt',
+				plugin_dir_url( __FILE__ ) . '/build/bound-excerpt.js',
+				$assets['dependencies'],
+				$assets['version'],
+				true
+			);
+		}
+	}
+);
+{{#isCompletedVariant}}
+/**
+ * Register a custom block bindings source for post excerpts.
+ * This allows blocks to bind their content to a post's excerpt field.
+ */
+add_action(
+	'init',
+	function() {
+		register_block_bindings_source(
+			'block-developer-cookbook/excerpt',
+			array(
+				'label'              => __( 'Post Excerpt', 'block-developer-cookbook' ),
+				'get_value_callback' => __NAMESPACE__ . '\retrieve_excerpt_binding',
+				'uses_context'       => array( 'postId' ), // Required context from block.
+			)
+		);
+	}
+);
+
+/**
+ * Retrieves the post excerpt for use in block bindings.
+ * This callback is used by blocks that bind to the post excerpt.
+ *
+ * @param array    $source_args    The source arguments.
+ * @param WP_Block $block_instance The block instance.
+ * @return string The post excerpt.
+ */
+function retrieve_excerpt_binding( $source_args, $block_instance ) {
+	$post_id      = $block_instance->context['postId'];
+	$current_post = get_post( $post_id );
+	return $current_post->post_excerpt;
+}
+{{/isCompletedVariant}}
