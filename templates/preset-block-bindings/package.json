@@ -1,6 +1,6 @@
 {
 	"name": "@block-developer-cookbook/preset-block-bindings",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Using a block variation to preset block bindings.",
 	"main": "index.js",
 	"author": {
