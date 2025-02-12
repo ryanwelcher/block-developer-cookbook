@@ -1,0 +1,57 @@
+/**
+ * WordPress dependencies
+ */
+import {
+	registerBlockVariation,
+	registerBlockBindingsSource,
+} from '@wordpress/blocks';
+import { __ } from '@wordpress/i18n';
+import { postExcerpt as icon } from '@wordpress/icons';
+
+{{#isCompletedVariant}}
+/**
+ * Register a block variation to make it easier to assign the custom binding.
+ */
+registerBlockVariation( 'core/paragraph', {
+	name: 'block-developer-cookbook/excerpt',
+	title: __( 'Bound Excerpt', 'block-developer-cookbook' ),
+	icon,
+	description: __(
+		'Mange the post excerpt directly in a block using a custom binding.',
+		'block-developer-cookbook'
+	),
+	isActive: [ 'metadata.bindings.content.source' ],
+	attributes: {
+		metadata: {
+			bindings: {
+				content: { source: 'block-developer-cookbook/excerpt' },
+			},
+		},
+	},
+	scope: [ 'inserter' ],
+} );
+
+/**
+ * Register the custom bindings so it can be edited in the block editor.
+ */
+registerBlockBindingsSource( {
+	label: __( 'Post Excerpt' ),
+	name: 'block-developer-cookbook/excerpt',
+	getValues( { select } ) {
+		return {
+			content:
+				select( 'core/editor' ).getEditedPostAttribute( 'excerpt' ),
+		};
+	},
+
+	setValues( { dispatch, bindings } ) {
+		dispatch( 'core/editor' ).editPost( {
+			excerpt: bindings?.content?.newValue,
+		} );
+	},
+
+	canUserEditValue( { select, context } ) {
+		return true;
+	},
+} );
+{{/isCompletedVariant}}

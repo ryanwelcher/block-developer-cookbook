@@ -11,15 +11,14 @@ module.exports = {
 		},
 		example: {},
 		npmDependencies: ['@wordpress/icons'],
+		customScripts: {
+			build: 'wp-scripts build ./src/bound-excerpt.js',
+			start: 'wp-scripts start ./src/bound-excerpt.js',
+		},
 	},
 	variants: {
 		start: {},
-		completed: {
-			customScripts: {
-				build: 'wp-scripts build ./src/bound-excerpt.js',
-				start: 'wp-scripts start ./src/bound-excerpt.js',
-			},
-		},
+		completed: {},
 	},
 	pluginTemplatesPath: join(__dirname, 'files/plugin'),
 	blockTemplatesPath: join(__dirname, 'files/src'),
