@@ -1,5 +1,6 @@
 {
-	"plugins": [ "https://downloads.wordpress.org/plugin/gutenberg.zip" ],
+	"plugins": ["https://downloads.wordpress.org/plugin/gutenberg.zip"],
+	"themes": ["./themes/tt4-dark-mode"],
 	"mappings": {
 		"wp-content/mu-plugins": "./mu-plugins",
 		"wp-content/plugins": "./plugins"
