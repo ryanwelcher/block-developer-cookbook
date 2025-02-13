@@ -1,0 +1,60 @@
+{
+	"$schema": "https://raw.githubusercontent.com/WordPress/gutenberg/trunk/schemas/json/theme.json",
+	"version": 3,
+	"settings": {
+		"color": {
+			"palette": [
+				{
+					"color": "light-dark(#f9f9f9, #1c1c1c)",
+					"name": "Base",
+					"slug": "base"
+				},
+				{
+					"color": "light-dark(#ffffff, #111111)",
+					"name": "Base / Two",
+					"slug": "base-2"
+				},
+				{
+					"color": "light-dark(#111111, #ffffff)",
+					"name": "Contrast",
+					"slug": "contrast"
+				},
+				{
+					"color": "light-dark(#636363, #888888)",
+					"name": "Contrast / Two",
+					"slug": "contrast-2"
+				},
+				{
+					"color": "light-dark(#A4A4A4, #3d3d3d)",
+					"name": "Contrast / Three",
+					"slug": "contrast-3"
+				},
+				{
+					"color": "light-dark(#cfcabe, #60544c)",
+					"name": "Accent",
+					"slug": "accent"
+				},
+				{
+					"color": "light-dark(#c2a990, #9d7359)",
+					"name": "Accent / Two",
+					"slug": "accent-2"
+				},
+				{
+					"color": "#d8613c",
+					"name": "Accent / Three",
+					"slug": "accent-3"
+				},
+				{
+					"color": "light-dark(#b1c5a4, #465a3b)",
+					"name": "Accent / Four",
+					"slug": "accent-4"
+				},
+				{
+					"color": "light-dark(#b5bdbc, #4d5757)",
+					"name": "Accent / Five",
+					"slug": "accent-5"
+				}
+			]
+		}
+	}
+}

@@ -1,0 +1,9 @@
+/**
+ * This ensures the color scheme works in the Color picker and lets the user see
+ * the color as they are light/dark version of a color depending on what their
+ * current user preference is.
+ */
+.component-color-indicator,
+.block-editor-color-gradient-control {
+	color-scheme: light dark;
+}

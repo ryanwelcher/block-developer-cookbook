@@ -1,0 +1,21 @@
+###
+## Editor Configuration file.
+##
+## @link https://editorconfig.org/
+###
+
+## -----------------------------------------------------------------------------
+## Sets this as the top-most `.editorconfig` file for this project.
+## -----------------------------------------------------------------------------
+
+root = true
+
+## -----------------------------------------------------------------------------
+## Global files configuration.
+## -----------------------------------------------------------------------------
+
+[*]
+charset = utf-8
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = tab

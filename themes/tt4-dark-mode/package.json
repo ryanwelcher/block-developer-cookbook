@@ -1,0 +1,31 @@
+{
+	"name": "tt4-dark-mode",
+	"version": "1.0.0",
+	"description": "A great theme by the even greater Justin Tadlock",
+	"main": "index.js",
+	"scripts": {
+		"start": "wp-scripts start js/variations.js --output-path=build/variations",
+		"start:iapi": "wp-scripts start --webpack-src-dir=js/iapi --output-path=build/iapi --experimental-modules"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/justintadlock/tt4-dark-mode.git"
+	},
+	"keywords": [
+		"block",
+		"theme",
+		"wordpress",
+		"dark",
+		"mode"
+	],
+	"devDependencies": {
+		"@wordpress/scripts": "^30.4.0"
+	},
+	"author": "Justin Tadlock",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/justintadlock/tt4-dark-mode/issues"
+	},
+	"homepage": "https://github.com/justintadlock/tt4-dark-mode#readme",
+	"prettier": "@wordpress/prettier-config"
+}
