@@ -15,8 +15,8 @@ module.exports = {
 				...view,
 				customScripts: isPluginVariant
 					? {
-							build: `wp-scripts build ${slug}.js`,
-							start: `wp-scripts start ${slug}.js`,
+							build: `wp-scripts build ./src/${slug}.js`,
+							start: `wp-scripts start ./src/${slug}.js`,
 						}
 					: view.customScripts,
 			};
@@ -30,6 +30,7 @@ module.exports = {
 		plugin: {},
 		interactive: {
 			viewScriptModule: 'file:./view.js',
+			render: 'file:./render.php',
 			customScripts: {
 				build: 'wp-scripts build --experimental-modules',
 				start: 'wp-scripts start --experimental-modules',

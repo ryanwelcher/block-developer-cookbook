@@ -31,6 +31,7 @@
  */
 
 namespace BlockDevelopersCookbook;
+
 {{^isPluginVariant}}
 /**
  * Registers the block using the metadata loaded from the `block.json` file.
@@ -42,7 +43,7 @@ namespace BlockDevelopersCookbook;
 function {{namespaceSnakeCase}}_{{slugSnakeCase}}_block_init() {
 	register_block_type( __DIR__ . '/build' );
 }
-add_action( 'init', '{{namespaceSnakeCase}}_{{slugSnakeCase}}_block_init' );
+add_action( 'init', __NAMESPACE__ . '\{{namespaceSnakeCase}}_{{slugSnakeCase}}_block_init' );
 {{/isPluginVariant}}
 {{#isPluginVariant}}
 add_action(
