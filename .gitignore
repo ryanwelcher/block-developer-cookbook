@@ -29,9 +29,10 @@ vendor/
 
 ## Studio stuff
 database
-mu-plugins
+mu-plugins/*
 !mu-plugins/block-developers-cookbook.php
 uploads
 db.php
-themes
 cursor
+themes/*
+!themes/tt4-dark-mode
