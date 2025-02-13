@@ -1,0 +1,46 @@
+<?php
+/**
+ * Render template for the Dark Light Mode Block.
+ *
+ * @package {{namespace}}
+ */
+
+namespace BlockDevelopersCookbook;
+
+{{#isCompletedVariant}}
+// Enqueue the WordPress API fetch script for making HTTP requests to the WordPress REST API.
+wp_enqueue_script( 'wp-api-fetch' );
+
+// Getting the initial color scheme from the cookie.
+$color_scheme = get_color_scheme();
+
+// Setup the initial state for the WordPress interactivity store.
+wp_interactivity_state(
+    'dark-light-mode',
+    array(
+        'userID'      => get_current_user_id(),
+        'colorScheme' => $color_scheme,
+        'darkMode'    => 'dark' === $color_scheme,
+    )
+);
+?>
+<div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>>
+    <button
+        data-wp-interactive="dark-light-mode"
+        data-wp-bind--aria-pressed="state.darkMode"
+        data-wp-on--click="actions.toggleMode"
+        data-wp-watch="callbacks.updateColorScheme"
+        class="toggle"
+        type="button"
+    >
+        <span class="toggle__display" hidden>
+        </span>
+    </button>
+</div>
+{{/isCompletedVariant}}
+{{#isStartVariant}}
+?>
+<div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>>
+    <p><?php esc_html_e( 'Dark Light Mode – hello from a dynamic block!', '{{textdomain}}' ); ?></p>
+</div>
+{{/isStartVariant}}

@@ -1,0 +1,123 @@
+<?php
+/**
+ * Plugin Name:       {{title}}
+{{#pluginURI}}
+ * Plugin URI:        {{{pluginURI}}}
+{{/pluginURI}}
+{{#description}}
+ * Description:       {{description}}
+{{/description}}
+ * Requires at least: 6.1
+ * Requires PHP:      7.0
+ * Version:           {{version}}
+{{#author}}
+ * Author:            {{author}}
+{{/author}}
+{{#license}}
+ * License:           {{license}}
+{{/license}}
+{{#licenseURI}}
+ * License URI:       {{{licenseURI}}}
+{{/licenseURI}}
+ * Text Domain:       {{textdomain}}
+{{#domainPath}}
+ * Domain Path:       {{{domainPath}}}
+{{/domainPath}}
+ *
+ * @package {{namespace}}
+ */
+
+namespace BlockDevelopersCookbook;
+
+{{#isCompletedVariant}}
+/**
+ * Gets the current color scheme preference from cookie or user meta.
+ *
+ * Priority order:
+ * 1. For logged-in users: Uses user meta preference
+ * 2. For guests: Uses cookie preference
+ * 3. Fallback: Returns 'light dark' to support both modes
+ *
+ * @return string The current color scheme setting.
+ */
+function get_color_scheme() {
+    // First check cookie, with sanitization for security.
+    $cookie_settings = isset( $_COOKIE['color-scheme'] ) ? sanitize_text_field( wp_unslash( $_COOKIE['color-scheme'] ) ) : 'light dark';
+    // For logged-in users, prefer their saved preference from user meta.
+    $color_scheme = is_user_logged_in() ? get_user_meta( get_current_user_id(), 'color-scheme', true ) : $cookie_settings;
+
+    return $color_scheme;
+}
+
+/**
+ * Enqueue color scheme styles with dynamic values.
+ */
+function enqueue_color_scheme_styles() {
+    // Get user's color scheme preference.
+    $color_scheme = get_color_scheme();
+
+    // Create a unique handle to avoid conflicts with other styles.
+    $handle = '{{textdomain}}-color-scheme';
+
+    // Register an empty stylesheet - we'll add our styles inline.
+    wp_register_style(
+        $handle,
+        false,
+        array(),
+        '1.0.0'
+    );
+
+    // Define the CSS that sets the color-scheme property.
+    $custom_css = '
+        :root {
+            color-scheme: ' . esc_html( $color_scheme ) . ';
+        }
+    ';
+
+    // Add our CSS inline and enqueue the style.
+    wp_add_inline_style( $handle, $custom_css );
+    wp_enqueue_style( $handle );
+}
+add_action( 'wp_enqueue_scripts', __NAMESPACE__ . '\enqueue_color_scheme_styles' );
+
+// Register user meta for color scheme.
+add_action(
+    'init',
+    function() {
+        register_meta(
+            'user',
+            'color-scheme',
+            array(
+                'show_in_rest' => true,
+                'type'         => 'string',
+                'single'       => true,
+            )
+        );
+    }
+);
+
+/**
+ * Registers the block using the metadata loaded from the `block.json` file.
+ * Behind the scenes, it registers also all assets so they can be enqueued
+ * through the block editor in the corresponding context.
+ *
+ * @see https://developer.wordpress.org/reference/functions/register_block_type/
+ */
+function create_block_dark_light_mode_block_init() {
+    register_block_type( __DIR__ . '/build' );
+}
+add_action( 'init', __NAMESPACE__ . '\create_block_dark_light_mode_block_init' );
+{{/isCompletedVariant}}
+{{#isStartVariant}}
+/**
+ * Registers the block using the metadata loaded from the `block.json` file.
+ * Behind the scenes, it registers also all assets so they can be enqueued
+ * through the block editor in the corresponding context.
+ *
+ * @see https://developer.wordpress.org/reference/functions/register_block_type/
+ */
+function create_block_dark_light_mode_block_init() {
+    register_block_type( __DIR__ . '/build' );
+}
+add_action( 'init', __NAMESPACE__ . '\create_block_dark_light_mode_block_init' );
+{{/isStartVariant}}

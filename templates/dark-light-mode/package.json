@@ -1,0 +1,30 @@
+{
+	"name": "@block-developer-cookbook/dark-light-mode",
+	"version": "1.0.0",
+	"description": "Create an interactive block that allows users to toggle between dark and light color schemes.",
+	"main": "index.js",
+	"author": {
+		"name": "Block Developer Cookbook",
+		"url": "https://blockdevelopercookbook.com"
+	},
+	"license": "GPL-2.0-or-later",
+	"keywords": [
+		"wordpress",
+		"create block",
+		"block template",
+		"dark mode",
+		"light mode",
+		"color scheme"
+	],
+	"homepage": "https://blockdevelopercookbook.com/",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ryanwelcher/block-developer-cookbook.git"
+	},
+	"bugs": {
+		"url": "https://github.com/ryanwelcher/block-developer-cookbook/issues"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
+}
