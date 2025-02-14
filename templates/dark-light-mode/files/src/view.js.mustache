@@ -4,10 +4,6 @@
 import { store } from '@wordpress/interactivity';
 
 {{#isCompletedVariant}}
-/**
- * Initialize the dark-light-mode store with state, actions, and callbacks
- * using WordPress Interactivity API.
- */
 const { state } = store( 'dark-light-mode', {
 	state: {
 		/**
@@ -23,8 +19,6 @@ const { state } = store( 'dark-light-mode', {
 	actions: {
 		/**
 		 * Toggles between dark and light mode.
-		 * If user is logged in, saves preference to user meta via REST API.
-		 * If user is not logged in, saves preference to cookies and localStorage.
 		 *
 		 * @return {void}
 		 */
@@ -69,12 +63,17 @@ const { state } = store( 'dark-light-mode', {
 			);
 		},
 		initToggle() {
-			state.darkMode =
-				window.matchMedia &&
-				window.matchMedia( '(prefers-color-scheme: dark)' ).matches;
+			if ( state.isLoggedIn || state.colorScheme !== 'light dark' ) {
+				state.darkMode = state.colorScheme === 'dark';
+			} else {
+				state.darkMode =
+					window.matchMedia &&
+					window.matchMedia( '(prefers-color-scheme: dark)' ).matches;
+			}
 		},
 	},
 } );
+
 {{/isCompletedVariant}}
 {{#isStartVariant}}
 store('dark-light-mode', {
