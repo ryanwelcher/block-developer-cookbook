@@ -68,6 +68,11 @@ const { state } = store( 'dark-light-mode', {
 				state.darkMode ? 'dark' : 'light'
 			);
 		},
+		initToggle() {
+			state.darkMode =
+				window.matchMedia &&
+				window.matchMedia( '(prefers-color-scheme: dark)' ).matches;
+		},
 	},
 } );
 {{/isCompletedVariant}}

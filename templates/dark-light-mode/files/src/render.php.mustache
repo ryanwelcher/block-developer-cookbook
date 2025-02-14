@@ -30,17 +30,19 @@ wp_interactivity_state(
         data-wp-bind--aria-pressed="state.darkMode"
         data-wp-on--click="actions.toggleMode"
         data-wp-watch="callbacks.updateColorScheme"
+		data-wp-init="callbacks.initToggle"
         class="toggle"
         type="button"
     >
-        <span class="toggle__display" hidden>
-        </span>
+        <span class="toggle__display" hidden></span>
     </button>
 </div>
 {{/isCompletedVariant}}
 {{#isStartVariant}}
 ?>
 <div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>>
-    <p><?php esc_html_e( 'Dark Light Mode – hello from a dynamic block!', '{{textdomain}}' ); ?></p>
+<button class="toggle" type="button">
+	<span class="toggle__display" hidden></span>
+</button>
 </div>
 {{/isStartVariant}}

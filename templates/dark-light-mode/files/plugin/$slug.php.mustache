@@ -62,8 +62,6 @@ function get_color_scheme() {
 }
 
 /**
- * Enqueue color scheme styles with dynamic values.
- *
  * Adds a CSS custom property to :root that controls the color-scheme
  * preference for the entire document. This allows the browser to adjust
  * default colors and form controls based on the user's preference.
@@ -81,8 +79,6 @@ function add_color_scheme_styles() {
 	</style>
 	<?php
 }
-
-// Hook our style enqueuing function to wp_enqueue_scripts.
 add_action( 'wp_head', __NAMESPACE__ . '\add_color_scheme_styles' );
 
 

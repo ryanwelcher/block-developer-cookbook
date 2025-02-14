@@ -4,7 +4,6 @@
  */
 
 .wp-block-{{namespace}}-{{slug}} {
-    {{#isCompletedVariant}}
     .toggle {
         display: flex;
         flex-wrap: wrap;
@@ -91,10 +90,4 @@
     [dir="rtl"] .toggle__input:checked+.toggle__display::before {
         transform: translate(-100%, -50%);
     }
-    {{/isCompletedVariant}}
-    {{#isStartVariant}}
-    background-color: #21759b;
-    color: #fff;
-    padding: 2px;
-    {{/isStartVariant}}
 }
