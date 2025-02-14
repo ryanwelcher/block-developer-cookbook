@@ -36,3 +36,4 @@ db.php
 cursor
 themes/*
 !themes/tt4-dark-mode
+!themes/twentytwentyfour
