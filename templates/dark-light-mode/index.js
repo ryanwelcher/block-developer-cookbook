@@ -15,6 +15,8 @@ module.exports = {
 		supports: {
 			interactive: true,
 		},
+		icon: 'star-half',
+		editorStyle: false,
 		customScripts: {
 			build: 'wp-scripts build --experimental-modules',
 			start: 'wp-scripts start --experimental-modules',

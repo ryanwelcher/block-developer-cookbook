@@ -15,13 +15,13 @@ wp_enqueue_script( 'wp-api-fetch' );
 $color_scheme = get_color_scheme();
 
 // Setup the initial state for the WordPress interactivity store.
+// This state will be available to the JavaScript front-end code.
 wp_interactivity_state(
-    'dark-light-mode',
-    array(
-        'userID'      => get_current_user_id(),
-        'colorScheme' => $color_scheme,
-        'darkMode'    => 'dark' === $color_scheme,
-    )
+	'dark-light-mode',
+	array(
+		'userID'      => get_current_user_id(), // Get the current user's ID or 0 for non-logged-in users.
+		'colorScheme' => $color_scheme,         // The current color scheme preference ('light' or 'dark').
+	)
 );
 ?>
 <div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>>

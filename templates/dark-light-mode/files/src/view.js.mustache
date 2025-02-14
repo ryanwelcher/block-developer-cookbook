@@ -8,63 +8,68 @@ import { store } from '@wordpress/interactivity';
  * Initialize the dark-light-mode store with state, actions, and callbacks
  * using WordPress Interactivity API.
  */
-const { state } = store('dark-light-mode', {
-    state: {
-        /**
-         * Computed property to check if user is logged in
-         * based on userID being greater than 0.
-         *
-         * @return {boolean} True if user is logged in, false otherwise.
-         */
-        get isLoggedIn() {
-            return state.userID > 0;
-        }
-    },
-    actions: {
-        /**
-         * Toggles between dark and light mode.
-         * If user is logged in, saves preference to user meta via REST API.
-         * If user is not logged in, saves preference to cookies and localStorage.
-         *
-         * @return {void}
-         */
-        toggleMode() {
-            state.darkMode = !state.darkMode;
-            if (state.isLoggedIn) {
-                // Save preference to user meta for logged-in users
-                wp.apiFetch({
-                    path: `/wp/v2/users/${state.userID}`,
-                    method: 'POST',
-                    data: {
-                        meta: {
-                            'color-scheme': state.darkMode ? 'dark' : 'light'
-                        }
-                    }
-                });
-            } else {
-                // Save preference to cookies and localStorage for non-logged-in users
-                document.cookie = `color-scheme=${state.darkMode ? 'dark' : 'light'};path=/`;
-                window.localStorage.setItem('color-scheme', state.darkMode ? 'dark' : 'light');
-            }
-        }
-    },
-    callbacks: {
-        /**
-         * Updates the root element's color scheme CSS property
-         * when the dark mode state changes.
-         * Skips if darkMode state is not yet initialized.
-         *
-         * @return {void}
-         */
-        updateColorScheme() {
-            if ('undefined' === typeof state.darkMode) {
-                return;
-            }
-            const root = document.querySelector(':root');
-            root.style.setProperty('color-scheme', state.darkMode ? 'dark' : 'light');
-        }
-    }
-});
+const { state } = store( 'dark-light-mode', {
+	state: {
+		/**
+		 * Computed property to check if user is logged in
+		 * based on userID being greater than 0.
+		 *
+		 * @return {boolean} True if user is logged in, false otherwise.
+		 */
+		get isLoggedIn() {
+			return state.userID > 0;
+		},
+	},
+	actions: {
+		/**
+		 * Toggles between dark and light mode.
+		 * If user is logged in, saves preference to user meta via REST API.
+		 * If user is not logged in, saves preference to cookies and localStorage.
+		 *
+		 * @return {void}
+		 */
+		toggleMode() {
+			state.darkMode = ! state.darkMode;
+			if ( state.isLoggedIn ) {
+				// Save preference to user meta for logged-in users
+				wp.apiFetch( {
+					path: `/wp/v2/users/${ state.userID }`,
+					method: 'POST',
+					data: {
+						meta: {
+							'color-scheme': state.darkMode ? 'dark' : 'light',
+						},
+					},
+				} );
+			} else {
+				// Save preference to a cookie.
+				document.cookie = `color-scheme=${
+					state.darkMode ? 'dark' : 'light'
+				};path=/`;
+			}
+		},
+	},
+	callbacks: {
+		/**
+		 * Updates the root element's color scheme CSS property
+		 * when the dark mode state changes.
+		 * Skips if darkMode state is not yet initialized.
+		 *
+		 * @return {void}
+		 */
+		updateColorScheme() {
+			// Dark mode will be undefined if there is not cookie or user meta.
+			if ( 'undefined' === typeof state.darkMode ) {
+				return;
+			}
+			const root = document.querySelector( ':root' );
+			root.style.setProperty(
+				'color-scheme',
+				state.darkMode ? 'dark' : 'light'
+			);
+		},
+	},
+} );
 {{/isCompletedVariant}}
 {{#isStartVariant}}
 store('dark-light-mode', {
