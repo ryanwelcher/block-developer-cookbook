@@ -1,0 +1,23 @@
+<?php
+
+namespace BlockDevelopersCookbook;
+
+/**
+ * Enqueue the Editor scripts and styles.
+ */
+function enqueue_editor_scripts_styles() {
+	global $pagenow, $typenow;
+
+	// Check if we are on the Post Editor and the post type is "post".
+	if ( 'person' === $typenow ) {
+		$assets = include trailingslashit( plugin_dir_path( dirname( __FILE__ ) ) ) . 'build/your-people.asset.php';
+		wp_enqueue_script(
+			'person_meta_editor_scripts',
+			trailingslashit( plugin_dir_url( dirname( __FILE__ ) ) ) . 'build/your-people.js',
+			$assets['dependencies'],
+			$assets['version'],
+			true
+		);
+	}
+}
+add_action( 'enqueue_block_editor_assets', __NAMESPACE__ . '\enqueue_editor_scripts_styles' );
