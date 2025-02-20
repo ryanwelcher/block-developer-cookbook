@@ -4,10 +4,10 @@ import { PluginDocumentSettingPanel } from '@wordpress/editor';
 import { useEntityProp } from '@wordpress/core-data';
 import { TextControl } from '@wordpress/components';
 
-{{#isCompletedVariant}}
 function SocialLinksPanel() {
+	{{#isCompletedVariant}}
     const [ meta, setMeta ] = useEntityProp( 'postType', 'person', 'meta' );
-
+	{{/isCompletedVariant}}
     return (
         <>
             <PluginDocumentSettingPanel
@@ -21,18 +21,21 @@ function SocialLinksPanel() {
                         'Title',
                         'your-people'
                     ) }
-                    value={ meta?.yp_job_title || '' }
+                    value={ {{#isCompletedVariant}}meta?.yp_job_title || {{/isCompletedVariant}}'' }
+					{{#isCompletedVariant}}
                     onChange={ ( newValue ) =>
                         setMeta( {
                             ...meta,
                             yp_job_title: newValue,
                         } )
                     }
+					{{/isCompletedVariant}}
                     help={ __(
                         'The person\'s job title(s).',
                         'your-people'
                     ) }
                 />
+				{{#isCompletedVariant}}
                 <TextControl
                     label={ __(
                         'Professional Designation',
@@ -102,7 +105,9 @@ function SocialLinksPanel() {
                         } )
                     }
                 />
+				{{/isCompletedVariant}}
             </PluginDocumentSettingPanel>
+			{{#isCompletedVariant}}
             <PluginDocumentSettingPanel
                 name="yp-social-links"
                 title={ __( 'Social Links', 'your-people' ) }
@@ -162,9 +167,9 @@ function SocialLinksPanel() {
                     }
                 />
             </PluginDocumentSettingPanel>
+			{{/isCompletedVariant}}
         </>
     );
 }
 
 registerPlugin( 'yp-social-links-panel', { render: SocialLinksPanel } );
-{{/isCompletedVariant}}

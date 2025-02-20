@@ -32,7 +32,6 @@
 
 namespace BlockDevelopersCookbook;
 
-{{#isCompletedVariant}}
 /**
  * Register the 'person' custom post type.
  */
@@ -105,7 +104,6 @@ add_action( 'init', __NAMESPACE__ . '\register_role_taxonomy' );
  * Register custom meta fields for the 'person' post type.
  */
 function register_person_meta() {
-
 	register_post_meta(
 		'person',
 		'yp_job_title',
@@ -118,7 +116,7 @@ function register_person_meta() {
 			'sanitize_callback' => 'wp_strip_all_tags'
 		)
 	);
-
+	{{#isCompletedVariant}}
 	register_post_meta(
 		'person',
 		'yp_professional_designation',
@@ -235,6 +233,7 @@ function register_person_meta() {
 			'sanitize_callback' => 'wp_strip_all_tags'
 		)
 	);
+	{{/isCompletedVariant}}
 }
 add_action( 'init', __NAMESPACE__ . '\register_person_meta' );
 
@@ -242,7 +241,8 @@ add_action( 'init', __NAMESPACE__ . '\register_person_meta' );
  * Register the plugin templates.
  */
 function register_plugin_templates() {
-
+	// Register your custom templates here.
+	{{#isCompletedVariant}}
 	register_block_template( 'your-people//single-person', [
 		'title'       => __( 'Single Person', 'your-people' ),
 		'description' => __( 'Displays a single person\'s profile page.', 'your-people' ),
@@ -260,6 +260,7 @@ function register_plugin_templates() {
 		'description' => __( 'Displays a list of people in a specific role.', 'your-people' ),
 		'content'     => get_template_content( 'taxonomy-role.php' )
 	] );
+	{{/isCompletedVariant}}
 }
 add_action( 'init', __NAMESPACE__ . '\register_plugin_templates' );
 
@@ -275,7 +276,6 @@ function get_template_content( $template ) {
 	return ob_get_clean();
 }
 
-{{/isCompletedVariant}}
 // Include some files we need
 require_once __DIR__ . '/includes/admin.php';
 require_once __DIR__ . '/includes/editor.php';
