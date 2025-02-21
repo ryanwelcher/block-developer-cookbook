@@ -10,15 +10,14 @@ module.exports = {
 			prettier: '@wordpress/prettier-config',
 		},
 		example: {},
+		customScripts: {
+			build: 'wp-scripts build ./src/block-binding-shortcut.js',
+			start: 'wp-scripts start ./src/block-binding-shortcut.js',
+		},
 	},
 	variants: {
 		start: {},
-		completed: {
-			customScripts: {
-				build: 'wp-scripts build ./src/block-binding-shortcut.js',
-				start: 'wp-scripts start ./src/block-binding-shortcut.js',
-			},
-		},
+		completed: {},
 	},
 	pluginTemplatesPath: join(__dirname, 'files/plugin'),
 	blockTemplatesPath: join(__dirname, 'files/src'),
