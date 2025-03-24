@@ -35,6 +35,9 @@ wp_interactivity_state(
         type="button"
     >
         <span class="toggle__display" hidden></span>
+        <span class="screen-reader-text">
+            <?php esc_html_e( 'View in dark mode', 'dark-light-mode' ); ?>
+        </span>
     </button>
 </div>
 {{/isCompletedVariant}}
@@ -43,6 +46,9 @@ wp_interactivity_state(
 <div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>>
 <button class="toggle" type="button">
 	<span class="toggle__display" hidden></span>
+	<span class="screen-reader-text">
+		<?php esc_html_e( 'View in dark mode', 'dark-light-mode' ); ?>
+	</span>
 </button>
 </div>
 {{/isStartVariant}}
