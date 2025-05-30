@@ -8,6 +8,7 @@ module.exports = {
 	defaultValues: {
 		version,
 		description,
+		author: 'The Block Developer Cookbook',
 		namespace: 'block-developers-cookbook',
 		customPackageJSON: {
 			prettier: '@wordpress/prettier-config',
