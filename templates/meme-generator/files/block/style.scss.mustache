@@ -1,0 +1,41 @@
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+
+.wp-block-{{namespace}}-{{slug}} {
+
+	.meme-wrapper {
+		position: relative;
+		display: flex;
+		justify-content: center;
+
+		img {
+			display: block;
+			width: 100%;
+			height: auto;
+		}
+
+		.text-overlay {
+			position: absolute;
+			text-transform: uppercase;
+			font-weight: bolder;
+			left: 0;
+			right: 0;
+			margin: 0 auto;
+			padding: 0 1rem;
+			pointer-events: none;
+		}
+
+		.text-overlay__top {
+			top: 1rem;
+		}
+
+		.text-overlay__bottom {
+			bottom: 1rem;
+		}
+	}
+
+}
