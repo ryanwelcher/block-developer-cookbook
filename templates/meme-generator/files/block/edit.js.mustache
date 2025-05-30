@@ -79,17 +79,6 @@ export default function Edit( { attributes, setAttributes } ) {
 			}
 		};
 		loadImages();
-		/*
-		fetch( 'https://api.imgflip.com/get_memes' )
-			.then( ( response ) => response.json() )
-			.then( ( data ) => {
-				const images = data.data.memes.filter(
-					( image ) => image.box_count === 2
-				);
-				setAllImages( images );
-				setFilteredImages( images );
-			} );
-		*/
 	}, [] );
 
 	// Filter the Meme based on the search term

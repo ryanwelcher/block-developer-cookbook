@@ -44,10 +44,12 @@ export default function save( { attributes } ) {
 				{{#isCompletedVariant}}
 				<RichText.Content
 					value={ topText }
+					tagName="div"
 					className="text-overlay text-overlay__top"
 				/>
 				<RichText.Content
 					value={ bottomText }
+					tagName="div"
 					className="text-overlay text-overlay__bottom"
 				/>
 				<img
