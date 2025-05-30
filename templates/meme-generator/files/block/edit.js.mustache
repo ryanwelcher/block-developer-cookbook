@@ -34,6 +34,7 @@ import './editor.scss';
  * @return {WPElement} Element to render.
  */
 export default function Edit( { attributes, setAttributes } ) {
+	const blockProps = useBlockProps();
 	{{#isCompletedVariant}}
 	const { image, topText, bottomText } = attributes;
 
