@@ -1,0 +1,124 @@
+<?php
+/**
+ * Plugin Name:       {{title}}
+{{#pluginURI}}
+ * Plugin URI:        {{{pluginURI}}}
+{{/pluginURI}}
+{{#description}}
+ * Description:       {{description}}
+{{/description}}
+ * Requires at least: 6.5
+ * Requires PHP:      7.0
+ * Version:           {{version}}
+{{#author}}
+ * Author:            {{author}}
+{{/author}}
+{{#license}}
+ * License:           {{license}}
+{{/license}}
+{{#licenseURI}}
+ * License URI:       {{{licenseURI}}}
+{{/licenseURI}}
+ * Text Domain:       {{textdomain}}
+{{#domainPath}}
+ * Domain Path:       {{{domainPath}}}
+{{/domainPath}}
+{{#updateURI}}
+ * Update URI:        {{{updateURI}}}
+{{/updateURI}}
+ *
+ * @package           {{namespace}}
+ */
+
+namespace BlockDevelopersCookbook;
+
+
+/**
+ * Registers the block using the metadata loaded from the `block.json` file.
+ * Behind the scenes, it registers also all assets so they can be enqueued
+ * through the block editor in the corresponding context.
+ *
+ * @see https://developer.wordpress.org/reference/functions/register_block_type/
+ */
+function {{slugSnakeCase}}_block_init() {
+	// Register the block.
+	register_block_type( __DIR__ . '/build' );
+	{{#isCompletedVariant}}
+
+	/**
+	* Register some Meme fonts
+	*/
+	wp_register_font_collection( 'memes', [
+		'name'          => __( 'Meme fonts', '{{textdomain}}' ),
+		'description'   => __( 'For the LOLZ!.', '{{textdomain}}' ),
+		'font_families' => [
+			[
+				'font_family_settings' => [
+					'fontFamily' => 'arial, sans-serif',
+					'slug'       => 'arial',
+					'name'       => __( 'Arial', '{{textdomain}}' ),
+				],
+				'categories' => [ 'memes', 'sans-serif' ]
+			],
+			[
+				'font_family_settings' => [
+					'fontFamily' => "Comic Sans MS, cursive, sans-serif",
+					'slug'       => 'comic-sans',
+					'name'       => __( 'Comic Sans', '{{textdomain}}' ),
+				],
+				'categories' => [ 'memes', 'serif' ]
+			],
+			[
+				'font_family_settings' => [
+					'fontFamily' => "'Impact', sans-serif",
+					'slug'       => 'impact',
+					'name'       => __( 'Impact', '{{textdomain}}' ),
+					'fontFace'   => [
+						[
+							'fontFamily' => 'Impact',
+							'src'        => trailingslashit( plugin_dir_url( __FILE__ ) ) . 'assets/fonts/impact.ttf',
+							'fontWeight' => '400',
+							'fontStyle'  => 'normal',
+						],
+					]
+				],
+				'categories' => [ 'monospace', 'serif' ]
+			],
+			[
+				'font_family_settings' => [
+					'fontFamily' => "'Montserrat', sans-serif",
+					'slug'       => 'montserrat',
+					'name'       => __( 'Montserrat', '{{textdomain}}' ),
+					'fontFace'   => [
+						[
+							'fontFamily' => 'Montserrat',
+							'src'        => 'https://fonts.gstatic.com/s/montserrat/v30/JTUSjIg1_i6t8kCHKm459WlhyyTh89Y.woff2',
+							'fontWeight' => '100 900',
+							'fontStyle'  => 'normal',
+						],
+						[
+							'fontFamily' => 'Montserrat',
+							'src'        => 'https://fonts.gstatic.com/s/montserrat/v30/JTUQjIg1_i6t8kCHKm459WxRyS7m0dR9pA.woff2',
+							'fontWeight' => '100 900',
+							'fontStyle'  => 'italic',
+						]
+					]
+				],
+				'categories' => [ 'memes', 'sans-serif' ]
+			]
+		],
+		'categories' => [
+			[
+				'name' => __( 'Memes', '{{textdomain}}' ),
+				'slug' => 'memes'
+			],
+			[
+				'name' => __( 'Sans Serif', '{{textdomain}}' ),
+				'slug' => 'sans-serif'
+			],
+
+		]
+	] );
+{{/isCompletedVariant}}
+}
+add_action( 'init', __NAMESPACE__ . '\{{slugSnakeCase}}_block_init' );
