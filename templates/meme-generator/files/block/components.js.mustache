@@ -1,0 +1,51 @@
+/**
+ *  WordPress dependencies
+ */
+// eslint-disable-next-line @wordpress/no-unsafe-wp-apis
+import { Spinner, __experimentalGrid as Grid } from '@wordpress/components';
+import { __, sprintf } from '@wordpress/i18n';
+
+export const ApiImageSelect = ( { images, setAttributes } ) => {
+	if ( images.length < 1 ) {
+		return <Spinner />;
+	}
+
+	return (
+		<Grid
+			columns={ 4 }
+			role="grid"
+			aria-label={ __( 'Meme image selection grid', '{{textdomain}}' ) }
+		>
+			{ images.map( ( meme ) => {
+				const { id, url, name } = meme;
+				return (
+					<div
+						key={ id }
+						role="gridcell"
+						className="image-select-wrapper"
+					>
+						<button
+							className="image-select"
+							onClick={ () => setAttributes( { image: meme } ) }
+							aria-label={ sprintf(
+								/* translators: %s: Name of the meme image */
+								__( 'Select meme: %s', '{{textdomain}}' ),
+								name
+							) }
+							title={ name }
+						>
+							<img src={ url } alt={ name } aria-hidden="true" />
+							<span className="screen-reader-text">
+								{ sprintf(
+									/* translators: %s: Name of the meme image */
+									__( 'Select meme: %s', '{{textdomain}}' ),
+									name
+								) }
+							</span>
+						</button>
+					</div>
+				);
+			} ) }
+		</Grid>
+	);
+};
