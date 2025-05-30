@@ -111,10 +111,10 @@ export default function Edit( { attributes, setAttributes } ) {
 						'Choose an image for your meme:',
 						'twitch-steams'
 					) }
-					label={ __( 'Meme Generator', 'twitch-streams' ) }
+					label={ __( 'Meme Generator', '{{textdomain}}' ) }
 				>
 					<TextControl
-						label={ __( 'Search', 'twitch-streams' ) }
+						label={ __( 'Search', '{{textdomain}}' ) }
 						value={ searchTerm }
 						onChange={ ( newSearchTerm ) =>
 							setSearchTerm( newSearchTerm )
@@ -154,11 +154,9 @@ export default function Edit( { attributes, setAttributes } ) {
 					{{/isCompletedVariant}}
 					{{#isCompletedVariant}}
 					<RichText
-						tagName="div"
-						id={ `${ blockProps.id }-top-text` }
 						className="text-overlay text-overlay__top"
 						value={ topText }
-						placeholder={ __( 'Setup', 'twitch-streams' ) }
+						placeholder={ __( 'Setup', '{{textdomain}}' ) }
 						onChange={ ( newTopText ) =>
 							setAttributes( { topText: newTopText } )
 						}
@@ -166,10 +164,9 @@ export default function Edit( { attributes, setAttributes } ) {
 						disableLineBreaks
 					/>
 					<RichText
-						tagName="div"
 						className="text-overlay text-overlay__bottom"
 						value={ bottomText }
-						placeholder={ __( 'Punchline', 'twitch-streams' ) }
+						placeholder={ __( 'Punchline', '{{textdomain}}' ) }
 						onChange={ ( newBottomText ) =>
 							setAttributes( { bottomText: newBottomText } )
 						}
@@ -185,7 +182,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				<ToolbarGroup>
 					<ToolbarButton
 						icon="remove"
-						label={ __( 'Remove Meme Image', 'twitch-streams' ) }
+						label={ __( 'Remove Meme Image', '{{textdomain}}' ) }
 						onClick={ () => setAttributes( { image: false } ) }
 					/>
 				</ToolbarGroup>
