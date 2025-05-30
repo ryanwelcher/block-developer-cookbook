@@ -34,33 +34,7 @@ import './editor.scss';
  * @return {WPElement} Element to render.
  */
 export default function Edit( { attributes, setAttributes } ) {
-	{{^isCompletedVariant}}
 	const blockProps = useBlockProps();
-	return (
-		<>
-			<section { ...blockProps }>
-				<div className="meme-wrapper">
-					<div
-						className="text-overlay text-overlay__top"
-						style={ { color: 'white' } }
-					>
-						Top Text
-					</div>
-					<div
-						className="text-overlay text-overlay__bottom"
-						style={ { color: 'white' } }
-					>
-						Bottom Text
-					</div>
-					<img
-						src="https://i.imgflip.com/1bh8.jpg"
-						alt="The Most Interesting Man In The World"
-					/>
-				</div>
-			</section>
-		</>
-	);
-	{{/isCompletedVariant}}
 	{{#isCompletedVariant}}
 	const { image, topText, bottomText } = attributes;
 
@@ -68,8 +42,6 @@ export default function Edit( { attributes, setAttributes } ) {
 	const [ allImages, setAllImages ] = useState( [] );
 	const [ filteredImages, setFilteredImages ] = useState( [] );
 	const [ searchTerm, setSearchTerm ] = useState( '' );
-
-	const blockProps = useBlockProps();
 
 	// Load the images from the API
 	useEffect( () => {
@@ -162,6 +134,24 @@ export default function Edit( { attributes, setAttributes } ) {
 		<>
 			<section { ...blockProps }>
 				<div className="meme-wrapper">
+					{{^isCompletedVariant}}
+					<div
+						className="text-overlay text-overlay__top"
+						style={ { color: 'white' } }
+					>
+						Top Text
+					</div>
+					<div
+						className="text-overlay text-overlay__bottom"
+						style={ { color: 'white' } }
+					>
+						Bottom Text
+					</div>
+					<img
+						src="https://i.imgflip.com/1bh8.jpg"
+						alt="The Most Interesting Man In The World"
+					/>
+					{{/isCompletedVariant}}
 					{{#isCompletedVariant}}
 					<RichText
 						tagName="div"
