@@ -23,6 +23,24 @@ export default function save( { attributes } ) {
 	return (
 		<section { ...useBlockProps.save() }>
 			<div className="meme-wrapper">
+				{{^isCompletedVariant}}
+				<div
+					className="text-overlay text-overlay__top"
+					style={ { color: 'white' } }
+				>
+					Top Text
+				</div>
+				<div
+					className="text-overlay text-overlay__bottom"
+					style={ { color: 'white' } }
+				>
+					Bottom Text
+				</div>
+				<img
+					src="https://i.imgflip.com/1bh8.jpg"
+					alt="The Most Interesting Man In The World"
+				/>
+				{{/isCompletedVariant}}
 				{{#isCompletedVariant}}
 				<RichText.Content
 					value={ topText }
