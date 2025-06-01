@@ -49,6 +49,7 @@ export default function Edit( { attributes, setAttributes } ) {
 			const sessionImages = sessionStorage.getItem( 'meme_images' );
 			if ( sessionImages ) {
 				setAllImages( JSON.parse( sessionImages ) );
+				setFilteredImages( JSON.parse( sessionImages ) );
 			} else {
 				const response = await fetch(
 					'https://api.imgflip.com/get_memes'
@@ -98,7 +99,7 @@ export default function Edit( { attributes, setAttributes } ) {
 					icon={ <MemeIcon /> }
 					instructions={ __(
 						'Choose an image for your meme:',
-						'twitch-steams'
+						'{{textdomain}}'
 					) }
 					label={ __( 'Meme Generator', '{{textdomain}}' ) }
 				>
