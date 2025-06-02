@@ -37,7 +37,6 @@ module.exports = {
 				color: {
 					text: true,
 					background: false,
-					gradients: false,
 					enableContrastChecker: false,
 				},
 				typography: {
