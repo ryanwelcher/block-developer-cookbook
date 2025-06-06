@@ -35,8 +35,6 @@ $context = array_merge(
 ?>
 <div <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>
 	data-wp-interactive="{{slug}}"
-	data-wp-init="callbacks.setupSlider"
-	data-wp-on-document--keydown="callbacks.onKeyDown"
 	<?php echo wp_interactivity_data_wp_context( $context ); ?>
 
 >
