@@ -1,6 +1,6 @@
 {
 	"name": "@block-developer-cookbook/dark-light-mode",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Create an interactive block that allows users to toggle between dark and light color schemes.",
 	"main": "index.js",
 	"author": {
