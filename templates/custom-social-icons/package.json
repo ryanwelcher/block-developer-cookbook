@@ -1,0 +1,30 @@
+{
+	"name": "@block-developer-cookbook/custom-social-icons",
+	"version": "1.0.0",
+	"description": "Create a plugin that adds custom social icons to the Social Icons block.",
+	"main": "index.js",
+	"author": {
+		"name": "Block Developer Cookbook",
+		"url": "https://blockdevelopercookbook.com"
+	},
+	"license": "GPL-2.0-or-later",
+	"keywords": [
+		"wordpress",
+		"create block",
+		"block template",
+		"social icons",
+		"custom icons",
+		"block variation"
+	],
+	"homepage": "https://blockdevelopercookbook.com/",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ryanwelcher/block-developer-cookbook.git"
+	},
+	"bugs": {
+		"url": "https://github.com/ryanwelcher/block-developer-cookbook/issues"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
+}
