@@ -1,4 +1,3 @@
-{{^isPluginVariant}}
 /**
  * Registers a new block provided a unique name and an object defining its behavior.
  *
@@ -19,9 +18,7 @@ import './style.scss';
  * Internal dependencies
  */
 import Edit from './edit';
-{{#isStaticVariant}}
 import save from './save';
-{{/isStaticVariant}}
 import metadata from './block.json';
 
 /**
@@ -42,4 +39,3 @@ registerBlockType( metadata.name, {
 	save,
 	{{/isStaticVariant}}
 } );
-{{/isPluginVariant}}

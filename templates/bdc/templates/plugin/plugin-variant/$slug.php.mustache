@@ -1,0 +1,51 @@
+<?php
+/**
+ * Plugin Name:       {{title}}
+{{#pluginURI}}
+ * Plugin URI:        {{{pluginURI}}}
+{{/pluginURI}}
+{{#description}}
+ * Description:       {{description}}
+{{/description}}
+ * Requires at least: 6.1
+ * Requires PHP:      7.0
+ * Version:           {{version}}
+{{#author}}
+ * Author:            {{author}}
+{{/author}}
+{{#license}}
+ * License:           {{license}}
+{{/license}}
+{{#licenseURI}}
+ * License URI:       {{{licenseURI}}}
+{{/licenseURI}}
+ * Text Domain:       {{textdomain}}
+{{#domainPath}}
+ * Domain Path:       {{{domainPath}}}
+{{/domainPath}}
+{{#updateURI}}
+ * Update URI:        {{{updateURI}}}
+{{/updateURI}}
+ *
+ * @package           {{namespace}}
+ */
+
+namespace BlockDevelopersCookbook;
+
+add_action(
+	'enqueue_block_editor_assets',
+	function() {
+		${{slugSnakeCase}}_file = plugin_dir_path( __FILE__ ) . '/build/{{slug}}.asset.php';
+
+		if ( file_exists( ${{slugSnakeCase}}_file ) ) {
+			$assets = include ${{slugSnakeCase}}_file;
+			wp_enqueue_script(
+				'{{slug}}',
+				plugin_dir_url( __FILE__ ) . '/build/{{slug}}.js',
+				$assets['dependencies'],
+				$assets['version'],
+				true
+			);
+		}
+	}
+);
