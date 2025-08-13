@@ -1,6 +1,6 @@
 {
 	"name": "@block-developer-cookbook/editorial-notes",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"description": "Add editorial notes to each block that are stored in a custom attribute.",
 	"main": "index.js",
 	"author": {

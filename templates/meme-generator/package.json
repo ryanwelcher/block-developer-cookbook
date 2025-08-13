@@ -1,6 +1,6 @@
 {
 	"name": "@block-developer-cookbook/meme-generator",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Generate and display memes on your site.",
 	"main": "index.js",
 	"author": {

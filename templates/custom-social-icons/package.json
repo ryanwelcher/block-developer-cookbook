@@ -1,6 +1,6 @@
 {
 	"name": "@block-developer-cookbook/custom-social-icons",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Create a plugin that adds custom social icons to the Social Icons block.",
 	"main": "index.js",
 	"author": {

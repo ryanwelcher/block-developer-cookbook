@@ -1,6 +1,6 @@
 {
 	"name": "@block-developer-cookbook/bound-excerpt",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "A tutorial on how to use custom block bindings to bind the post excerpt to a block.",
 	"main": "index.js",
 	"author": {

@@ -1,6 +1,6 @@
 {
 	"name": "@block-developer-cookbook/recipe-block-deprecations",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Learn how to manage changes in your static blocks by using block deprecations.",
 	"main": "index.js",
 	"author": {

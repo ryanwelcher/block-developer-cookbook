@@ -1,6 +1,6 @@
 {
 	"name": "@block-developer-cookbook/word-counter",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Create a word count tool to restrict post saving based until the word count is met.",
 	"main": "index.js",
 	"author": {

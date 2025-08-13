@@ -1,6 +1,6 @@
 {
 	"name": "@block-developer-cookbook/customize-build-process",
-	"version": "2.0.1",
+	"version": "2.0.2",
 	"description": "Demonstrates customizing build process in a WordPress plugin.",
 	"main": "index.js",
 	"author": {

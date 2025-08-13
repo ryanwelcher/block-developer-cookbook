@@ -1,6 +1,6 @@
 {
 	"name": "@block-developer-cookbook/your-people",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Create a custom block to display team members or staff.",
 	"main": "index.js",
 	"author": {
