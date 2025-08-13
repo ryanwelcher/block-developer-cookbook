@@ -9,5 +9,7 @@
 	<rule ref="WordPress-Extra">
 		<!-- Package tags are annoying-->
 		<exclude name="Squiz.Commenting.FileComment.MissingPackageTag"/>
+		<exclude name="Universal.Arrays.DisallowShortArraySyntax.Found"/>
+		<exclude name="Squiz.Commenting.FunctionComment.Missing"/>
 	</rule>
 </ruleset>
