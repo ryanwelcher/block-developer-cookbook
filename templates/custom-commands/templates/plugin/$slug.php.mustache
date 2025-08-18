@@ -1,0 +1,56 @@
+<?php
+/**
+ * Plugin Name:       Block Developer Cookbook: {{title}}
+{{#pluginURI}}
+ * Plugin URI:        {{{pluginURI}}}
+{{/pluginURI}}
+{{#description}}
+ * Description:       {{description}}
+{{/description}}
+ * Requires at least: 6.1
+ * Requires PHP:      7.0
+ * Version:           {{version}}
+{{#author}}
+ * Author:            {{author}}
+{{/author}}
+{{#license}}
+ * License:           {{license}}
+{{/license}}
+{{#licenseURI}}
+ * License URI:       {{{licenseURI}}}
+{{/licenseURI}}
+ * Text Domain:       {{textdomain}}
+{{#domainPath}}
+ * Domain Path:       {{{domainPath}}}
+{{/domainPath}}
+ *
+ * @package {{namespace}}
+ */
+
+namespace BlockDevelopersCookbook;
+
+add_action(
+	'enqueue_block_editor_assets',
+	function() {
+		$toggle_custom_fields_file = plugin_dir_path( __FILE__ ) . '/build/build/index.asset.php';
+
+		if ( file_exists( $toggle_custom_fields_file ) ) {
+			$assets = include $toggle_custom_fields_file;
+			wp_enqueue_script(
+				'confetti-lib',
+				'https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js">',
+				$assets['dependencies'],
+				$assets['version'],
+				true
+			);
+
+			wp_enqueue_script(
+				'custom-commands',
+				plugin_dir_url( __FILE__ ) . '/build/index.js',
+				$assets['dependencies'],
+				$assets['version'],
+				true
+			);
+		}
+	}
+);

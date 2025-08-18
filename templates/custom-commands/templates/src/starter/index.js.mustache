@@ -1,0 +1,24 @@
+/**
+ * WordPress dependencies
+ */
+import {
+	store as commandsStore,
+	useCommand,
+	useCommandLoader,
+} from '@wordpress/commands';
+import { replace, plus, starFilled } from '@wordpress/icons';
+import { dispatch, useSelect } from '@wordpress/data';
+import { __ } from '@wordpress/i18n';
+import { getPathAndQueryString } from '@wordpress/url';
+import { registerPlugin } from '@wordpress/plugins';
+import { store as editorStore } from '@wordpress/editor';
+import { store as coreStore } from '@wordpress/core-data';
+import { useMemo } from '@wordpress/element';
+
+const Render = () => {
+	return null; // The component doesn't need to render anything visually
+};
+
+registerPlugin( 'my-custom-command-plugin', {
+	render: Render,
+} );
