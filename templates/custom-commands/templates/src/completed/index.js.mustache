@@ -27,7 +27,9 @@ const Render = () => {
 		label: __( 'Great Success!' ),
 		icon: starFilled,
 		callback: ( { close } ) => {
+			// Call this to close the command palette
 			close();
+			// Do something!
 			window.confetti( {
 				particleCount: 100,
 				fullscreen: true,
@@ -40,7 +42,7 @@ const Render = () => {
 	return null; // The component doesn't need to render anything visually
 };
 
-registerPlugin( 'my-custom-command-plugin', {
+registerPlugin( '{{namespace}}-{{slug}}-plugin', {
 	render: Render,
 } );
 
@@ -54,7 +56,6 @@ const useToggleCustomFields = () => {
 			const postTypeObject = select( coreStore ).getPostType( postType );
 			return {
 				isViewable: postTypeObject?.viewable,
-				postTypeName: postType,
 				hasCustomFields:
 					postTypeObject?.supports?.[ 'custom-fields' ] === true,
 				isSiteEditor:
@@ -64,6 +65,7 @@ const useToggleCustomFields = () => {
 		[]
 	);
 	const commands = [];
+
 	if ( isViewable && hasCustomFields && ! isSiteEditor ) {
 		commands.push( {
 			name: 'block-developer-cookbook/toggle-custom-fields',

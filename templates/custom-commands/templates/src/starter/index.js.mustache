@@ -19,6 +19,6 @@ const Render = () => {
 	return null; // The component doesn't need to render anything visually
 };
 
-registerPlugin( 'my-custom-command-plugin', {
+registerPlugin( '{{namespace}}-{{slug}}-plugin', {
 	render: Render,
 } );

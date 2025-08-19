@@ -32,7 +32,7 @@ namespace BlockDevelopersCookbook;
 add_action(
 	'enqueue_block_editor_assets',
 	function() {
-		$toggle_custom_fields_file = plugin_dir_path( __FILE__ ) . '/build/build/index.asset.php';
+		$toggle_custom_fields_file = plugin_dir_path( __FILE__ ) . '/build/index.asset.php';
 
 		if ( file_exists( $toggle_custom_fields_file ) ) {
 			$assets = include $toggle_custom_fields_file;
