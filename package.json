@@ -25,7 +25,8 @@
 		"prep:dark-light-mode": "cd plugins && npx @wordpress/create-block@latest dark-light-mode --template ../templates/dark-light-mode --category block-developer-cookbook",
 		"prep:your-people": "cd plugins && npx @wordpress/create-block@latest your-people --template ../templates/your-people --category block-developer-cookbook",
 		"prep:meme-generator": "cd plugins && npx @wordpress/create-block@latest meme-generator --template ../templates/meme-generator --category block-developer-cookbook",
-		"prep:custom-social-icons": "cd plugins && npx @wordpress/create-block@latest custom-social-icons --template ../templates/custom-social-icons --category block-developer-cookbook"
+		"prep:custom-social-icons": "cd plugins && npx @wordpress/create-block@latest custom-social-icons --template ../templates/custom-social-icons --category block-developer-cookbook",
+		"prep:custom-commands": "cd plugins && npx @wordpress/create-block@latest custom-commands --template ../templates/custom-commands --category block-developer-cookbook"
 	},
 	"devDependencies": {
 		"@wordpress/env": "^10.17.0",

@@ -53,5 +53,7 @@ Run any of the following scripts to scaffold a recipe and then follow the tutori
 | `npm run prep:dark-light-mode`         | [Creating a dark/light mode block](https://blockdevelopercookbook.com/recipes/creating-a-dark-light-mode-block/)           |
 | `npm run prep:your-people`             | [Managing team members](https://blockdevelopercookbook.com/recipes/managing-team-members/)                                 |
 | `npm run prep:meme-generator`          | [Meme Generator](https://blockdevelopercookbook.com/recipes/meme-generator/)                                               |
+| `npm run prep:custom-social-icons`     | [Creating Custom Social Icons](https://blockdevelopercookbook.com/recipes/creating-custom-social-icons/)                   |
+| `npm run prep:custom-commands`         | [Command Palette Commands](https://blockdevelopercookbook.com/recipes/custom-commands/)                                    |
 
 All of the these commands will scaffold a new plugin in the `plugins` directory of this repo, set some defaults, and assign them the custom block category of `Block Developer Cookbook'. Beyond that, there is no difference between the plugins scaffolded using these commands and the [templates published on NPM](https://www.npmjs.com/settings/block-developer-cookbook/packages) - in fact this repo uses those!
