@@ -1,0 +1,153 @@
+/**
+ * WordPress Dependencies
+ */
+import { __ } from '@wordpress/i18n';
+import { useBlockProps, RichText, InnerBlocks } from '@wordpress/block-editor';
+
+/**
+ * Edit component for the Recipe Card block
+ *
+ * @param {Object}   props               Block props.
+ * @param {Object}   props.attributes    Block attributes.
+ * @param {Function} props.setAttributes Function to set block attributes.
+ * @return {WPElement}                   Element to render.
+ */
+export default function Edit( { attributes, setAttributes } ) {
+	const { name } = attributes;
+
+	const TEMPLATE = [
+		[
+			'core/details',
+			{
+				summary: 'Ingredients',
+				showContent: true,
+				className: 'recipe-ingredients',
+			},
+			[
+				[
+					'core/list',
+					{
+						ordered: false,
+					},
+					[
+						[
+							'core/list-item',
+							{ content: '2 1/4 cups all-purpose flour' },
+						],
+						[
+							'core/list-item',
+							{ content: '1 cup butter, softened' },
+						],
+						[ 'core/list-item', { content: '3/4 cup sugar' } ],
+						[
+							'core/list-item',
+							{ content: '3/4 cup brown sugar' },
+						],
+						[ 'core/list-item', { content: '2 large eggs' } ],
+						[
+							'core/list-item',
+							{ content: '2 cups chocolate chips' },
+						],
+					],
+				],
+			],
+		],
+		[
+			'core/details',
+			{
+				summary: 'Instructions',
+				showContent: true,
+				className: 'recipe-instructions',
+			},
+			[
+				[
+					'core/list',
+					{
+						ordered: true,
+					},
+					[
+						[
+							'core/list-item',
+							{ content: 'Preheat oven to 375°F (190°C)' },
+						],
+						[
+							'core/list-item',
+							{ content: 'Cream together butter and sugars' },
+						],
+						[
+							'core/list-item',
+							{ content: 'Beat in eggs one at a time' },
+						],
+						[
+							'core/list-item',
+							{ content: 'Mix in dry ingredients' },
+						],
+						[
+							'core/list-item',
+							{ content: 'Fold in chocolate chips' },
+						],
+						[
+							'core/list-item',
+							{ content: 'Bake for 10-12 minutes' },
+						],
+					],
+				],
+			],
+		],
+	];
+
+	return (
+		<article { ...useBlockProps() }>
+			<div className="recipe-header">
+				<div className="recipe-meta">
+					<span className="recipe-time">
+						<i className="dashicons dashicons-clock"></i>
+						30 mins
+					</span>
+					<span className="recipe-servings">
+						<i className="dashicons dashicons-groups"></i>4 servings
+					</span>
+					<span className="recipe-difficulty">
+						<i className="dashicons dashicons-chart-bar"></i>
+						Easy
+					</span>
+				</div>
+				<RichText
+					tagName="h2"
+					className="recipe-title"
+					value={ name }
+					onChange={ ( newName ) =>
+						setAttributes( { name: newName } )
+					}
+					placeholder={ __(
+						'Enter recipe title…',
+						'block-deprecation'
+					) }
+				/>
+				<p className="recipe-description">
+					Soft and chewy chocolate chip cookies with a perfect golden
+					edge. A timeless recipe that never fails to bring smiles.
+				</p>
+			</div>
+
+			<div className="recipe-content">
+				<InnerBlocks
+					template={ TEMPLATE }
+					allowedBlocks={ [ 'core/details', 'core/list' ] }
+				/>
+			</div>
+
+			<footer className="recipe-footer">
+				<div className="recipe-tags">
+					<span className="tag">Dessert</span>
+					<span className="tag">Baking</span>
+					<span className="tag">Cookies</span>
+				</div>
+				<button className="recipe-print">
+					<i className="dashicons dashicons-printer"></i>
+					Print Recipe
+				</button>
+			</footer>
+		</article>
+	);
+}

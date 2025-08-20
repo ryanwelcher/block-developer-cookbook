@@ -1,7 +1,7 @@
 {
-	"name": "@block-developer-cookbook/custom-commands",
-	"version": "1.0.1",
-	"description": "A tutorial on how to create custom commands for the command palette",
+	"name": "@block-developer-cookbook/convert-static-block",
+	"version": "1.0.0",
+	"description": "A tutorial on how to convert a static block into a dynamic one",
 	"main": "index.js",
 	"author": {
 		"name": "Ryan Welcher",

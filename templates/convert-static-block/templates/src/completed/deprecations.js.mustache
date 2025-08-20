@@ -1,0 +1,74 @@
+/**
+ * WordPress Dependencies
+ */
+import { useBlockProps, RichText, InnerBlocks } from '@wordpress/block-editor';
+
+/**
+ * Array of deprecation objects for the block
+ *
+ * Each object represents a previous version of the block,
+ * ordered from newest to oldest.
+ */
+const deprecations = [
+	{
+		attributes: {
+			name: {
+				type: 'string',
+				default: 'Classic Chocolate Chip Cookies',
+			},
+		},
+
+		save: ( { attributes } ) => {
+			const { name } = attributes;
+
+			return (
+				<article { ...useBlockProps.save() }>
+					<div className="recipe-header">
+						<div className="recipe-meta">
+							<span className="recipe-time">
+								<i className="dashicons dashicons-clock"></i>
+								30 mins
+							</span>
+							<span className="recipe-servings">
+								<i className="dashicons dashicons-groups"></i>4
+								servings
+							</span>
+							<span className="recipe-difficulty">
+								<i className="dashicons dashicons-chart-bar"></i>
+								Easy
+							</span>
+						</div>
+						<RichText.Content
+							tagName="h2"
+							className="recipe-title"
+							value={ name }
+						/>
+						<p className="recipe-description">
+							Soft and chewy chocolate chip cookies with a perfect
+							golden edge. A timeless recipe that never fails to
+							bring smiles.
+						</p>
+					</div>
+
+					<div className="recipe-content">
+						<InnerBlocks.Content />
+					</div>
+
+					<footer className="recipe-footer">
+						<div className="recipe-tags">
+							<span className="tag">Dessert</span>
+							<span className="tag">Baking</span>
+							<span className="tag">Cookies</span>
+						</div>
+						<button className="recipe-print">
+							<i className="dashicons dashicons-printer"></i>
+							Print Recipe
+						</button>
+					</footer>
+				</article>
+			);
+		},
+	},
+];
+
+export default deprecations;

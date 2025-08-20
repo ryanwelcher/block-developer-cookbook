@@ -1,0 +1,45 @@
+<?php
+/**
+ * Render.php
+ */
+
+$name = $attributes['name'];
+?>
+<article <?php echo wp_kses_data( get_block_wrapper_attributes() ); ?>>
+	<div class="recipe-header">
+			<div class="recipe-meta">
+				<span class="recipe-time">
+					<i class="dashicons dashicons-clock"></i>
+					30 mins
+				</span>
+				<span class="recipe-servings">
+					<i class="dashicons dashicons-groups"></i>4 servings
+				</span>
+				<span class="recipe-difficulty">
+					<i class="dashicons dashicons-chart-bar"></i>
+					Easy
+				</span>
+			</div>
+			<h2><?php echo esc_html( $name ); ?></h2>
+			<p class="recipe-description">
+				Soft and chewy chocolate chip cookies with a perfect golden
+				edge. A timeless recipe that never fails to bring smiles.
+			</p>
+		</div>
+
+		<div class="recipe-content">
+			<?php echo wp_kses_post( $content ); ?>
+		</div>
+
+		<footer class="recipe-footer">
+			<div class="recipe-tags">
+				<span class="tag">Dessert</span>
+				<span class="tag">Baking</span>
+				<span class="tag">Cookies</span>
+			</div>
+			<button class="recipe-print">
+				<i class="dashicons dashicons-printer"></i>
+				Print Recipe
+			</button>
+		</footer>
+</article>
