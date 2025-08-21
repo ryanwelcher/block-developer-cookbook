@@ -1,6 +1,6 @@
 {
 	"name": "@block-developer-cookbook/transforms",
-	"version": "1.0.5",
+	"version": "1.0.6",
 	"description": "A primer on using the Block Transforms API",
 	"main": "index.js",
 	"author": {

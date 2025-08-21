@@ -119,19 +119,6 @@ function register_person_meta() {
 	{{#isCompletedVariant}}
 	register_post_meta(
 		'person',
-		'yp_professional_designation',
-		array(
-			'show_in_rest'      => true,
-			'single'            => true,
-			'type'              => 'string',
-			'label'             => __( 'Professional Designation', 'your-people' ),
-			'description'       => __( 'The professional designation of the person (MD, RN, NP, etc.)', 'your-people' ),
-			'sanitize_callback' => 'wp_strip_all_tags'
-		)
-	);
-
-	register_post_meta(
-		'person',
 		'yp_institution',
 		array(
 			'show_in_rest'      => true,
@@ -158,19 +145,6 @@ function register_person_meta() {
 
 	register_post_meta(
 		'person',
-		'yp_email_address',
-		array(
-			'show_in_rest' => true,
-			'single'            => true,
-			'type'              => 'string',
-			'label'             => __( 'Email', 'your-people' ),
-			'description'       => __( 'The person\'s email address', 'your-people' ),
-			'sanitize_callback' => 'sanitize_email'
-		)
-	);
-
-	register_post_meta(
-		'person',
 		'yp_website_url',
 		array(
 			'show_in_rest'      => true,
@@ -178,19 +152,6 @@ function register_person_meta() {
 			'type'              => 'string',
 			'label'             => __( 'Website', 'your-people' ),
 			'description'       => __( 'The person\'s website', 'your-people' ),
-			'sanitize_callback' => 'wp_strip_all_tags'
-		)
-	);
-
-	register_post_meta(
-		'person',
-		'yp_facebook_url',
-		array(
-			'show_in_rest'      => true,
-			'single'            => true,
-			'type'              => 'string',
-			'label'             => __( 'Facebook URL', 'your-people' ),
-			'description'       => __( 'The person\'s Facebook URL', 'your-people' ),
 			'sanitize_callback' => 'wp_strip_all_tags'
 		)
 	);
@@ -208,31 +169,6 @@ function register_person_meta() {
 		)
 	);
 
-	register_post_meta(
-		'person',
-		'yp_x_url',
-		array(
-			'show_in_rest'      => true,
-			'single'            => true,
-			'type'              => 'string',
-			'label'             => __( 'X URL', 'your-people' ),
-			'description'       => __( 'The person\'s X URL', 'your-people' ),
-			'sanitize_callback' => 'wp_strip_all_tags'
-		)
-	);
-
-	register_post_meta(
-		'person',
-		'yp_instagram_url',
-		array(
-			'show_in_rest' => true,
-			'single'            => true,
-			'type'              => 'string',
-			'label'             => __( 'Instagram URL', 'your-people' ),
-			'description'       => __( 'The person\'s Instagram URL', 'your-people' ),
-			'sanitize_callback' => 'wp_strip_all_tags'
-		)
-	);
 	{{/isCompletedVariant}}
 }
 add_action( 'init', __NAMESPACE__ . '\register_person_meta' );

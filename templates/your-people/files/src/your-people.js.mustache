@@ -38,23 +38,6 @@ function SocialLinksPanel() {
 				{{#isCompletedVariant}}
                 <TextControl
                     label={ __(
-                        'Professional Designation',
-                        'your-people'
-                    ) }
-                    value={ meta?.yp_professional_designation || '' }
-                    onChange={ ( newValue ) =>
-                        setMeta( {
-                            ...meta,
-                            yp_professional_designation: newValue,
-                        } )
-                    }
-                    help={ __(
-                        'The professional designation of the person (MD, RN, MBA, etc.)',
-                        'your-people'
-                    ) }
-                />
-                <TextControl
-                    label={ __(
                         'Employer/Institution',
                         'your-people'
                     ) }
@@ -81,19 +64,6 @@ function SocialLinksPanel() {
                 />
                 <TextControl
                     label={ __(
-                        'Email Address',
-                        'your-people'
-                    ) }
-                    value={ meta?.yp_email_address || '' }
-                    onChange={ ( newValue ) =>
-                        setMeta( {
-                            ...meta,
-                            yp_email_address: newValue,
-                        } )
-                    }
-                />
-                <TextControl
-                    label={ __(
                         'Personal Website',
                         'your-people'
                     ) }
@@ -105,29 +75,7 @@ function SocialLinksPanel() {
                         } )
                     }
                 />
-				{{/isCompletedVariant}}
-            </PluginDocumentSettingPanel>
-			{{#isCompletedVariant}}
-            <PluginDocumentSettingPanel
-                name="yp-social-links"
-                title={ __( 'Social Links', 'your-people' ) }
-                className="yp-social-links"
-                initialOpen={true}
-            >
-                <TextControl
-                    label={ __(
-                        'Facebook URL',
-                        'your-people'
-                    ) }
-                    value={ meta?.yp_facebook || '' }
-                    onChange={ ( newValue ) =>
-                        setMeta( {
-                            ...meta,
-                            yp_facebook: newValue,
-                        } )
-                    }
-                />
-                <TextControl
+				<TextControl
                     label={ __(
                         'LinkedIn URL',
                         'your-people'
@@ -140,34 +88,8 @@ function SocialLinksPanel() {
                         } )
                     }
                 />
-                <TextControl
-                    label={ __(
-                        'Instagram URL',
-                        'your-people'
-                    ) }
-                    value={ meta?.yp_instagram_url || '' }
-                    onChange={ ( newValue ) =>
-                        setMeta( {
-                            ...meta,
-                            yp_instagram_url: newValue,
-                        } )
-                    }
-                />
-                <TextControl
-                    label={ __(
-                        'X (Twitter) URL',
-                        'your-people'
-                    ) }
-                    value={ meta?.yp_x_url || '' }
-                    onChange={ ( newValue ) =>
-                        setMeta( {
-                            ...meta,
-                            yp_x_url: newValue,
-                        } )
-                    }
-                />
+				{{/isCompletedVariant}}
             </PluginDocumentSettingPanel>
-			{{/isCompletedVariant}}
         </>
     );
 }
