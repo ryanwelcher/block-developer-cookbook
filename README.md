@@ -59,5 +59,6 @@ Run any of the following scripts to scaffold a recipe and then follow the tutori
 | `npm run prep:meme-generator`          | [Meme Generator](https://blockdevelopercookbook.com/recipes/meme-generator/)                                               |
 | `npm run prep:custom-social-icons`     | [Creating Custom Social Icons](https://blockdevelopercookbook.com/recipes/creating-custom-social-icons/)                   |
 | `npm run prep:custom-commands`         | [Command Palette Commands](https://blockdevelopercookbook.com/recipes/custom-commands/)                                    |
+| `npm run prep:convert-static-block`    | [Convert to a dynamic block](https://blockdevelopercookbook.com/recipes/converting-to-a-dynamic-block/)                    |
 
 All of the these commands will scaffold a new plugin in the `plugins` directory of this repo, set some defaults, and assign them the custom block category of `Block Developer Cookbook'. Beyond that, there is no difference between the plugins scaffolded using these commands and the [templates published on NPM](https://www.npmjs.com/settings/block-developer-cookbook/packages) - in fact this repo uses those!
