@@ -14,7 +14,7 @@
 
 add_filter(
 	'block_categories_all',
-	function( $categories ) {
+	function ( $categories ) {
 		array_unshift(
 			$categories,
 			array(
