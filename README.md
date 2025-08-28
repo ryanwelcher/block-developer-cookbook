@@ -4,6 +4,15 @@ This repository contains all of the create-block templates for the recipes that 
 
 You can use this repo as a local development environment with the [`@wordpress/env`](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/) package.
 
+## Setup/Requires for an in-person Block Developer Cookbook
+
+- An account at [www.blockdevelopercookbook.com](https://www.blockdevelopercookbook.com).
+- Laptop configured for [block development](https://developer.wordpress.org/block-editor/getting-started/devenv/) and your IDE of choice.
+- Local WordPress development environment.
+- Copy of this repo installed and configured inside your local environment.
+
+To be able to vote and full
+
 ## Setup
 
 Please ensure you have all of the [requirements for a block development environment](https://developer.wordpress.org/block-editor/getting-started/devenv/).
