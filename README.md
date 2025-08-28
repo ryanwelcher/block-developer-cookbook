@@ -43,7 +43,9 @@ npm run env start
 
 Run the following command to generate the starter files for all of the the recipes:
 
-`npm run get-cooking`
+```bash
+npm run get-cooking
+```
 
 Run any of the following scripts to scaffold a recipe and then follow the tutorial at [https://blockdevelopercookbook.com/](https://blockdevelopercookbook.com/).
 
