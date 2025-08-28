@@ -11,8 +11,6 @@ You can use this repo as a local development environment with the [`@wordpress/e
 - Local WordPress development environment.
 - Copy of this repo installed and configured inside your local environment.
 
-To be able to vote and full
-
 ## Setup
 
 Please ensure you have all of the [requirements for a block development environment](https://developer.wordpress.org/block-editor/getting-started/devenv/).
