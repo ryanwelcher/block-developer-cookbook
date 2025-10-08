@@ -4,6 +4,13 @@ This repository contains all of the create-block templates for the recipes that 
 
 You can use this repo as a local development environment with the [`@wordpress/env`](https://developer.wordpress.org/block-editor/reference-guides/packages/packages-env/) package.
 
+## Setup/Requires for an in-person Block Developer Cookbook
+
+- An account at [www.blockdevelopercookbook.com](https://www.blockdevelopercookbook.com).
+- Laptop configured for [block development](https://developer.wordpress.org/block-editor/getting-started/devenv/) and your IDE of choice.
+- Local WordPress development environment.
+- Copy of this repo installed and configured inside your local environment.
+
 ## Setup
 
 Please ensure you have all of the [requirements for a block development environment](https://developer.wordpress.org/block-editor/getting-started/devenv/).
@@ -34,7 +41,13 @@ npm run env start
 
 ## Using the recipes
 
-Run any of the following scripts to scaffold a recipe and then follow the tutorial in either the Readme or at [https://blockdevelopercookbook.com/](https://blockdevelopercookbook.com/). The content of the tutorials on the website is also provided in the README for each scaffolded plugin.
+Run the following command to generate the starter files for all of the the recipes:
+
+```bash
+npm run get-cooking
+```
+
+Run any of the following scripts to scaffold a recipe and then follow the tutorial at [https://blockdevelopercookbook.com/](https://blockdevelopercookbook.com/).
 
 | Script                                 | Recipe                                                                                                                     |
 | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
@@ -55,5 +68,6 @@ Run any of the following scripts to scaffold a recipe and then follow the tutori
 | `npm run prep:meme-generator`          | [Meme Generator](https://blockdevelopercookbook.com/recipes/meme-generator/)                                               |
 | `npm run prep:custom-social-icons`     | [Creating Custom Social Icons](https://blockdevelopercookbook.com/recipes/creating-custom-social-icons/)                   |
 | `npm run prep:custom-commands`         | [Command Palette Commands](https://blockdevelopercookbook.com/recipes/custom-commands/)                                    |
+| `npm run prep:convert-static-block`    | [Convert to a dynamic block](https://blockdevelopercookbook.com/recipes/converting-to-a-dynamic-block/)                    |
 
 All of the these commands will scaffold a new plugin in the `plugins` directory of this repo, set some defaults, and assign them the custom block category of `Block Developer Cookbook'. Beyond that, there is no difference between the plugins scaffolded using these commands and the [templates published on NPM](https://www.npmjs.com/settings/block-developer-cookbook/packages) - in fact this repo uses those!
